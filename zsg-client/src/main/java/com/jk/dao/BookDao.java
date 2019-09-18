@@ -1,5 +1,11 @@
 package com.jk.dao;
 
+import com.jk.model.Book;
+import com.jk.util.ParameUtil;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
+
 /**
  * @version :   1.0.0
  * @Author :  Zhangsongguang
@@ -8,4 +14,10 @@ package com.jk.dao;
  * @Package :   com.jk.dao
  */
 public interface BookDao {
+
+    //@Select ("select count(*) from book")
+    Integer queryBookCount ();
+
+    //@Select ("select * from book limit #{pageNumber},#{pageSize}")
+    List<Book> queryBookList (ParameUtil parameUtil);
 }

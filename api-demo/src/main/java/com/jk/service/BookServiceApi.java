@@ -1,5 +1,11 @@
 package com.jk.service;
 
+import com.jk.util.ParameUtil;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.HashMap;
+
 /**
  * @version :   1.0.0
  * @Author :  Zhangsongguang
@@ -8,4 +14,8 @@ package com.jk.service;
  * @Package :   com.jk.service
  */
 public interface BookServiceApi {
+
+
+    @RequestMapping("queryBook")
+    HashMap<String, Object> queryBook (@RequestBody ParameUtil parameUtil);
 }
