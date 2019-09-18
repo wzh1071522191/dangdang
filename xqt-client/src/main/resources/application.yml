@@ -1,11 +1,24 @@
 server:
   port: 8084
-
+#链接mysql
 spring:
   application:
     name: server-xqt
-
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.2.103:3307/1902?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password:
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8080/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 2
+
+#扫描mybatis下的配置文件
+mybatis:
+  type-aliases-package: com.jk.model
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-locations: classpath:mybatis/confg.xml
