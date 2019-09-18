@@ -103,7 +103,7 @@
 <script>
 $('#login_btn').on('click', function(){
 	$.ajax({
-		url:'../',
+		url:'../user/LoginUser',
 		data:{password:$("#password").val().serialize(),username:$("#username").val().serialize()},
 		type:'post',
 		success:function(data){

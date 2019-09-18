@@ -1,7 +1,8 @@
 package com.jk.service;
 
 import com.jk.dao.UserDao;
-import com.jk.service.model.LoginUser;
+
+import com.jk.model.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService{
   @Autowired
-  private UserDao userDao;
+    private UserDao userDao;
     @Override
     public LoginUser loginUser(String username) {
 
