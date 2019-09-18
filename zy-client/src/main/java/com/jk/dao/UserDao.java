@@ -2,6 +2,10 @@ package com.jk.dao;
 
 
 import com.jk.model.LoginUser;
+import com.jk.model.Tree;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author ： 朱友
@@ -11,5 +15,8 @@ import com.jk.model.LoginUser;
  * @version:
  */
 public interface UserDao {
-    LoginUser loginUser(String username);
+
+    LoginUser loginUser(@Param("username") String username);
+
+    List<Tree> tree(@Param("id") Integer userid);
 }

@@ -2,13 +2,16 @@ package com.jk.controller;
 
 import com.jk.dao.UserDao;
 import com.jk.model.LoginUser;
+import com.jk.model.Tree;
 import com.jk.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author ： 朱友
@@ -21,18 +24,16 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
     @Autowired
     private UserService userService;
-    @RequestMapping("LoginUser")
-    public String  LoginUser(LoginUser loginUser, HttpServletRequest request){
-        LoginUser user=userService.loginUser(loginUser.getUsername());
-        if (user == null){
-            return "yonghu";
-        }else if(!user.getPassword().equals(loginUser.getPassword())) {
-            return "mima";
-        }
-        request.getSession().setAttribute("user",user);
-        return "ok";
-    }
-
+    @RequestMapping("loginUser")
+    @ResponseBody
+    public LoginUser loginUser(String username){
+        LoginUser user=userService.loginUser(username);
+        return user;
+     }
+   @RequestMapping("tree")
+    public List<Tree> tree(Integer userid){
+        return  userService.tree(userid);
+   }
 
 
 }

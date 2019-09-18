@@ -2,8 +2,12 @@ package com.jk.service;
 
 import com.jk.model.LoginUser;
 
+import com.jk.model.Tree;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * @author ： 朱友
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @FeignClient(value = "server-zy")
 public interface UserService {
-       @RequestMapping("LoginUser")
-       LoginUser loginUser(String username);
+    @RequestMapping("loginUser")
+    LoginUser loginUser(@RequestParam String username);
+    @RequestMapping("tree")
+    List<Tree> tree(@RequestParam Integer userid);
 }

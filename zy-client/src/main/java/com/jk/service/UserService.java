@@ -1,6 +1,9 @@
 package com.jk.service;
 
 import com.jk.model.LoginUser;
+import com.jk.model.Tree;
+
+import java.util.List;
 
 
 /**
@@ -11,5 +14,8 @@ import com.jk.model.LoginUser;
  * @version:
  */
 public interface UserService {
+
     LoginUser loginUser(String username);
+
+    List<Tree> tree(Integer userid);
 }
