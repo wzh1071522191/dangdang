@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <!-- 引入bootstrap的css -->
+    <link  href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-treeview的css -->
+    <link  href="../js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-addTabs的css -->
+    <link  href="../js/addTabs/addTabs.css" rel="stylesheet" >
+    <!-- 引入bootstrap-table的css -->
+    <link  href="../js/table/bootstrap-table.min.css" rel="stylesheet" >
+    <!-- 引入fileinput的css -->
+    <link type="text/css" rel="stylesheet" href="../js/fileinput/css/fileinput.min.css" />
+    <!-- 引入datetime css、js -->
+    <link  rel="stylesheet" href="/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <script  src="../js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script  src="../js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="../js/My97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/addTabs/addTabs.js"></script>
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="../js/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../js/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="../js/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/locales/zh.js"></script>
+
+    <script type="text/javascript" src="../js/fileinput/themes/fa/theme.js"></script>
+</head>
+<body>
+<form id="updateMemberForm" class="form-horizontal">
+    <div class="form-group">
+        <input type="hidden"  id="memberId" name="id"/>
+        <lable for="memberaihao" class="col-sm- control-label">会员爱好</lable>
+        <input type="text" class="form-control" id="memberaihaos" name="memberaihao"/>
+
+        <lable for="memberarea" class="col-sm- control-label">会员详细地址</lable>
+        <input type="text" class="form-control" id="memberareas" name="memberarea"/>
+
+        <lable for="memberdetail" class="col-sm- control-label">会员简介</lable>
+        <input type="text" class="form-control" id="memberdetails" name="memberdetail"/>
+
+        <lable for="memberemail" class="col-sm- control-label">会员邮箱</lable>
+        <input type="text" class="form-control" id="memberemails" name="memberemail"/>
+
+        <lable for="memberolds" class="col-sm- control-label">会员年龄</lable>
+        <input type="text" class="form-control" id="memberoldss" name="memberolds"/>
+
+
+        <lable for="membertime" class="col-sm-1 control-label">出版时间</lable>
+        <input type="text" class="form-control date" id="membertimes" name="membertime"/>
+       <!-- <textarea name="info" id="info"  class="form-control" th:text="${b.info}"></textarea>
+        <input type="date" class="form-control"  name="date" th:value="${#dates.format(b.date,'yyyy-MM-dd')}" >-->
+        <lable for="memberzhengjian" class="col-sm- control-label">会员证件号</lable>
+        <input type="text" class="form-control" id="memberzhengjians" name="memberzhengjian"/>
+
+    </div>
+</form>
+</body>
+<script>
+
+
+</script>
+</html>

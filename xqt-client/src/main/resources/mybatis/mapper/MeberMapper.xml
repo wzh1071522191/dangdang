@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jk.mapper.MeberMapper" >
+<!--会员列表分页查询-->
+    <select id="findMemberCount" parameterType="map" resultType="int">
+      SELECT
+	     count(1)
+      FROM
+	     USER tu
+      LEFT JOIN t_member tm ON tu.userid = tm.memberuserid
+    </select>
 
+    <select id="findMemberList" resultType="com.jk.model.Member">
+      SELECT
+            tm.id,
+            tm.memberaihao,
+            tm.memberarea,
+            tm.memberdetail,
+            tm.memberemail,
+            tm.memberolds,
+            tm.membertime,
+            tm.memberuserid,
+            tm.memberzhengjian,
+            tu.dengji AS dengjis,
+            tu.jifen AS jifens,
+            tu.password AS passwords,
+            tu.status AS statuss,
+            tu.userid AS userids,
+            tu.username AS usernames,
+            tu.userphone AS userphones
+    FROM
+        t_member tm
+    LEFT JOIN USER tu ON tm.memberuserid = tu.userid
+        limit #{page},#{rows}
+    </select>
+<!--批量删除-->
+    <delete id="deleteMemberAll" parameterType="int" >
+        delete from t_member where id in(
+        <foreach collection="array" item="itme" index="index" separator="," >
+            #{itme}
+        </foreach>
+        )
+    </delete>
+<!--删除-->
+    <delete id="deleteMember" parameterType="int">
+        delete from t_member where id in
+        <foreach collection="array" index="index" item="item" open="("
+                 close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+<!--新增会员信息-->
+    <insert id="saveMember" parameterType="com.jk.model.Member">
+        insert into t_member(memberaihao,memberarea,memberdetail,memberemail,memberolds,membertime,memberzhengjian)
+        values(#{memberaihao},#{memberarea},#{memberdetail},#{memberemail},#{memberolds},#{membertime},#{memberzhengjian})
+    </insert>
+<!--修改会员信息-->
+    <update id="updateMeber" parameterType="com.jk.model.Member">
+        update t_member t set t.memberaihao=#{memberaihao},t.memberarea=#{memberarea},t.memberdetail=#{memberdetail},t.memberemail=#{memberemail},
+        t.memberolds=#{memberolds},t.membertime=#{membertime},t.memberzhengjian=#{memberzhengjian}
+        where t.id=#{id}
+    </update>
+    <!--回显会员信息-->
+    <select id="queryFindMemberById" resultType="com.jk.model.Member" parameterType="int">
+        select * from t_member t where t.id = #{value}
+    </select>
 </mapper>
