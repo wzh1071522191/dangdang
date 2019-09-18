@@ -31,6 +31,76 @@
         </association>
     </resultMap>
     <select id="queryBookList" resultMap="bookList">
-        SELECT * FROM book b LEFT JOIN booktype bt ON b.booktypeid=bt.typeid
+        SELECT * FROM book b LEFT JOIN booktype bt ON b.booktypeid=bt.typeid LIMIT #{pageNumber},#{pageSize}
     </select>
+
+    <!--void addBook (Book book)-->
+    <insert id="addBook" parameterType="Book">
+        INSERT INTO
+        book(bookname, bookauthor,booktypeid, press, bookcontent,bookprice, bookdate, bookstatus,bookcount, hits, bookstar,bookimg1, bookimg2, bookimg3)
+        VALUES(#{bookName}, #{bookAuthor}, #{bookTypeId}, #{press}, #{bookContent},#{bookPrice}, #{bookDate}, #{bookStar},#{bookCount}, 0, #{bookStar},#{bookImg1}, #{bookImg2}, #{bookImg3})
+    </insert>
+
+    <!--void updateStatus (Book book)-->
+    <update id="updateStatus" parameterType="Book">
+        UPDATE book
+        <if test="bookStatus==1">
+            SET bookstatus=2
+        </if>
+        <if test="bookStatus==2">
+            SET bookstatus=1
+        </if>
+
+        WHERE bookid =#{bookId}
+    </update>
+
+    <!--void updateBook (Book book)-->
+    <update id="updateBook" parameterType="Book">
+        UPDATE book
+        <set >
+            <if test="bookName != null" >
+                bookname = #{bookName},
+            </if>
+            <if test="bookAuthor != null" >
+                bookauthor = #{bookAuthor},
+            </if>
+            <if test="bookTypeId != null" >
+                booktypeid = #{bookTypeId},
+            </if>
+            <if test="press != null" >
+                press = #{press},
+            </if>
+            <if test="bookContent != null" >
+                bookcontent = #{bookContent},
+            </if>
+            <if test="bookPrice != null" >
+                bookprice = #{bookPrice},
+            </if>
+            <if test="bookDate != null" >
+                bookdate = #{bookDate},
+            </if>
+            <if test="bookStatus != null" >
+                bookstatus = #{bookStatus},
+            </if>
+            <if test="bookCount != null" >
+                bookcount = #{bookCount},
+            </if>
+            <if test="hits != null" >
+                hits = #{hits},
+            </if>
+            <if test="bookStar != null" >
+                bookstar = #{bookStar},
+            </if>
+            <if test="bookImg1 != null" >
+                bookimg1 = #{bookImg1},
+            </if>
+            <if test="bookImg2 != null" >
+                bookimg2 = #{bookImg2},
+            </if>
+            <if test="bookImg3 != null" >
+                bookimg3 = #{bookImg3},
+            </if>
+        </set>
+        where bookid = #{bookId}
+    </update>
 </mapper>

@@ -2,6 +2,7 @@ package com.jk.service;
 
 import com.jk.dao.BookDao;
 import com.jk.model.Book;
+import com.jk.model.BookType;
 import com.jk.util.ParameUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,38 @@ public class BookServiceImpl implements BookServiceApi{
         hashMap.put("total",total);
         hashMap.put("rows",queryBookList);
         return hashMap;
+    }
+
+    @Override
+    public List<BookType> queryBookType () {
+        return bookDao.queryBookType();
+    }
+
+    @Override
+    public String addBook (Book book) {
+        if (book.getBookId () == null||"".equals (book.getBookId ())) {
+            bookDao.addBook(book);
+            return "1";
+        }else {
+            bookDao.updateBook(book);
+            return "1";
+        }
+
+    }
+
+    @Override
+    public void delBook (Integer id) {
+        bookDao.delBook(id);
+    }
+
+    @Override
+    public String updateStatus (Book book) {
+        bookDao.updateStatus(book);
+        return "0";
+    }
+
+    @Override
+    public Book queryBookById (Integer id) {
+        return bookDao.queryBookById(id);
     }
 }
