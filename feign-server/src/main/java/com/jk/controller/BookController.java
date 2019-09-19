@@ -1,9 +1,15 @@
 package com.jk.controller;
 
 import com.jk.service.BookService;
+import com.jk.util.ParameUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import java.util.HashMap;
 
 /**
  * @version :   1.0.0
@@ -17,6 +23,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BookController {
     @Autowired
     private BookService bookService;
+
+    @RequestMapping("toBook")
+    public String toBook(){
+
+        return "zsg/book";
+    }
+    @RequestMapping("queryBook")
+    @ResponseBody
+    public HashMap<String,Object> queryBook(@RequestBody ParameUtil parameUtil){
+        return bookService.queryBook(parameUtil);
+    }
+
 
 
 }
