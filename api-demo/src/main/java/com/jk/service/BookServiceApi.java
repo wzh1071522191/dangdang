@@ -25,7 +25,7 @@ public interface BookServiceApi {
     HashMap<String, Object> queryBook (@RequestBody ParameUtil parameUtil);
 
     @RequestMapping("queryBookType")
-    List<BookType> queryBookType ();
+    List<BookType> queryBookType (@RequestBody Integer pid);
 
     @RequestMapping("addBook")
     String addBook (@RequestBody Book book);

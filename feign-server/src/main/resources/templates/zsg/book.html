@@ -36,10 +36,20 @@
     <script type="text/javascript" src="../zsg/fileinput/themes/fa/theme.js"></script>
 </head>
 <body>
+<form id="queryForm" >
+    <div class="form-group">
+        <label>书名:</label>
+        <label for="name"><input type="text" id="name" placeholder="名称" class="form-control"></label>
+    </div>
+    <button type="button" class="btn btn-success" onclick="queryData()">搜索</button>
+</form>
+    <div style="margin-top:2%;margin-left:1%;">
+    <button type='button' class='btn btn-info' onclick='addBook()'>添加书籍</button></div>
 
-    <button type='button' class='btn btn-info' onclick='addBook()'>添加书籍</button>
     <!--  表格 -->
-    <table id="dataGrid" class="table table-striped table-bordered table-hover" ></table>
+    <div style="margin-left:1%;">
+        <table id="dataGrid" class="table table-striped table-bordered table-hover" ></table>
+    </div>
 </body>
 <script>
     $(function(){
@@ -87,9 +97,8 @@
                     pageNumber: params.pageNumber,
                     pageSize: params.pageSize,
                     sortName: params.sortName,
-                    sortOrder: params.sortOrder
-                    // name: $("#name").val()
-
+                    sortOrder: params.sortOrder,
+                    typename: $("#name").val()
                 };
                 return param;
             },
@@ -102,11 +111,7 @@
                     }
                 },
                 {field: 'bookAuthor', title: '作者', width: 80},
-                {field: 'bookType', title: '类型', width: 150,
-                    formatter:function(value,row,index){
-                        return value.typeName;
-                    }
-                },
+                {field: 'typeName', title: '类型', width: 150},
                 {field: 'press', title: '出版社', width: 200},
                 {field: 'bookContent', title: '简介', width: 300,
                     formatter:function(value,row,index){
@@ -128,17 +133,17 @@
                 {field: 'bookCount', title: '数量', width: 80},
                 {field: 'hits', title: '点击量', width: 50},
                 {field: 'bookStar', title: '星级', width: 80},
-                {field: 'bookImg1', title: '图1', width: 300,
+                {field: 'bookImg1', title: '宣传图片', width: 300,
                     formatter:function(value,row,index){
                         return "<img src='"+value+"' style='width: 100%;height: 80px'/>";
                     }
                 },
-                {field: 'bookImg2', title: '图2', width: 300,
+                {field: 'bookImg2', title: '书籍样图', width: 300,
                     formatter:function(value,row,index){
                         return "<img src='"+value+"' style='width: 100%;height: 80px'/>";
                     }
                 },
-                {field: 'bookImg3', title: '图3', width: 300,
+                {field: 'bookImg3', title: '封面', width: 300,
                     formatter:function(value,row,index){
                         return "<img src='"+value+"' style='width: 100%;height: 80px'/>";
                     }
@@ -152,8 +157,8 @@
                         }else {
                             status="<button type='button' class='btn btn-info' onclick='updateStatus("+row.bookId+",2)'>上架</button>&nbsp;&nbsp;";
                         }
-                        return status+ "<button type='button' class='btn btn-info' onclick='delBook("+row.bookId+")'>删除</button>&nbsp;&nbsp;"+
-                                "<button type='button' class='btn btn-info' onclick='updateBook("+row.bookId+")'>修改</button>";
+                        return status+ "<button type='button' class='btn btn-danger' onclick='delBook("+row.bookId+")'>删除</button>&nbsp;&nbsp;"+
+                                "<button type='button' class='btn btn-warning' onclick='updateBook("+row.bookId+")'>修改</button>";
 
                     }
                 }
@@ -162,6 +167,16 @@
         });
     }
 
+
+    function queryData() {
+
+        $("#dataGrid").bootstrapTable("refresh", {
+            "query": {
+                typename: $("#name").val(),
+
+            }
+        });
+    }
 //=====================
     var res;
     function createAddContent(url) {

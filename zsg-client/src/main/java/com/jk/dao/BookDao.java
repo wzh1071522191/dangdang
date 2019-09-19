@@ -25,17 +25,17 @@ public interface BookDao {
     //@Select ("select * from book limit #{pageNumber},#{pageSize}")
     List<Book> queryBookList (ParameUtil parameUtil);
 
-    @Select ("SELECT * FROM booktype")
-    List<BookType> queryBookType ();
+    @Select ("SELECT * FROM booktype WHERE pid=#{pid}")
+    List<BookType> queryBookType (Integer pid);
 
     void addBook (Book book);
 
-    @Delete ("DELETE FROM book WHERE bookid=#{id}")
+    @Delete ("DELETE FROM book WHERE bookId=#{id}")
     void delBook (Integer id);
 
     void updateStatus (Book book);
 
-    @Select ("SELECT * FROM book WHERE bookid=#{id}")
+    //@Select ("SELECT * FROM book b LEFT JOIN booktype bt ON b.booktypeid=bt.typeid WHERE bookid=#{id}")
     Book queryBookById (Integer id);
 
     void updateBook (Book book);

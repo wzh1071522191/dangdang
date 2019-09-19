@@ -16,3 +16,10 @@ spring:
       cache: false
       prefix: classpath:/templates/
       suffix: .html
+
+elasticsearch:
+  clusterName: my-application
+  ip: 127.0.0.1
+  firstPort: 9300
+  secondPort: 9301
+  thirdPort: 9302

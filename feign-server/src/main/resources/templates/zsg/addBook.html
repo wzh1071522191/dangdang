@@ -41,33 +41,51 @@
 <body>
     <form role="form" id="addForm">
         <div class="form-group">
-            <label>书名</label>
-            <input type="text" class="form-control"  name="bookName" placeholder="书名"/>
+            <label>书名:&nbsp; &nbsp; &nbsp;&nbsp;</label>
+            <label>
+                <input type="text" class="form-control"  name="bookName" placeholder="书名"/>
+            </label>
         </div>
         <div class="form-group">
-            <label>作者</label>
-            <input type="text" class="form-control"  name="bookAuthor"/>
+            <label>作者:&nbsp; &nbsp; &nbsp;&nbsp;</label>
+            <label>
+                <input type="text" class="form-control"  name="bookAuthor"/>
+            </label>
         </div>
         <div class="form-group">
-            <label>类型</label>
-            <select  class="form-control" name="bookTypeId" id="tid">
-            </select>
+            <label>类型:&nbsp; &nbsp; &nbsp;&nbsp;</label>
+            <label for="tid">
+                <select class="form-control" id="tid" onchange="queryType(this.value)">
+                </select>
+            </label>
+            <label for="pid">
+                <select class="form-control" name="bookTypeId" id="pid">
+                </select>
+            </label>
         </div>
         <div class="form-group">
-            <label>价格</label>
-            <input class="form-control"  onkeyup="this.value=this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"  placeholder="只限数字,最多输入两位小数"  name="bookPrice" />
+            <label>价格:&nbsp; &nbsp; &nbsp;&nbsp;</label>
+            <label>
+                <input class="form-control"  onkeyup="this.value=this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"  placeholder="只限数字,最多输入两位小数"  name="bookPrice" />
+            </label>
         </div>
         <div class="form-group">
-            <label>库存</label>
-            <input class="form-control"  onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="只限数字"  name="bookCount" />
+            <label>库存:&nbsp; &nbsp; &nbsp;&nbsp;</label>
+            <label>
+                <input class="form-control"  onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="只限数字"  name="bookCount" />
+            </label>
         </div>
         <div class="form-group">
-            <label>出版社</label>
-            <input type="text" class="form-control"  name="press"/>
+            <label>出版社:&nbsp; &nbsp;</label>
+            <label>
+                <input type="text" class="form-control"  name="press"/>
+            </label>
         </div>
         <div class="form-group">
             <label>出版日期</label>
-            <input type="date" class="form-control"  name="bookDate">
+            <label>
+                <input type="date" class="form-control"  name="bookDate">
+            </label>
         </div>
         <div class="stars">
             <span><label>推荐星级:</label></span>
@@ -80,21 +98,23 @@
         </div>
 
         <div class="form-group">
-            <label>内容描述</label>
-            <textarea name="bookContent" cols="80px" rows="5px"></textarea>
+            <label>内容描述:</label>
+            <label>
+                <textarea name="bookContent" cols="70px" rows="5px"></textarea>
+            </label>
         </div>
         <div class="form-group">
-            <label>宣传图片</label>
+            <label>宣传图片:</label>
                 <input type="hidden" id="upFile" name="bookImg1" />
                 <input type="file" class="form-control" id="imgName" name="imgName" >
         </div>
         <div class="form-group">
-            <label>书籍样图</label>
+            <label>书籍样图:</label>
             <input type="hidden" id="upFile1" name="bookImg2" />
             <input type="file" class="form-control" id="imgName1" name="imgName" >
         </div>
         <div class="form-group">
-            <label>封面</label>
+            <label>封面:</label>
             <input type="hidden" id="upFile2" name="bookImg3" />
             <input type="file" class="form-control" id="imgName2" name="imgName" >
         </div>
@@ -104,24 +124,34 @@
 <script>
 
     $(function () {
-
+        const pid = 0;
+        queryType(pid);
         uploadImg();
         uploadImg1();
         uploadImg2();
         setStarts();
+
+
+    })
+
+    queryType=function (pid) {
         $.ajax({
-            url:"../book/queryBookType",
+            url:"../book/queryBookType?pid="+pid,
             type:"post",
             success:function (data) {
                 var op="<option value=''>请选择</option>";
                 for (var i = 0; i < data.length; i++) {
                     op+="<option value='"+data[i].typeId+"'>"+data[i].typeName+"</option>";
                 }
-                $("#tid").html(op);
+                if(pid==0){
+                    $("#tid").html(op);
+                }else {
+                    $("#pid").html(op);
+                }
+
             }
         })
-
-    })
+    }
 
     function uploadImg(url){
         $('#imgName').fileinput({

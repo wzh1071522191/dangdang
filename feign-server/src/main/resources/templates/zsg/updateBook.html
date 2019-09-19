@@ -39,38 +39,58 @@
 
 </head>
 <body>
-<input type="hidden" id="typeId" th:value="${b.bookTypeId}">
+<input type="hidden" id="typeId" th:value="${b.bookType.typeId}">
+<input type="hidden" id="typePid" th:value="${b.bookType.pid}">
 
 <form role="form" id="addForm">
     <input type="hidden" name="bookId" th:value="${b.bookId}">
     <div class="form-group">
-        <label>书名</label>
-        <input type="text" class="form-control"  th:value="${b.bookName}"  name="bookName" placeholder="书名"/>
+        <label>书名:&nbsp; &nbsp; &nbsp;&nbsp;</label>
+        <label>
+            <input type="text" class="form-control"  th:value="${b.bookName}"  name="bookName" placeholder="书名" id="bookName"/>
+        </label>
     </div>
     <div class="form-group">
-        <label>作者</label>
-        <input type="text" class="form-control" th:value="${b.bookAuthor}" name="bookAuthor"/>
+        <label>作者: &nbsp; &nbsp; &nbsp;&nbsp;</label>
+        <label>
+            <input type="text" class="form-control" th:value="${b.bookAuthor}" name="bookAuthor" id="bookAuthor"/>
+        </label>
     </div>
     <div class="form-group">
-        <label>类型</label>
-        <select  class="form-control" name="bookTypeId" id="tid">
-        </select>
+        <label>类型: &nbsp; &nbsp; &nbsp;&nbsp;</label>
+        <label for="tid">
+            <select class="form-control" id="tid" onchange="queryType(this.value)">
+            </select>
+        </label>
+        <label for="pid">
+            <select class="form-control" name="bookTypeId" id="pid">
+            </select>
+        </label>
+
     </div>
     <div class="form-group">
-        <label>价格</label>
-        <input class="form-control" th:value="${b.bookPrice}" onkeyup="this.value=this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" placeholder="只限数字"  name="bookPrice" />
+        <label>价格: &nbsp; &nbsp; &nbsp;&nbsp;</label>
+        <label>
+            <input class="form-control" th:value="${b.bookPrice}" onkeyup="this.value=this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" placeholder="只限数字"  name="bookPrice" />
+        </label>
     </div>
     <div class="form-group">
-        <label>库存</label>
-        <input class="form-control" th:value="${b.bookCount}"  onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="只限数字"  name="bookCount" />
+        <label>库存: &nbsp; &nbsp; &nbsp;&nbsp;</label>
+        <label>
+            <input class="form-control" th:value="${b.bookCount}"  onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="只限数字"  name="bookCount" />
+        </label>
     </div>
     <div class="form-group">
-        <label>出版社</label>
-        <input type="text" class="form-control" th:value="${b.press}"  name="press"/>
+        <label>出版社: &nbsp; &nbsp;</label>
+        <label>
+            <input type="text" class="form-control" th:value="${b.press}"  name="press"/>
+        </label>
     </div>
     <div class="form-group">
-        <label>出版日期</label>
-        <input type="date" class="form-control" th:value="${#dates.format(b.bookDate,'yyyy-MM-dd')}" name="bookDate">
+        <label>出版日期:</label>
+        <label>
+            <input type="date" class="form-control" th:value="${#dates.format(b.bookDate,'yyyy-MM-dd')}" name="bookDate">
+        </label>
     </div>
     <div class="stars">
         <span><label>推荐星级:</label></span>
@@ -83,26 +103,28 @@
     </div>
 
     <div class="form-group">
-        <label>内容描述</label>
-        <textarea name="bookContent" cols="80px" rows="5px" th:text="${b.bookContent}"></textarea>
+        <label>内容描述:</label>
+        <label>
+            <textarea name="bookContent" cols="70px" rows="5px" th:text="${b.bookContent}"></textarea>
+        </label>
     </div>
     <div class="form-group">
-        <label>宣传图片</label>
-        <span id="msg1"><img th:src="${b.bookImg1}" alt="图片" style="width: 100px;height: 100px" id="img1"></span>
+        <label>宣传图片:</label><br>
+        <span id="msg1"><img th:src="${b.bookImg1}" alt="图片" style="width: 200px;height: 150px" id="img1"></span>
         <input type="hidden" id="upFile" name="bookImg1" th:value="${b.bookImg1}"/>
         <input type="file" class="form-control" id="imgName" name="imgName">
     </div>
     <div class="form-group">
-        <label>书籍样图</label>
-        <span id="msg2"><img th:src="${b.bookImg2}" alt="图片" style="width: 100px;height: 100px" id="img2"></span>
+        <label>书籍样图:</label><br>
+        <span id="msg2"><img th:src="${b.bookImg2}" alt="图片" style="width: 200px;height: 150px" id="img2"></span>
         <input type="hidden" id="upFile1" name="bookImg2" th:value="${b.bookImg2}"/>
         <input type="file" class="form-control" id="imgName1" name="imgName" >
     </div>
     <div class="form-group">
-        <label>封面</label>
-        <span id="msg3"><img th:src="${b.bookImg3}" alt="图片" style="width: 100px;height: 100px" id="img3"></span>
+        <label>封面 &nbsp; &nbsp; &nbsp;</label><br>
+        <span id="msg3"><img th:src="${b.bookImg3}" alt="图片" style="width: 200px;height: 150px" id="img3"></span>
         <input type="hidden" id="upFile2" name="bookImg3" th:value="${b.bookImg3}"/>
-        <input type="file" class="form-control" id="imgName2" name="imgName" >
+        <input type="file" class="form-control" id="imgName2" name="imgName">
     </div>
 </form>
 
@@ -111,14 +133,22 @@
 
     $(function () {
 
+        var pid = 0 ;
+        queryType(pid);
         uploadImg();
         uploadImg1();
         uploadImg2();
         setStarts();
 
+
+
+    })
+
+    function queryType(pid) {
         var typeId=$("#typeId").val();
+        var typePid=$("#typePid").val();
         $.ajax({
-            url:"../book/queryBookType",
+            url:"../book/queryBookType?pid="+pid,
             type:"post",
             success:function (data) {
                 var op="<option value=''>请选择</option>";
@@ -126,15 +156,19 @@
                     op+="<option value='"+data[i].typeId+"' >"+data[i].typeName+"</option>";
                 }
 
-                $("#tid").html(op);
-                $("select>option[value='"+typeId+"']").attr("selected", true);
-                //$("option[value='${b.bookTypeId}']").attr("selected",true);
+                if(pid==0){
+                    $("#tid").html(op);
+                    $("#tid>option[value='"+typePid+"']").attr("selected", true);
+                }else {
 
+                    $("#pid").html(op);
+                    $("#pid>option[value='"+typeId+"']").attr("selected", true);
+                }
 
             }
         })
 
-    })
+    }
 
     function uploadImg(url){
         $('#imgName').fileinput({

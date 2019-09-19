@@ -19,4 +19,5 @@ public class ParameUtil implements Serializable {
     private Integer pageSize;
     private String sortName;      //排序字段
     private String sortOrder;
+    private String typename;
 }

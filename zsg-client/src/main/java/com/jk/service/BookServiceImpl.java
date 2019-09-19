@@ -38,8 +38,8 @@ public class BookServiceImpl implements BookServiceApi{
     }
 
     @Override
-    public List<BookType> queryBookType () {
-        return bookDao.queryBookType();
+    public List<BookType> queryBookType (Integer pid) {
+        return bookDao.queryBookType(pid);
     }
 
     @Override
