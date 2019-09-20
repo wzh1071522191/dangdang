@@ -1,5 +1,7 @@
 package com.jk.model;
 
+import lombok.Data;
+
 import javax.crypto.SecretKey;
 import java.io.Serializable;
 
@@ -11,6 +13,8 @@ import java.io.Serializable;
  * @version:
  */
 public class LoginUser  implements Serializable {
+    private static final long serialVersionUID = 5668497656756245456L;
+
     private  Integer userid;
     private  String password;
     private  String username;
@@ -39,5 +43,12 @@ public class LoginUser  implements Serializable {
         this.username = username;
     }
 
-
+    @Override
+    public String toString() {
+        return "LoginUser{" +
+                "userid=" + userid +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }
