@@ -3,8 +3,12 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8080/eureka/
 server:
-  port: 8088
+  port: 8081
 spring:
   application:
-    name: server-feign
-
+    name: feign-server
+  main:
+    allow-bean-definition-overriding: true
+  feign:
+    hystrix:
+      enabled: true
