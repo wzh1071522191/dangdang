@@ -1,10 +1,14 @@
 package com.jk.service;
 
+import com.jk.model.LoginUser;
 import com.jk.model.Member;
+import com.jk.model.MemberUser;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 /**
@@ -31,4 +35,11 @@ public interface MeberServiceApi {
     //回显会员信息
     @RequestMapping(value = "/queryFindMemberById")
     Member queryFindMemberById(@RequestParam("id") Integer id);
+    //前台会员登录
+    @RequestMapping(value = "/queryUserName")
+    MemberUser queryUserName(@RequestParam("username")  String username);
+    //前台会员注册
+    @RequestMapping(value = "/savemeMberUser")
+    String savemeMberUser(@RequestBody MemberUser memberUser);
+
 }

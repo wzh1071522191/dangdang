@@ -11,10 +11,13 @@
 package com.jk.service;
 
 import com.jk.mapper.MeberMapper;
+import com.jk.model.LoginUser;
 import com.jk.model.Member;
+import com.jk.model.MemberUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,7 +40,6 @@ public class MeberServiceImpl implements MeberServiceApi{
     //批量删除会员数据
     @Override
     public void deleteMemberAll(Integer[] ids) {
-
         meberMapper.deleteMemberAll(ids);
     }
     //单删会员信息
@@ -48,13 +50,11 @@ public class MeberServiceImpl implements MeberServiceApi{
     //新增会员信息
     @Override
     public void saveMember(Member member) {
-
          meberMapper.saveMember(member);
     }
     //修改会员信息
     @Override
     public void updateMeber(Member member) {
-
         meberMapper.updateMeber(member);
     }
     //回显会员信息
@@ -63,5 +63,20 @@ public class MeberServiceImpl implements MeberServiceApi{
         return meberMapper.queryFindMemberById(id);
     }
 
+    //前台登录会员
+    @Override
+    public MemberUser queryUserName(String username) {
+        MemberUser st=meberMapper.queryUserName(username);
+        return st;
+    }
+    //前台注册会员
+    @Override
+    public String savemeMberUser(MemberUser memberUser) {
+        if(!memberUser.getUsername().equals("")){
+            meberMapper.savemeMberUser(memberUser);
+        }
+        return "1";
+
+    }
 
 }

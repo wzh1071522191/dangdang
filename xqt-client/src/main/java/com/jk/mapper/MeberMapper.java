@@ -1,6 +1,9 @@
 package com.jk.mapper;
 
+import com.jk.model.LoginUser;
 import com.jk.model.Member;
+import com.jk.model.MemberUser;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -22,4 +25,14 @@ public interface MeberMapper {
     void updateMeber(Member member);
     //回显会员信息
     Member queryFindMemberById(Integer id);
+    //前台登录会员
+    @Select("select * from user u where u.username=#{username}")
+    MemberUser queryUserName(String username);
+    //前台注册会员
+    @Insert("insert into user(username,password,userphone,jifen,dengji,status) values(#{username},#{password},#{userphone},0,1,1)")
+    void savemeMberUser(MemberUser memberUser);
+
+
+
+
 }

@@ -6,7 +6,7 @@ spring:
     name: server-xqt
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.2.103:3307/1902?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.2.110:3307/1902?useUnicode=true&characterEncoding=utf-8
     username: root
     password:
 eureka:

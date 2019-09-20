@@ -21,6 +21,7 @@
             tm.membertime,
             tm.memberuserid,
             tm.memberzhengjian,
+            tm.membersex,
             tu.dengji AS dengjis,
             tu.jifen AS jifens,
             tu.password AS passwords,
@@ -60,8 +61,9 @@
         t.memberolds=#{memberolds},t.membertime=#{membertime},t.memberzhengjian=#{memberzhengjian}
         where t.id=#{id}
     </update>
-    <!--回显会员信息-->
+<!--回显会员信息-->
     <select id="queryFindMemberById" resultType="com.jk.model.Member" parameterType="int">
         select * from t_member t where t.id = #{value}
     </select>
+
 </mapper>

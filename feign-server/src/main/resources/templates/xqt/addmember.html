@@ -38,37 +38,70 @@
 
     <script type="text/javascript" src="../js/fileinput/themes/fa/theme.js"></script>
 
+
 </head>
 <body>
-<div class="container-fluid">
     <form id="MemberForm" class="form-horizontal">
         <div class="form-group">
-
-                <lable for="memberaihao" class="col-sm- control-label">会员爱好</lable>
+            <div class="col-sm-4">
+            <label>会员爱好:&nbsp; &nbsp; &nbsp;&nbsp;</label>
+            <label>
                 <input type="text" class="form-control" id="memberaihao" name="memberaihao"/>
+            </label>
+            </div>
 
-                <lable for="memberarea" class="col-sm- control-label">会员详细地址</lable>
+            <div class="col-sm-4">
+            <lable>会员详细地址:&nbsp; &nbsp; &nbsp;&nbsp;</lable>
+            <label>
                 <input type="text" class="form-control" id="memberarea" name="memberarea"/>
+            </label>
+            </div>
 
-                <lable for="memberdetail" class="col-sm- control-label">会员简介</lable>
-                <input type="text" class="form-control" id="memberdetail" name="memberdetail"/>
-
-                <lable for="memberemail" class="col-sm- control-label">会员邮箱</lable>
+            <div class="col-sm-4">
+            <lable>会员邮箱:&nbsp; &nbsp; &nbsp;&nbsp;</lable>
+            <label>
                 <input type="text" class="form-control" id="memberemail" name="memberemail"/>
+            </label>
+            </div>
+        </div>
 
-                <lable for="memberolds" class="col-sm- control-label">会员年龄</lable>
+
+        <div class="form-group">
+            <div class="col-sm-4">
+            <lable>会员年龄:&nbsp; &nbsp; &nbsp;&nbsp;</lable>
+            <label>
                 <input type="text" class="form-control" id="memberolds" name="memberolds"/>
+            </label>
+            </div>
 
-
-                <lable for="membertime" class="col-sm-1 control-label">出版时间</lable>
+            <div class="col-sm-4">
+            <lable>创建时间:&nbsp; &nbsp; &nbsp;&nbsp;</lable>
+            <label>
                 <input type="text" class="form-control date" id="membertime" name="membertime"/>
+            </label>
+            </div>
 
-                <lable for="memberzhengjian" class="col-sm- control-label">会员证件号</lable>
+            <div class="col-sm-4">
+            <lable>会员证件号:&nbsp; &nbsp; &nbsp;&nbsp;</lable>
+            <label>
                 <input type="text" class="form-control" id="memberzhengjian" name="memberzhengjian"/>
+            </label>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <lable>会员简介:&nbsp; &nbsp; &nbsp;&nbsp;</lable>
+                <label>
+                    <textarea rows="5" cols="50" name="memberdetail" id="memberdetails"></textarea>
+                </label>
+            </div>
+
+        </div>
 
         </div>
     </form>
-</div>
 </body>
 <script>
 
@@ -80,6 +113,8 @@
         autoclose: true,//选中自动关闭
         todayBtn: true//显示今日按钮
     });
+
+
 
 </script>
 </html>

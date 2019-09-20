@@ -41,35 +41,74 @@
 <body>
 <form id="updateMemberForm" class="form-horizontal">
     <div class="form-group">
-        <input type="hidden"  id="memberId" name="id"/>
-        <lable for="memberaihao" class="col-sm- control-label">会员爱好</lable>
-        <input type="text" class="form-control" id="memberaihaos" name="memberaihao"/>
+        <div class="col-sm-4">
+            <label>会员爱好:&nbsp; &nbsp; &nbsp;&nbsp;</label>
+            <label>
+                <input type="hidden"  id="memberId" name="id"/>
+                <input type="text" class="form-control" id="memberaihaos" name="memberaihao"/>
+            </label>
+        </div>
 
-        <lable for="memberarea" class="col-sm- control-label">会员详细地址</lable>
-        <input type="text" class="form-control" id="memberareas" name="memberarea"/>
+        <div class="col-sm-4">
+            <lable>会员详细地址:&nbsp; &nbsp; &nbsp;&nbsp;</lable>
+            <label>
+                <input type="text" class="form-control" id="memberareas" name="memberarea"/>
+            </label>
+        </div>
 
-        <lable for="memberdetail" class="col-sm- control-label">会员简介</lable>
-        <input type="text" class="form-control" id="memberdetails" name="memberdetail"/>
+        <div class="col-sm-4">
+            <lable>会员邮箱:&nbsp; &nbsp; &nbsp;&nbsp;</lable>
+            <label>
+                <input type="text" class="form-control" id="memberemails" name="memberemail"/>
+            </label>
+        </div>
+    </div>
 
-        <lable for="memberemail" class="col-sm- control-label">会员邮箱</lable>
-        <input type="text" class="form-control" id="memberemails" name="memberemail"/>
+    <div class="form-group">
+        <div class="col-sm-4">
+            <lable>会员年龄:&nbsp; &nbsp; &nbsp;&nbsp;</lable>
+            <label>
+                <input type="text" class="form-control" id="memberoldss" name="memberolds"/>
+            </label>
+        </div>
 
-        <lable for="memberolds" class="col-sm- control-label">会员年龄</lable>
-        <input type="text" class="form-control" id="memberoldss" name="memberolds"/>
+        <div class="col-sm-4">
+            <lable>创建时间:&nbsp; &nbsp; &nbsp;&nbsp;</lable>
+            <label>
+                <input type="text" class="form-control date" id="membertimes" name="membertime"/>
+            </label>
+        </div>
 
+        <div class="col-sm-4">
+            <lable>会员证件号:&nbsp; &nbsp; &nbsp;&nbsp;</lable>
+            <label>
+                <input type="text" class="form-control" id="memberzhengjians" name="memberzhengjian"/>
+            </label>
+        </div>
+    </div>
 
-        <lable for="membertime" class="col-sm-1 control-label">出版时间</lable>
-        <input type="text" class="form-control date" id="membertimes" name="membertime"/>
-       <!-- <textarea name="info" id="info"  class="form-control" th:text="${b.info}"></textarea>
-        <input type="date" class="form-control"  name="date" th:value="${#dates.format(b.date,'yyyy-MM-dd')}" >-->
-        <lable for="memberzhengjian" class="col-sm- control-label">会员证件号</lable>
-        <input type="text" class="form-control" id="memberzhengjians" name="memberzhengjian"/>
+    <div class="form-group">
+        <div class="col-sm-8">
+            <lable>会员简介:</lable>
+            <label>
+                <textarea rows="5" cols="65" name="memberdetail" id="memberdetails"></textarea>
+            </label>
+        </div>
+
+    </div>
 
     </div>
 </form>
 </body>
 <script>
-
+    $('.date').datetimepicker({
+        language: 'zh-CN',//显示中文
+        format: 'yyyy-mm-dd hh:ii:ss',//显示格式
+        minView: "month",//设置只显示到月份
+        initialDate: new Date(),//初始化当前日期
+        autoclose: true,//选中自动关闭
+        todayBtn: true//显示今日按钮
+    });
 
 </script>
 </html>
