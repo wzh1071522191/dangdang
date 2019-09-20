@@ -83,7 +83,7 @@ public class ShiroConfig {
         // 登录请求路径 登录页面提交form表单时 表单的action写此路径
         shiroFilterFactoryBean.setLoginUrl("/user/LoginUser");
         // 登录成功跳转到登录成功页面
-        shiroFilterFactoryBean.setSuccessUrl("/user/index");
+        shiroFilterFactoryBean.setSuccessUrl("/user/tree");
         // 未授权界面;
          //shiroFilterFactoryBean.setUnauthorizedUrl("/403.html");
          shiroFilterFactoryBean.setUnauthorizedUrl("/user/403");
