@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>铛铛书城欢迎注册</title>
+    <link type="text/css" href="../xqtcss/css.css" rel="stylesheet" />
+    <script type="text/javascript" src="../xqtjs/jquery.js"></script>
+    <script type="text/javascript" src="../xqtjs/js.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+    <!-- 引入bootstrap的css -->
+    <link  href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-treeview的css -->
+    <link  href="../js/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+    <!-- 引入bootstrap-addTabs的css -->
+    <link  href="../js/addTabs/addTabs.css" rel="stylesheet" >
+    <!-- 引入bootstrap-table的css -->
+    <link  href="../js/table/bootstrap-table.min.css" rel="stylesheet" >
+    <!-- 引入fileinput的css -->
+    <link type="text/css" rel="stylesheet" href="../js/fileinput/css/fileinput.min.css" />
+
+    <!-- 引入my97 -->
+    <script type="text/javascript" src="../js/My97/WdatePicker.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入bootstrap的js-->
+    <script type="text/javascript" src="../js/addTabs/addTabs.js"></script>
+    <!-- 引入bootstrap-table的js-->
+    <script type="text/javascript" src="../js/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../js/table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 引入bootbox.js -->
+    <script type="text/javascript" src="../js/bootbox/bootbox.js"></script>
+    <!-- 引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/fileinput.min.js"></script>
+    <!--  引入fileinput的js -->
+    <script type="text/javascript" src="../js/fileinput/js/locales/zh.js"></script>
+
+    <script type="text/javascript" src="../js/fileinput/themes/fa/theme.js"></script>
+</head>
+<body style=" background:#FFF;">
+<div class="loginLogo">
+    <div class="logoMid">
+        <h1 class="logo" style="height:71px;padding-top:10px;"><a href="index.html"><img src="../xqtimages/loginLogo.jpg" width="241" height="71" /></a></h1>
+        <div class="loginReg">
+            还没有铛铛会员账号?&nbsp;<a href="../meber/tomemberlogin">登录铛铛</a>
+        </div><!--loginReg/-->
+    </div><!--logoMid/-->
+</div><!--loginLogo/-->
+<div class="loginBox">
+    <img src="../xqtimages/chengnuo.jpg" width="295" height="393" class="chengnuo" />
+    <form id="regForm">
+        <h3>铛铛会员注册</h3>
+        <div class="regList">
+            <label><span class="red">*</span> 账户名</label>
+        <input type="text" class="name" name="username"/><span style="color:#999;">请输入邮箱/用户名/手机号</span>
+        </div>
+        <div class="regList">
+            <label><span class="red">*</span> 请设置密码</label>
+        <input type="password" class="pwd" name="password"/>
+        </div>
+        <div class="regList">
+            <label><span class="password">*</span> 请确认密码</label>
+        <input type="password" class="pwd" name="password2"/>
+        </div>
+        <div class="regList">
+            <label><span class="password">*</span> 请输入手机号</label>
+            <input type="text" class="pwd" name="userphone"/>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-5">
+                <button onclick="memberReg()" type="button" class="btn btn-info btn-block"><i class="glyphicon glyphicon-user"></i>注册</button>
+            </div>
+        </div>
+
+    </form>
+    <div class="clears"></div>
+
+</div>
+</body>
+<script>
+function memberReg(){
+    var password1 = $("input[name='password']").val();
+    var password2 = $("input[name='password2']").val();
+    if(password1 != password2){
+        bootbox.alert({
+            size:'small',
+            title:'提示',
+            message:'两次密码不一致'
+        })
+        return;
+    }
+    $.ajax({
+        url:'../meber/savemeMberUser',
+        type:'post',
+        data:$("#regForm").serialize(),
+        dataType:'json',
+        success:function(data){
+            if(data == 1){
+                alert("注册成功");
+                location.href="../meber/tomemberlogin";
+            }
+
+      }
+
+    })
+
+
+
+}
+</script>
+</html>

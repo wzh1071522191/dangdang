@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jk.dao.UserDao" >
-  <select id="loginUser" parameterType="java.lang.String" resultType="com.jk.service.model.LoginUser">
-  select * from
+  <select id="loginUser"  resultType="com.jk.model.LoginUser">
+  select *  from  loginuser where username=#{username}
 
+  </select>
+  <select id="tree" resultType="com.jk.model.Tree">
+select t.* from loginuser l,role r,tree t,userandrole u,roleandtree a where l.userid=u.userid and r.roleid=u.roleid and a.treeid=t.id and a.roleid=r.roleid and l.userid=#{id}
+
+  </select>
+  <select id="treenode" resultType="com.jk.model.Tree">
+    select * from tree where pid=#{id}
+  </select>
+  <select id="zong" resultType="java.lang.Integer">
+    select  count(*) from  comments t, user u  where t.userid=u.userid
+  </select>
+  <select id="cha" resultType="com.jk.model.Comments">
+  select  * from  comments t, user u  where t.userid=u.userid
+  limit #{page},#{rows}
+  </select>
+  <insert id="add" >
+    insert into comments(content,dtime,userid) values (#{content},#{dtime},#{userid})
+  </insert>
+  <select id="pinglun" resultType="com.jk.model.Comments">
+    select *  from comments
   </select>
 </mapper>

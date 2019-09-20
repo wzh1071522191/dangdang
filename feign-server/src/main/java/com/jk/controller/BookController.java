@@ -47,7 +47,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("book")
 public class BookController {
-
     @Autowired
     private BookService bookService;
 
