@@ -8,3 +8,10 @@ spring:
   application:
     name: feign-dangdang
 
+  main:
+    allow-bean-definition-overriding: true
+    thymeleaf:
+      cache: false
+      prefix: classpath:/templates/
+      suffix: .html
+
