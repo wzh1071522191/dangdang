@@ -101,7 +101,7 @@ public class BookController {
     @RequestMapping("delBook")
     @ResponseBody
     public void delBook(Integer id){
-       // bookService.delBook(id);
+        bookService.delBook(id);
         bookRepository.deleteById (id);
     }
 
@@ -123,10 +123,17 @@ public class BookController {
 
     @RequestMapping("addBook")
     @ResponseBody
-    public String addBook( Book book){
-        String str = bookService.addBook (book);
-        bookRepository.save (book);
-        return str;
+    public String addBook(Book book){
+        Integer id=book.getBookId ();
+        Book b = bookService.addBook (book);
+        if(id==null){
+
+            bookRepository.save (b);
+        }else {
+            bookRepository.deleteById (book.getBookId ());
+            bookRepository.save (b);
+        }
+        return "1";
     }
 
     @RequestMapping("queryBook")
@@ -161,7 +168,7 @@ public class BookController {
 
         //获取高亮组件
         HighlightBuilder highlightBuilder = new HighlightBuilder();
-        highlightBuilder.field("bookname");//设置高亮字段
+        highlightBuilder.field("bookName");//设置高亮字段
         highlightBuilder.preTags("<span style='color:red;'>");//设置前缀
         highlightBuilder.postTags("</span>");//设置后缀
         //设置查询策略
@@ -191,29 +198,29 @@ public class BookController {
         for (SearchHit hit:hits1){
             Book b = new Book();
             Map<String, HighlightField> highlightFields = hit.getHighlightFields();
-            HighlightField title = highlightFields.get("bookname");
+            HighlightField title = highlightFields.get("bookName");
             //处理高亮字段
             if (title==null){//如果是空就用普通字段代替
-                b.setBookName (hit.getSourceAsMap().get("bookname").toString());
+                b.setBookName (hit.getSourceAsMap().get("bookName").toString());
             }else{//如果非空就用高亮字段替换掉查询出的字段
                 b.setBookName(title.fragments()[0].toString());
             }
             //依次将查询出的其它字段放入对象中
-            b.setBookAuthor (hit.getSourceAsMap().get("bookauthor").toString());
-            b.setBookId ((Integer)hit.getSourceAsMap().get("bookid"));
-            b.setBookPrice ((Double) hit.getSourceAsMap().get("bookprice"));
+            b.setBookAuthor (hit.getSourceAsMap().get("bookAuthor").toString());
+            b.setBookId ((Integer)hit.getSourceAsMap().get("bookId"));
+            b.setBookPrice ((Double) hit.getSourceAsMap().get("bookPrice"));
             b.setPress (hit.getSourceAsMap().get("press").toString ());
-            b.setBookContent (hit.getSourceAsMap().get("bookcontent").toString ());
-            b.setBookStatus ((Integer)hit.getSourceAsMap().get("bookstatus"));
-            b.setBookCount ((Integer)hit.getSourceAsMap().get("bookcount"));
+            b.setBookContent (hit.getSourceAsMap().get("bookContent").toString ());
+            b.setBookStatus ((Integer)hit.getSourceAsMap().get("bookStatus"));
+            b.setBookCount ((Integer)hit.getSourceAsMap().get("bookCount"));
             b.setHits ((Double) hit.getSourceAsMap().get("hits"));
-            b.setBookStar ((Integer)hit.getSourceAsMap().get("bookstar"));
-            b.setBookImg1 (hit.getSourceAsMap().get("bookimg1").toString ());
-            b.setBookImg2 (hit.getSourceAsMap().get("bookimg2").toString ());
-            b.setBookImg3 (hit.getSourceAsMap().get("bookimg3").toString ());
-            b.setTypeName (hit.getSourceAsMap().get("typename").toString ());
+            b.setBookStar ((Integer)hit.getSourceAsMap().get("bookStar"));
+            b.setBookImg1 (hit.getSourceAsMap().get("bookImg1").toString ());
+            b.setBookImg2 (hit.getSourceAsMap().get("bookImg2").toString ());
+            b.setBookImg3 (hit.getSourceAsMap().get("bookImg3").toString ());
+            b.setTypeName (hit.getSourceAsMap().get("typeName").toString ());
 
-            System.out.println (hit.getSourceAsMap().get("bookdate"));
+           // System.out.println (hit.getSourceAsMap().get("bookdate"));
             book.add(b);
         }
         map.put("total",totalHits);

@@ -28,7 +28,7 @@ public interface BookServiceApi {
     List<BookType> queryBookType (@RequestBody Integer pid);
 
     @RequestMapping("addBook")
-    String addBook (@RequestBody Book book);
+    Book addBook (@RequestBody Book book);
 
     @RequestMapping("delBook")
     void delBook (@RequestBody Integer id);

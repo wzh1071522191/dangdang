@@ -43,13 +43,16 @@ public class BookServiceImpl implements BookServiceApi{
     }
 
     @Override
-    public String addBook (Book book) {
+    public Book addBook (Book book) {
         if (book.getBookId () == null||"".equals (book.getBookId ())) {
             bookDao.addBook(book);
-            return "1";
+            Integer id= book.getBookId ();
+            Book book1 = bookDao.queryBookByIdEs (id);
+            return book1;
         }else {
             bookDao.updateBook(book);
-            return "1";
+            Book book1 = bookDao.queryBookByIdEs (book.getBookId ());
+            return book1;
         }
 
     }

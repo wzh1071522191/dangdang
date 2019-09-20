@@ -36,10 +36,13 @@
     </select>
 
     <!--void addBook (Book book)-->
-    <insert id="addBook" parameterType="Book">
+    <insert id="addBook" parameterType="Book" useGeneratedKeys="true">
+        <selectKey resultType="int" keyProperty="bookId" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         INSERT INTO
         book(bookName, bookAuthor,bookTypeId, press, bookContent,bookPrice, bookDate, bookStatus,bookCount, hits, bookStar,bookImg1, bookImg2, bookImg3)
-        VALUES(#{bookName}, #{bookAuthor}, #{bookTypeId}, #{press}, #{bookContent},#{bookPrice}, #{bookDate}, #{bookStatus},#{bookCount}, 0, #{bookStar},#{bookImg1}, #{bookImg2}, #{bookImg3})
+        VALUES(#{bookName}, #{bookAuthor}, #{bookTypeId}, #{press}, #{bookContent},#{bookPrice}, #{bookDate}, 2,#{bookCount}, 0, #{bookStar},#{bookImg1}, #{bookImg2}, #{bookImg3})
     </insert>
 
     <!--void updateStatus (Book book)-->
@@ -130,5 +133,10 @@
     </resultMap>
     <select id="queryBookById" resultMap="book">
         SELECT * FROM book b LEFT JOIN booktype bt ON b.bookTypeId=bt.typeId WHERE bookId=#{id}
+    </select>
+
+    <!--Book queryBookByIdEs (Integer id)-->
+    <select id="queryBookByIdEs" resultType="Book">
+        SELECT b.*,bt.typename FROM book b LEFT JOIN booktype bt ON b.bookTypeId=bt.typeId WHERE b.bookId = #{id}
     </select>
 </mapper>

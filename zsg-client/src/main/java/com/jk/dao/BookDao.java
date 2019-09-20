@@ -28,7 +28,7 @@ public interface BookDao {
     @Select ("SELECT * FROM booktype WHERE pid=#{pid}")
     List<BookType> queryBookType (Integer pid);
 
-    void addBook (Book book);
+    Integer addBook (Book book);
 
     @Delete ("DELETE FROM book WHERE bookId=#{id}")
     void delBook (Integer id);
@@ -39,4 +39,6 @@ public interface BookDao {
     Book queryBookById (Integer id);
 
     void updateBook (Book book);
+
+    Book queryBookByIdEs (Integer id);
 }
