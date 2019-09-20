@@ -107,38 +107,7 @@ $(window).scroll(function(){
 		$(this).addClass("vipNavStyle").siblings("dt").removeClass("vipNavStyle");
 		$(this).next("dd").show().siblings("dd").hide();
 		})
-	//登录验证
-	$('.submit').click(function(event){
-                var name = $('.name').val();
-				var pwd = $('.pwd').val();
-				
-                var namelen = name.length;
-				var pwdlen = pwd.length;
-                if(namelen < 6){
-                        alert("用户名不能小于六位，请重新输入！")
-					    return false;
-                        }
-				
-				if(pwdlen < 6){
-                        alert("你输入的密码不正确，请重新输入！")
-					    return false;
-                        }
-				
-                });
-	//会员中心修改密码验证
-	$(".vipSub").click(function(){
-		var pwd1=$(".vipPwd1").val();
-	    var pwd2=$(".vipPwd2").val();
-		if(pwd1!==pwd2||pwd1<1){
-			alert("两次输入的密码不一样,请重新输入");
-			$(".vipPwd1,.vipPwd2").val("");
-			}
-			else{
-				alert("恭喜您，修改成功！");
-				$(".vipPwd1,.vipPwd2").val("");
-				}
-		})
-	})
+
 	
 //banner	
 	/*! jQuery.kinMaxShow v1.0 | mr.kin@foxmail.com */

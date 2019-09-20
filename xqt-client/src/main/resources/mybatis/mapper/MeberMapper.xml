@@ -65,5 +65,42 @@
     <select id="queryFindMemberById" resultType="com.jk.model.Member" parameterType="int">
         select * from t_member t where t.id = #{value}
     </select>
+<!--前台列表查询-->
+    <select id="queryMemberList" resultType="com.jk.model.Member">
+         SELECT
+                tm.id,
+                tm.memberaihao,
+                tm.memberarea,
+                tm.memberdetail,
+                tm.memberemail,
+                tm.memberolds,
+                tm.membertime,
+                tm.memberuserid,
+                tm.memberzhengjian,
+                tm.membersex,
+                tu.dengji AS dengjis,
+                tu.jifen AS jifens,
+                tu.password AS passwords,
+                tu.status AS statuss,
+                tu.userid AS userids,
+                tu.username AS usernames,
+                tu.userphone AS userphones
+        FROM
+            t_member tm
+        LEFT JOIN USER tu ON tm.memberuserid = tu.userid
+    </select>
+<!--前台会员信息修改-->
+    <update id="updateMemberUser" parameterType="com.jk.model.Member">
+          UPDATE t_member tm
+                INNER JOIN USER tu ON tm.memberuserid = tu.userid
+                SET
+                tu.userphone = #{userphones},
+                tm.memberdetail = #{memberdetail},
+                tm.memberolds = #{memberolds},
+                tm.memberzhengjian = #{memberzhengjian},
+                tm.memberemail = #{memberemail}
+            WHERE
+	        tm.id = #{id}
+    </update>
 
 </mapper>

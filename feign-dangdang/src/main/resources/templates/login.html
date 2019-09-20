@@ -2,18 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>当当商城</title>
+<title>铛铛书城欢迎登录</title>
 <link type="text/css" href="../css/css.css" rel="stylesheet" />
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/js.js"></script>
 </head>
-
 <body style=" background:#FFF;">
  <div class="loginLogo">
   <div class="logoMid">
    <h1 class="logo" style="height:71px;padding-top:10px;"><a href="../index.html"><img src="../images/loginLogo.jpg" width="241" height="95" /></a></h1>
    <div class="loginReg">
-    还没有会员账号?&nbsp;<a href="../reg.html">免费注册</a>
+    还没有会员账号?&nbsp;<a href="../jumpMeber/toreg">免费注册</a>
    </div><!--loginReg/-->
   </div><!--logoMid/-->
  </div><!--loginLogo/-->
@@ -21,20 +20,42 @@
   <div class="loginLeft">
    <img src="../images/logoinimg.jpg" width="716" height="376" />
   </div><!--loginLeft/-->
-  <form action="vip.html" method="get" class="loginRight">
-   <h2>会员登录</h2>
+  <form id="loginForm" class="loginRight">
+   <h2>当当会员登录</h2>
    <h3>用户名</h3>
-   <input type="text" class="name" />
+   <input type="text" class="name" name="username"/>
    <h3>密码</h3>
-   <input type="password" class="pwd" />
-   <div class="zhuangtai">
-    <input type="checkbox" checked="checked" /> 下次自动登录
-   </div><!--zhuangtai/-->
+   <input type="password" class="pwd" name="password"/>
+
    <div class="subs">
-    <input type="image" src="../images/sub.jpg" width="290px" class="submit" />
+    <input type="image" onclick="membelogin()"  src="../images/sub.jpg" width="290px" class="submit" />
    </div>
   </form><!--loginRight/-->
   <div class="clears"></div>
  </div><!--loginBox/-->
 </body>
+<script>
+ /*登录ajax*/
+ function membelogin(){
+  $.ajax({
+   url:"../jumpMeber/memberLogin",
+   data:$("#loginForm").serialize(),
+   success:function(data){
+
+    if (data==1) {
+     alert("用户不存在");
+    }else
+    if (data==2) {
+     alert("密码错误");
+    }else
+    if (data==3) {
+     //alert("成功");
+     location.href="../jumpMeber/queryMemberList";
+    }
+   },error:function(){
+    alert("登录失败,请重新输入账号与密码!");
+   }
+  })
+ }
+</script>
 </html>

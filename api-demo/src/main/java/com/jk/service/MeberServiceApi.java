@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 会员信息接口--xqt
@@ -41,5 +42,11 @@ public interface MeberServiceApi {
     //前台会员注册
     @RequestMapping(value = "/savemeMberUser")
     String savemeMberUser(@RequestBody MemberUser memberUser);
+    //前台会员列表展示
+    @RequestMapping(value = "/queryMemberList")
+    List<Member> queryMemberList();
+    //前台会员信息修改
+    @RequestMapping(value = "/updateMemberUser")
+    void updateMemberUser(@RequestBody  Member member);
 
 }

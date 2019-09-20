@@ -7,4 +7,7 @@ server:
 spring:
   application:
     name: feign-dangdang
-
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html

@@ -6,6 +6,34 @@
 <link type="text/css" href="../css/css.css" rel="stylesheet" />
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/js.js"></script>
+ <!-- 引入bootstrap的css -->
+ <link  href="../bootstarpjs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+ <!-- 引入bootstrap-treeview的css -->
+ <link  href="../bootstarpjs/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
+ <!-- 引入bootstrap-addTabs的css -->
+ <link  href="../bootstarpjs/addTabs/addTabs.css" rel="stylesheet" >
+ <!-- 引入bootstrap-table的css -->
+ <link  href="../bootstarpjs/table/bootstrap-table.min.css" rel="stylesheet" >
+ <!-- 引入fileinput的css -->
+ <link type="text/css" rel="stylesheet" href="../bootstarpjs/fileinput/css/fileinput.min.css" />
+ <!-- 引入my97 -->
+ <script type="text/javascript" src="../bootstarpjs/My97/WdatePicker.js"></script>
+ <!-- 引入bootstrap的js-->
+ <script type="text/javascript" src="../bootstarpjs/bootstrap/js/bootstrap.min.js"></script>
+ <!-- 引入bootstrap的js-->
+ <script type="text/javascript" src="../bootstarpjs/treeview/bootstrap-treeview.min.js"></script>
+ <!-- 引入bootstrap的js-->
+ <script type="text/javascript" src="../bootstarpjs/addTabs/addTabs.js"></script>
+ <!-- 引入bootstrap-table的js-->
+ <script type="text/javascript" src="../bootstarpjs/table/bootstrap-table.min.js"></script>
+ <script type="text/javascript" src="../bootstarpjs/table/locale/bootstrap-table-zh-CN.min.js"></script>
+ <!-- 引入bootbox.js -->
+ <script type="text/javascript" src="../bootstarpjs/bootbox/bootbox.js"></script>
+ <!-- 引入fileinput的js -->
+ <script type="text/javascript" src="../bootstarpjs/fileinput/js/fileinput.min.js"></script>
+ <!--  引入fileinput的js -->
+ <script type="text/javascript" src="../bootstarpjs/fileinput/js/locales/zh.js"></script>
+ <script type="text/javascript" src="../bootstarpjs/fileinput/themes/fa/theme.js"></script>
 </head>
 
 <body style=" background:#FFF;">
@@ -13,37 +41,60 @@
   <div class="logoMid">
    <h1 class="logo" style="height:71px;padding-top:10px;"><a href="../index.html"><img src="../images/loginLogo.jpg" width="241" height="95" /></a></h1>
    <div class="loginReg">
-    还没有会员账号?&nbsp;<a href="../login.html">登录</a>
+    还没有会员账号?&nbsp;<a href="../jumpMeber/tologin">登录</a>
    </div><!--loginReg/-->
   </div><!--logoMid/-->
  </div><!--loginLogo/-->
  <div class="loginBox">
   <img src="../images/chengnuo.jpg" width="295" height="393" class="chengnuo" />
-  <form action="#.html" method="get" class="reg">
+  <form id="regForm">
+   <h3>铛铛会员注册</h3>
    <div class="regList">
     <label><span class="red">*</span> 账户名</label>
-    <input type="text" /> <span style="color:#999;">请输入邮箱/用户名/手机号</span>
-   </div><!--regList/-->
+    <input type="text" class="name" name="username"/><span style="color:#999;">请输入邮箱/用户名/手机号</span>
+   </div>
    <div class="regList">
     <label><span class="red">*</span> 请设置密码</label>
-    <input type="password" />
-   </div><!--regList/-->
+    <input type="password" class="pwd" name="password"/>
+   </div>
    <div class="regList">
     <label><span class="password">*</span> 请确认密码</label>
-    <input type="text" />
-   </div><!--regList/-->
+    <input type="password" class="pwd" name="password2"/>
+   </div>
    <div class="regList">
-    <label><span class="red">*</span> 验证码</label>
-    <input type="text" class="yanzheng" /><img src="../images/yanzheng.jpg" width="103" height="38" />
-   </div><!--regList/-->
-   <div class="xieyi">
-    <input type="checkbox" /> 我已经阅读并同意<a href="../#">《当当交易条款》</a>和<a href="../#">《当当社区条款》</a>
-   </div><!--xieyi/-->
-   <div class="reg">
-    <input type="image" src="../images/reg.jpg" width="284" height="34" />
-   </div><!--reg/-->
-  </form><!--reg/-->
+    <label><span class="password">*</span> 请输入手机号</label>
+    <input type="text" class="pwd" name="userphone"/>
+   </div>
+   <div class="form-group">
+    <div class="col-xs-5">
+     <input type="image" onclick="memberReg()" src="../images/reg.jpg" width="284" height="34" />
+
+    </div>
+   </div>
+  </form>
   <div class="clears"></div>
  </div><!--loginBox/-->
 </body>
+<script>
+ function memberReg(){
+  alert("注册成功,请登录")
+  var password1 = $("input[name='password']").val();
+  var password2 = $("input[name='password2']").val();
+  if(password1 != password2){
+   bootbox.alert({
+    size:'small',
+    title:'提示',
+    message:'两次密码不一致'
+   })
+   return;
+  }
+  $.ajax({
+   url:'../jumpMeber/savemeMberUser',
+   type:'post',
+   data:$("#regForm").serialize(),
+   dataType:'json'
+
+  })
+ }
+</script>
 </html>

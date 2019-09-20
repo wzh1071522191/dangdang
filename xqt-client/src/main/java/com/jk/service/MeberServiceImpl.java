@@ -76,7 +76,16 @@ public class MeberServiceImpl implements MeberServiceApi{
             meberMapper.savemeMberUser(memberUser);
         }
         return "1";
-
+    }
+    //前台会员列表展示
+    @Override
+    public List<Member> queryMemberList() {
+        return meberMapper.queryMemberList();
+    }
+    //前台会员信息修改
+    @Override
+    public void updateMemberUser(Member member) {
+        meberMapper.updateMemberUser(member);
     }
 
 }

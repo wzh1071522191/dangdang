@@ -22,6 +22,62 @@ public class MemberUser implements Serializable {
     private Integer dengji;
     private Integer status;
 
+    //临时
+    private String memberdetail;//会员简介
+    private String memberzhengjian;//会员证件号
+    private String memberemail;//会员邮箱
+    private String memberarea;//会员所在地详细信息
+    private Integer memberolds;//会员年龄
+    private String memberaihao;//会员爱好
+
+    public String getMemberaihao() {
+        return memberaihao;
+    }
+
+    public void setMemberaihao(String memberaihao) {
+        this.memberaihao = memberaihao;
+    }
+
+    public String getMemberdetail() {
+        return memberdetail;
+    }
+
+    public void setMemberdetail(String memberdetail) {
+        this.memberdetail = memberdetail;
+    }
+
+    public String getMemberzhengjian() {
+        return memberzhengjian;
+    }
+
+    public void setMemberzhengjian(String memberzhengjian) {
+        this.memberzhengjian = memberzhengjian;
+    }
+
+    public String getMemberemail() {
+        return memberemail;
+    }
+
+    public void setMemberemail(String memberemail) {
+        this.memberemail = memberemail;
+    }
+
+    public String getMemberarea() {
+        return memberarea;
+    }
+
+    public void setMemberarea(String memberarea) {
+        this.memberarea = memberarea;
+    }
+
+    public Integer getMemberolds() {
+        return memberolds;
+    }
+
+    public void setMemberolds(Integer memberolds) {
+        this.memberolds = memberolds;
+    }
+
     public Integer getUserid() {
         return userid;
     }

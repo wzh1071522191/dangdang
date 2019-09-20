@@ -31,8 +31,9 @@ public interface MeberMapper {
     //前台注册会员
     @Insert("insert into user(username,password,userphone,jifen,dengji,status) values(#{username},#{password},#{userphone},0,1,1)")
     void savemeMberUser(MemberUser memberUser);
+    //前台列表查询
+    List<Member> queryMemberList();
 
-
-
+    void updateMemberUser(Member member);
 
 }
