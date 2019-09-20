@@ -59,4 +59,6 @@ public class Book implements Serializable {
     private BookType bookType;
 
     private String typeName;
+
+    private Integer buyCount;
 }
