@@ -26,6 +26,7 @@ public class ConsumerBookServiceImpl implements ConsumerBookServiceApi{
         HashMap<String,Object> hashMap = new HashMap<String,Object>();
         List<Book> bookList = bookDao.queryBookAll ();
         List<Book> bookList1 = bookDao.queryBookStatus ();
+        List<Book> bookList2 = bookDao.queryBookLike ();
         hashMap.put ("book",bookList);
         hashMap.put ("b",bookList1);
         return hashMap;

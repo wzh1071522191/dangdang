@@ -47,4 +47,7 @@ public interface BookDao {
 
     @Select ("SELECT * FROM book WHERE bookStatus =1")
     List<Book> queryBookStatus ();
+
+
+    List<Book> queryBookLike ();
 }

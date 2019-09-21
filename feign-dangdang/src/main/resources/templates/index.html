@@ -209,6 +209,7 @@ $(function(){
       <dt><img th:src="${b.bookImg1}" width="180" height="300" th:id="${b.bookId}" onclick="toMessage(this.id)"/></dt>
        <dd>《<span th:text="${b.bookName}"></span>》</dd>
        <dd>作者:</span><span th:text="${b.bookAuthor}"></span></dd>
+           <dd>成交量:</span><span th:text="${b.buyCount}"></span>本</dd>
        <dd class="cheng">价格:<span th:text="${b.bookPrice}"></span>/本</dd>
      </dl>
       </div>
@@ -219,6 +220,7 @@ $(function(){
        <dt><a href="../proinfo.html"><img th:src="${b.bookImg1}" width="180" height="300" /></a></dt>
        <dd>《<span th:text="${b.bookName}"></span>》</dd>
        <dd>作者:</span><span th:text="${b.bookAuthor}"></span></dd>
+          <dd>成交量:</span><span th:text="${b.buyCount}"></span>本</dd>
        <dd class="cheng">价格:<span th:text="${b.bookPrice}"></span>/本</dd>
       </dl>
      </div>

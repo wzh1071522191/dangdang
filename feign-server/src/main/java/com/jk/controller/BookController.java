@@ -150,7 +150,7 @@ public class BookController {
             boolQueryBuilder.must(QueryBuilders.matchQuery("copy", key));
         }*/
         if (parm.getTypename()!=null && !"".equals(parm.getTypename())){
-            boolQueryBuilder.must(QueryBuilders.matchQuery("bookname",parm.getTypename()));}
+            boolQueryBuilder.must(QueryBuilders.matchQuery("booknNme",parm.getTypename()));}
 
         //区间查询
        /* if (store.ge()!=null && !"".equals(book.getMinprice()) && book.getMaxprice()!=null && !"".equals(book.getMaxprice())) {
