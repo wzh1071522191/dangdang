@@ -1,8 +1,6 @@
 package com.jk.util;
 
-import com.alibaba.dubbo.common.logger.Logger;
-
-import com.alibaba.dubbo.common.logger.LoggerFactory;
+import com.alibaba.dubbo.common.logger.*;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.*;
 import org.springframework.util.StringUtils;
@@ -23,7 +21,7 @@ import java.util.Random;
  */
 public class AlYunOssUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(AlYunOssUtil.class);
+    public static final Logger logger = LoggerFactory.getLogger(AlYunOssUtil.class);
 
 
     private String endpoint = "oss-cn-beijing.aliyuncs.com";
@@ -189,5 +187,4 @@ public class AlYunOssUtil {
             return url.toString();
         }
         return  "";
-    }
-}
+    }}

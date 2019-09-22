@@ -1,5 +1,6 @@
 package com.jk.controller;
 
+import com.jk.ftp.FtpFileUtil;
 import com.jk.model.Book;
 import com.jk.model.BookType;
 import com.jk.repository.BookRepository;
@@ -25,12 +26,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,7 +66,7 @@ public class BookController {
 
         return "zsg/book";
     }
-    @RequestMapping("queryBook1")
+    @RequestMapping("queryBook")
     @ResponseBody
     public HashMap<String,Object> queryBook1(@RequestBody ParameUtil parameUtil){
         return bookService.queryBook(parameUtil);
@@ -135,7 +139,7 @@ public class BookController {
         return "1";
     }
 
-    @RequestMapping("queryBook")
+    @RequestMapping("queryBook1")
     @ResponseBody
     public Map queryBook(@RequestBody ParameUtil parm){
         //System.out.println (parm.getTypename ());
@@ -225,6 +229,24 @@ public class BookController {
         map.put("total",totalHits);
         map.put("rows",book);
         return map;
+    }
+
+    //ftp上传文件(图片)
+    @RequestMapping("upLoadFileFtp")
+    @ResponseBody
+    public String upLoadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
+
+        String fileName = file.getOriginalFilename();
+        InputStream inputStream=file.getInputStream();
+        String filePath=null;
+        Boolean flag= FtpFileUtil.uploadFile(fileName,inputStream);
+        if(flag==true){
+            System.out.println("ftp上传成功！");
+            filePath=fileName;
+            System.out.println (filePath);
+        }
+        return  filePath;  //该路径图片名称，前端框架可用ngnix指定的路径+filePath,即可访问到ngnix图片服务器中的图片
+
     }
 
 

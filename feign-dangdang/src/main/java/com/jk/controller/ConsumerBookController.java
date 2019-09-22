@@ -3,6 +3,7 @@ package com.jk.controller;
 import com.jk.model.Book;
 import com.jk.service.ConsumerBookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,9 @@ import java.util.List;
 @Controller
 @RequestMapping("consumerBook")
 public class ConsumerBookController {
+
+    @Autowired
+    private ElasticsearchTemplate elasticsearchTemplate;
 
     @Autowired
     private ConsumerBookService consumerBookService;

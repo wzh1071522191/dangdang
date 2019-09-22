@@ -134,6 +134,30 @@
 
     })
 
+
+    /*upLoadFile=function(){
+        var file=$("#file").val();
+        var formData = new FormData($("#ftpForm")[0]);
+        alert(formData);
+        $.ajax({
+            url:"../book/upLoadFileFtp",
+            type:"post",
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (returndata) {
+                $("#filename").val(returndata);
+                alert(returndata);
+            },
+            error: function (returndata) {
+                alert(returndata);
+            }
+
+        })
+    }*/
+
     queryType=function (pid) {
         $.ajax({
             url:"../book/queryBookType?pid="+pid,
