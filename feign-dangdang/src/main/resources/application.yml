@@ -7,4 +7,22 @@ server:
 spring:
   application:
     name: feign-dangdang
-
+  redis:
+    host: localhost
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+    port: 6379
+    timeout: 10000
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+  data:
+    mongodb:
+      database: haha
+      host: localhost
+      port: 27017
