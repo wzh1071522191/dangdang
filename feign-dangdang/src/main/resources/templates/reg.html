@@ -1,39 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>当当商城</title>
 <link type="text/css" href="../css/css.css" rel="stylesheet" />
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/js.js"></script>
- <!-- 引入bootstrap的css -->
- <link  href="../bootstarpjs/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
- <!-- 引入bootstrap-treeview的css -->
- <link  href="../bootstarpjs/treeview/bootstrap-treeview.min.css" rel="stylesheet" >
- <!-- 引入bootstrap-addTabs的css -->
- <link  href="../bootstarpjs/addTabs/addTabs.css" rel="stylesheet" >
- <!-- 引入bootstrap-table的css -->
- <link  href="../bootstarpjs/table/bootstrap-table.min.css" rel="stylesheet" >
- <!-- 引入fileinput的css -->
- <link type="text/css" rel="stylesheet" href="../bootstarpjs/fileinput/css/fileinput.min.css" />
- <!-- 引入my97 -->
- <script type="text/javascript" src="../bootstarpjs/My97/WdatePicker.js"></script>
- <!-- 引入bootstrap的js-->
- <script type="text/javascript" src="../bootstarpjs/bootstrap/js/bootstrap.min.js"></script>
- <!-- 引入bootstrap的js-->
- <script type="text/javascript" src="../bootstarpjs/treeview/bootstrap-treeview.min.js"></script>
- <!-- 引入bootstrap的js-->
- <script type="text/javascript" src="../bootstarpjs/addTabs/addTabs.js"></script>
- <!-- 引入bootstrap-table的js-->
- <script type="text/javascript" src="../bootstarpjs/table/bootstrap-table.min.js"></script>
- <script type="text/javascript" src="../bootstarpjs/table/locale/bootstrap-table-zh-CN.min.js"></script>
- <!-- 引入bootbox.js -->
- <script type="text/javascript" src="../bootstarpjs/bootbox/bootbox.js"></script>
- <!-- 引入fileinput的js -->
- <script type="text/javascript" src="../bootstarpjs/fileinput/js/fileinput.min.js"></script>
- <!--  引入fileinput的js -->
- <script type="text/javascript" src="../bootstarpjs/fileinput/js/locales/zh.js"></script>
- <script type="text/javascript" src="../bootstarpjs/fileinput/themes/fa/theme.js"></script>
+ <style>
+  .zc{color:#fff000;}
+ </style>
 </head>
 
 <body style=" background:#FFF;">
@@ -65,36 +40,55 @@
     <label><span class="password">*</span> 请输入手机号</label>
     <input type="text" class="pwd" name="userphone"/>
    </div>
+   <!--验证码-->
+   <div>
+    <label><span>*</span> 请输入验证码</label>
+    &nbsp;&nbsp;&nbsp; <input type="text" id="checkcode" name="checkcode"  maxlength="4">
+    <img id="checkImg" src="../jumpMeber/checkImg" onclick="change()" title="点击更换验证码">
+   </div>
+   <!--结束-->
+   <div class="xieyi">
+    <input type="checkbox" /> 我已经阅读并同意<a href="#">《当当交易条款》</a>和<a href="#">《当当社区条款》</a>
+   </div>
    <div class="form-group">
-    <div class="col-xs-5">
-     <input type="image" onclick="memberReg()" src="../images/reg.jpg" width="284" height="34" />
-
-    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button"  style="background-color:red;width:286px;height: 35px" value="注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册✍" onclick="memberReg()" class="zc" />
    </div>
   </form>
   <div class="clears"></div>
  </div><!--loginBox/-->
 </body>
 <script>
- function memberReg(){
-  alert("注册成功,请登录")
+ function memberReg() {
   var password1 = $("input[name='password']").val();
   var password2 = $("input[name='password2']").val();
-  if(password1 != password2){
-   bootbox.alert({
-    size:'small',
-    title:'提示',
-    message:'两次密码不一致'
+  /*验证码输入框的值*/
+  var checkcode2 = $("input[name='checkcode']").val();
+  if (password1 != password2 || password1 == null || password2 == null) {
+     alert("两次密码不一致!");
+  } else if (checkcode2 == null) {
+     alert("验证码不能为空!");
+  }else if(password1 == password2 || checkcode2 != null) {
+   $.ajax({
+    url: '../jumpMeber/savemeMberUser',
+    type: 'post',
+    data: $("#regForm").serialize(),
+    dataType: 'json',
+    success: function (data) {
+     alert("注册成功,请登录");
+    }, error: function () {
+     alert("注册失败");
+    }
    })
-   return;
   }
-  $.ajax({
-   url:'../jumpMeber/savemeMberUser',
-   type:'post',
-   data:$("#regForm").serialize(),
-   dataType:'json'
-
-  })
  }
+ function change(){
+  var img1=document.getElementById("checkImg");
+  img1.src="../jumpMeber/checkImg?"+new Date(); //加时间戳防止缓存
+ }
+
+
+
+
+
 </script>
 </html>

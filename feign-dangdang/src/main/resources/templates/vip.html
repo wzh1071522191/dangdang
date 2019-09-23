@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>当当商城</title>
@@ -9,12 +9,15 @@
 <script src="../js/wb.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 </script>
+ <style>
+  .baocun{color:#FFF0F5;}
+ </style>
 </head>
 
 <body>
  <div class="mianCont">
   <div class="top">
-   <span>您好！欢迎来到当当商城 请&nbsp;<a href="../login.html">[登录]</a>&nbsp;<a href="../reg.html">[注册]</a></span>
+   <span>您好！欢迎来到当当商城 请&nbsp;<a href="javascript:tologins()">[登录]</a>&nbsp;<a href="javascript:toregs()">[注册]</a></span>
    <span class="topRight">
     <a href="../vip.html">我的当当</a>&nbsp;|
     <a href="../order.html">我的订单</a>&nbsp;|
@@ -188,14 +191,14 @@
       </dd>
      <dt>账户设置</dt>
       <dd>
-       <a href="../vipMy.html">个人信息</a>
-       <a href="../vipPwd.html">密码修改</a>
-       <a href="../vipAdress.html">收货地址</a>
+       <a href="javascript:toxinxigeren()">个人信息</a>
+       <a href="javascript:updatePassword()">密码修改</a>
+       <a href="javascript:shouhuoarea()">收货地址</a>
       </dd>
       <dt>客户服务</dt>
        <dd>
-        <a href="../vipExit.html">网站使用条款</a>
-        <a href="../vipTuihuo.html">网站免责声明</a>
+        <a href="javascript:tiaokuan()">网站使用条款</a>
+        <a href="javascript:mianze()">网站免责声明</a>
         <a href="../message.html">在线留言</a>
        </dd>
 
@@ -230,7 +233,6 @@
     <div class="address">
      <form id="updateUser">
             <table>
-
                    <tr>
                     <td> <label><span class="red">* </span>个人简介:</label></td>
                     <td>
@@ -265,7 +267,7 @@
                     </td>
                    </tr>
                    <tr>
-                    <td colspan="2"> <input type="image" src="../images/baocun.png" width="79" height="30" onclick="updateMemUser()"/></td>
+                    <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button"  style="background-color:red;width:224px;height: 35px" value="保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存✎" onclick="updateMemUser()" class="baocun" /></td>
                    </tr>
             </table>
      </form>
@@ -287,8 +289,8 @@
    <div class="inHLeft">
     <h4>会员服务</h4>
     <ul class="inHeList">
-     <li><a href="../reg.html">会员注册</a></li>
-     <li><a href="../login.html">会员登录</a></li>
+     <li><a href="javascript:reg2()">会员注册</a></li>
+     <li><a href="javascript:login2()">会员登录</a></li>
      <li><a href="../order.html">购物车</a></li>
      <li><a href="../order.html">我的订单</a></li>
      <div class="clears"></div>
@@ -327,7 +329,7 @@
  function togeren(){
   location.href="../jumpMeber/queryMemberList";
  }
-
+//修改
  function updateMemUser(){
   var form = $("#updateUser").serialize();
   var valueid=$("#valueid2").val();
@@ -335,7 +337,7 @@
    url:"../jumpMeber/updateMemberUser?id="+valueid,
    type:"post",
    data:form,
-   success:function(data){
+   success:function(){
     alert("修改成功");
     location.href= "../jumpMeber/queryMemberList";
    },error:function(){
@@ -354,7 +356,38 @@
   $("#valueid2").val(valueid);
  })
 //展示个人中心
-
-//修改个人中心
+function toxinxigeren(){
+  location.href="../jumpMeber/queryMemberUserList";
+}
+ //跳转登录
+ function tologins(){
+  location.href="../jumpMeber/tologin";
+ }
+ function login2(){
+  location.href="../jumpMeber/tologin";
+ }
+ //跳转注册
+ function toregs(){
+     location.href="../jumpMeber/toreg";
+ }
+ function reg2(){
+  location.href="../jumpMeber/toreg";
+ }
+ //跳转密码修改
+ function updatePassword(){
+  location.href="../jumpMeber/queryUpdateMemberList";
+ }
+//跳转使用条款
+ function tiaokuan(){
+  location.href="../jumpMeber/tovipExit";
+ }
+ //跳转免责声明
+ function mianze(){
+  location.href="../jumpMeber/tovipTuihuo";
+ }
+ //跳转收货地址
+ function shouhuoarea(){
+  location.href="../jumpMeber/queryTakeAreaList";
+ }
 </script>
 </html>

@@ -17,11 +17,11 @@
 <body>
  <div class="mianCont">
   <div class="top">
-   <span>您好！欢迎来到当当商城 请&nbsp;<a href="../login.html">[登录]</a>&nbsp;<a href="../reg.html">[注册]</a></span>
+   <span>您好！欢迎来到当当商城 请&nbsp;<a href="javascript:denglu6()">[登录]</a>&nbsp;<a href="javascript:zhuce6()">[注册]</a></span>
    <span class="topRight">
     <a href="../vip.html">我的当当</a>&nbsp;|
     <a href="../order.html">我的订单</a>&nbsp;|
-    <a href="../login.html">会员中心</a>&nbsp;|
+    <a href="">会员中心</a>&nbsp;|
     <a href="../contact.html">联系我们</a>
    </span>
   </div><!--top/-->
@@ -168,7 +168,7 @@
     <ul class="nav">
      <li><a href="../index.html">商城首页</a></li>
      <li><a href="../product.html">促销中心</a></li>
-     <li><a href="../login.html">会员中心</a></li>
+     <li><a href="javascript:huiyuanzhongxin3()">会员中心</a></li>
      <li><a href="../help.html">帮助中心</a></li>
      <div class="clears"></div>
      <div class="phone">TEL：021-12345678</div>
@@ -177,7 +177,7 @@
    <div class="clears"></div>
   </div><!--pnt/-->
   <div class="positions">
-   当前位置：<a href="../index.html">首页</a> &gt; <a href="../vip.html">会员中心</a>
+   当前位置：<a href="../index.html">首页</a> &gt; <a href="javascript:huiyuanzhongxin2()">会员中心</a>
     &gt; <a href="../#" class="posCur">我的订单</a>
   </div><!--positions/-->
   <div class="cont">
@@ -186,19 +186,19 @@
     <dl class="helpNav vipNav">
      <dt>我的主页</dt>
       <dd>
-       <a href="../vip.html">个人中心</a>
+       <a href="javascript:gerenzhongxin3()">个人中心</a>
        <a href="../vipOrder.html">我的订单</a>
       </dd>
      <dt>账户设置</dt>
       <dd>
-       <a href="../vipMy.html">个人信息</a>
-       <a href="../vipPwd.html">密码修改</a>
+       <a href="javascript:gerenxinxi()">个人信息</a>
+       <a href="javascript:updatePassword3()">密码修改</a>
        <a href="../vipAdress.html">收货地址</a>
       </dd>
       <dt>客户服务</dt>
        <dd>
-        <a href="../vipExit.html">网站使用条款</a>
-        <a href="../vipTuihuo.html" class="vipCur">网站免责声明</a>
+        <a href="javascript:tiaokuan3()">网站使用条款</a>
+        <a href="javascript:shengming3()" class="vipCur">网站免责声明</a>
         <a href="../message.html">在线留言</a>
        </dd>
     </dl><!--helpNav/-->
@@ -229,8 +229,8 @@
    <div class="inHLeft">
     <h4>会员服务</h4>
     <ul class="inHeList">
-     <li><a href="../reg.html">会员注册</a></li>
-     <li><a href="../login.html">会员登录</a></li>
+     <li><a href="javascript:zhuce7()">会员注册</a></li>
+     <li><a href="javascript:login7()">会员登录</a></li>
      <li><a href="../order.html">购物车</a></li>
      <li><a href="../order.html">我的订单</a></li>
      <div class="clears"></div>
@@ -262,4 +262,48 @@
  </div><!--mianCont/-->
  <a href="../#" class="backTop">&nbsp;</a>
 </body>
+<script>
+ //会员中心
+ function huiyuanzhongxin2(){
+  location.href="../jumpMeber/queryMemberList";
+ }
+ function huiyuanzhongxin3(){
+  location.href="../jumpMeber/queryMemberList";
+ }
+ //登录
+ function denglu6(){
+  location.href="../jumpMeber/tologin";
+ }
+ function login7(){
+  location.href="../jumpMeber/tologin";
+ }
+ //注册
+ function zhuce6(){
+  location.href="../jumpMeber/toreg";
+ }
+ function zhuce7(){
+  location.href="../jumpMeber/toreg";
+ }
+ //个人中心
+ function gerenzhongxin3(){
+  location.href="../jumpMeber/queryMemberList";
+ }
+ //个人信息
+ function gerenxinxi(){
+  location.href="../jumpMeber/queryMemberUserList";
+ }
+ //修改密码
+ function updatePassword3(){
+  location.href="../jumpMeber/queryUpdateMemberList";
+ }
+ //条款
+ function tiaokuan3(){
+  location.href="../jumpMeber/tovipExit";
+ }
+ //声明
+ function shengming3(){
+  location.href="../jumpMeber/tovipTuihuo";
+ }
+
+</script>
 </html>

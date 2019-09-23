@@ -108,6 +108,8 @@ $(window).scroll(function(){
 		$(this).next("dd").show().siblings("dd").hide();
 		})
 
+
+	})
 	
 //banner	
 	/*! jQuery.kinMaxShow v1.0 | mr.kin@foxmail.com */

@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>当当商城</title>
@@ -12,12 +12,16 @@
 	 $(".vipNav dd:eq(1)").show();
 	 })
 </script>
+ <style>
+  .tj{color:#FFF0F5;}
+ </style>
+
 </head>
 
 <body>
  <div class="mianCont">
   <div class="top">
-   <span>您好！欢迎来到当当商城 请&nbsp;<a href="../login.html">[登录]</a>&nbsp;<a href="../reg.html">[注册]</a></span>
+   <span>您好！欢迎来到当当商城 请&nbsp;<a href="javascript:denglu4()">[登录]</a>&nbsp;<a href="javascript:zhuce4()">[注册]</a></span>
    <span class="topRight">
     <a href="../vip.html">我的当当</a>&nbsp;|
     <a href="../order.html">我的订单</a>&nbsp;|
@@ -186,19 +190,19 @@
     <dl class="helpNav vipNav">
      <dt>我的主页</dt>
       <dd>
-       <a href="../vip.html">个人中心</a>
+       <a href="javascript:gerenzhonxin2()">个人中心</a>
        <a href="../vipOrder.html">我的订单</a>
       </dd>
      <dt>账户设置</dt>
       <dd>
-       <a href="../vipMy.html">个人信息</a>
-       <a href="../vipPwd.html" class="vipCur">密码修改</a>
-       <a href="../vipAdress.html">收货地址</a>
+       <a href="javascript:gerenxinxi2()">个人信息</a>
+       <a href="javascript:updatePassword2()" class="vipCur">密码修改</a>
+       <a href="javascript:areadizhi()">收货地址</a>
       </dd>
       <dt>客户服务</dt>
        <dd>
-        <a href="../vipExit.html">网站使用条款</a>
-        <a href="../vipTuihuo.html">网站免责声明</a>
+        <a href="javascript:tiaokuan4()">网站使用条款</a>
+        <a href="javascript:shengming4()">网站免责声明</a>
         <a href="../message.html">在线留言</a>
        </dd>
     </dl><!--helpNav/-->
@@ -208,22 +212,36 @@
     修改密码
     </h2>
     <div class="address" style="display:block">
-    <div class="addList">
-     <label>原密码:</label>
-     <input type="password" />
-    </div><!--addList-->
-    <div class="addList">
-     <label>新密码:</label>
-     <input type="password" class="vipPwd1" />
-    </div><!--addList-->
-    <div class="addList">
-     <label>确认密码:</label>
-     <input type="password" class="vipPwd2" />
-    </div><!--addList-->
-    <div class="addList2">
-     <input type="image" src="../images/baocun.png" width="79" height="30" class="vipSub" />
-    </div><!--addList2/-->
-   </div><!--address/-->
+     <form id="updateUser2">
+      <table>
+       <tr>
+        <td> <label><span class="red">* </span>原密码:</label></td>
+        <td>
+         <div class="addList">
+          <input type="hidden" name="id" id="valueid" th:value="${user.id}">
+          <input type="hidden" name="password4" th:value="${session.loginUser.password }"/>
+          <input type="text" name="password3"/>
+         </div>
+        </td>
+       </tr>
+       <tr>
+        <td> <label><span class="red">* </span>设置密码</label></td>
+        <td>
+         <div class="addList"><input type="text" name="passwords"/></div>
+        </td>
+       </tr>
+       <tr>
+        <td> <label><span class="red">* </span>确认密码</label></td>
+        <td>
+         <div class="addList"><input type="text" name="passwords2"/></div>
+        </td>
+       </tr>
+       <tr>
+        <td colspan="2"> &nbsp; &nbsp; &nbsp;<input type="button"  style="background-color:red;width:260px;height: 30px" value="保&nbsp;&nbsp;&nbsp;存" onclick="updatepassword()" class="tj" /></td>
+       </tr>
+      </table>
+     </form>
+    </div>
    </div><!--contRight/-->
    <div class="clears"></div>
   </div><!--cont/-->
@@ -241,8 +259,8 @@
    <div class="inHLeft">
     <h4>会员服务</h4>
     <ul class="inHeList">
-     <li><a href="../reg.html">会员注册</a></li>
-     <li><a href="../login.html">会员登录</a></li>
+     <li><a href="javascript:zhuce5()">会员注册</a></li>
+     <li><a href="javascript:denglu5()">会员登录</a></li>
      <li><a href="../order.html">购物车</a></li>
      <li><a href="../order.html">我的订单</a></li>
      <div class="clears"></div>
@@ -274,4 +292,84 @@
  </div><!--mianCont/-->
  <a href="../#" class="backTop">&nbsp;</a>
 </body>
+<script>
+ //密码修改
+ function updatepassword() {
+  /*
+  alert("进行修改密码")
+*/
+  var valueid = $("#valueid").val();
+  /*
+       alert("修改的"+valueid);
+*/
+  var password1 = $("input[name='passwords']").val();
+  /*
+  alert("输入的密码"+password1);
+*/
+  var password2 = $("input[name='passwords2']").val();
+  /*
+  alert("确定输入的密码"+password2);
+*/
+  var password4 = $("input[name='password4']").val();
+  /*
+       alert("原密码"+password4);
+*/
+  var password3 = $("input[name='password3']").val();
+  /*
+  alert("输入的原密码"+password3);
+*/
+   $.ajax({
+    url: "../jumpMeber/updatePassword?id=" + valueid,
+    type: 'post',
+    data: $("#updateUser2").serialize(),
+    success: function (data) {
+     alert("修改成功,请重新登录！");
+    }, error: function () {
+     alert("修改失败，请重新输入密码！");
+    }
+   })
+
+ }
+
+
+
+ //登录
+ function denglu4(){
+  location.href="../jumpMeber/tologin"
+ }
+ function denglu5(){
+  location.href="../jumpMeber/tologin";
+ }
+ //注册
+ function zhuce4(){
+  location.href="../jumpMeber/toreg"
+ }
+ function zhuce5(){
+  location.href="../jumpMeber/toreg";
+ }
+ //个人中心
+ function gerenzhonxin2(){
+  location.href="../jumpMeber/queryMemberList";
+ }
+ //个人信息
+ function gerenxinxi2(){
+  location.href="../jumpMeber/queryMemberUserList";
+ }
+ //密码修改
+ function updatePassword2(){
+  location.href="../jumpMeber/queryUpdateMemberList";
+ }
+ //条款
+ function tiaokuan4(){
+  location.href="../jumpMeber/tovipExit";
+ }
+ //声明
+ function shengming4(){
+  location.href="../jumpMeber/tovipTuihuo";
+ }
+ //收货地址
+ function areadizhi(){
+  location.href="../jumpMeber/queryTakeAreaList";
+ }
+</script>
 </html>

@@ -30,54 +30,6 @@ public class MemberUser implements Serializable {
     private Integer memberolds;//会员年龄
     private String memberaihao;//会员爱好
 
-    public String getMemberaihao() {
-        return memberaihao;
-    }
-
-    public void setMemberaihao(String memberaihao) {
-        this.memberaihao = memberaihao;
-    }
-
-    public String getMemberdetail() {
-        return memberdetail;
-    }
-
-    public void setMemberdetail(String memberdetail) {
-        this.memberdetail = memberdetail;
-    }
-
-    public String getMemberzhengjian() {
-        return memberzhengjian;
-    }
-
-    public void setMemberzhengjian(String memberzhengjian) {
-        this.memberzhengjian = memberzhengjian;
-    }
-
-    public String getMemberemail() {
-        return memberemail;
-    }
-
-    public void setMemberemail(String memberemail) {
-        this.memberemail = memberemail;
-    }
-
-    public String getMemberarea() {
-        return memberarea;
-    }
-
-    public void setMemberarea(String memberarea) {
-        this.memberarea = memberarea;
-    }
-
-    public Integer getMemberolds() {
-        return memberolds;
-    }
-
-    public void setMemberolds(Integer memberolds) {
-        this.memberolds = memberolds;
-    }
-
     public Integer getUserid() {
         return userid;
     }
@@ -134,6 +86,54 @@ public class MemberUser implements Serializable {
         this.status = status;
     }
 
+    public String getMemberdetail() {
+        return memberdetail;
+    }
+
+    public void setMemberdetail(String memberdetail) {
+        this.memberdetail = memberdetail;
+    }
+
+    public String getMemberzhengjian() {
+        return memberzhengjian;
+    }
+
+    public void setMemberzhengjian(String memberzhengjian) {
+        this.memberzhengjian = memberzhengjian;
+    }
+
+    public String getMemberemail() {
+        return memberemail;
+    }
+
+    public void setMemberemail(String memberemail) {
+        this.memberemail = memberemail;
+    }
+
+    public String getMemberarea() {
+        return memberarea;
+    }
+
+    public void setMemberarea(String memberarea) {
+        this.memberarea = memberarea;
+    }
+
+    public Integer getMemberolds() {
+        return memberolds;
+    }
+
+    public void setMemberolds(Integer memberolds) {
+        this.memberolds = memberolds;
+    }
+
+    public String getMemberaihao() {
+        return memberaihao;
+    }
+
+    public void setMemberaihao(String memberaihao) {
+        this.memberaihao = memberaihao;
+    }
+
     @Override
     public String toString() {
         return "MemberUser{" +
@@ -144,6 +144,12 @@ public class MemberUser implements Serializable {
                 ", jifen=" + jifen +
                 ", dengji=" + dengji +
                 ", status=" + status +
+                ", memberdetail='" + memberdetail + '\'' +
+                ", memberzhengjian='" + memberzhengjian + '\'' +
+                ", memberemail='" + memberemail + '\'' +
+                ", memberarea='" + memberarea + '\'' +
+                ", memberolds=" + memberolds +
+                ", memberaihao='" + memberaihao + '\'' +
                 '}';
     }
 }

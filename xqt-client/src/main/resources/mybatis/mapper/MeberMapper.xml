@@ -29,9 +29,9 @@
             tu.userid AS userids,
             tu.username AS usernames,
             tu.userphone AS userphones
-    FROM
+      FROM
         t_member tm
-    LEFT JOIN USER tu ON tm.memberuserid = tu.userid
+      LEFT JOIN USER tu ON tm.memberuserid = tu.userid
         limit #{page},#{rows}
     </select>
 <!--批量删除-->
@@ -102,5 +102,82 @@
             WHERE
 	        tm.id = #{id}
     </update>
+<!--前台个人信息列表展示-->
+<select id="queryMemberUserList" resultType="com.jk.model.Member">
+       SELECT
+                tm.id,
+                tm.memberaihao,
+                tm.memberarea,
+                tm.memberdetail,
+                tm.memberemail,
+                tm.memberolds,
+                tm.membertime,
+                tm.memberuserid,
+                tm.memberzhengjian,
+                tm.membersex,
+                tu.dengji AS dengjis,
+                tu.jifen AS jifens,
+                tu.password AS passwords,
+                tu.status AS statuss,
+                tu.userid AS userids,
+                tu.username AS usernames,
+                tu.userphone AS userphones
+        FROM
+            t_member tm
+        LEFT JOIN USER tu ON tm.memberuserid = tu.userid
+</select>
+<!--前台会员密码修改-->
+    <update id="updatePassword" parameterType="com.jk.model.Member">
+          UPDATE t_member tm
+                INNER JOIN USER tu ON tm.memberuserid = tu.userid
+                SET
+                tu.password = #{passwords}
+            WHERE
+	        tm.id = #{id}
+    </update>
+<!--前台密码修改返回页面-->
+<select id="queryUpdateMemberList" resultType="com.jk.model.Member">
+       SELECT
+                tm.id,
+                tm.memberaihao,
+                tm.memberarea,
+                tm.memberdetail,
+                tm.memberemail,
+                tm.memberolds,
+                tm.membertime,
+                tm.memberuserid,
+                tm.memberzhengjian,
+                tm.membersex,
+                tu.dengji AS dengjis,
+                tu.jifen AS jifens,
+                tu.password AS passwords,
+                tu.status AS statuss,
+                tu.userid AS userids,
+                tu.username AS usernames,
+                tu.userphone AS userphones
+        FROM
+            t_member tm
+        LEFT JOIN USER tu ON tm.memberuserid = tu.userid
+</select>
+<!--收货地址列表查询-->
+<select id="queryTakeAreaList" resultType="com.jk.model.Take">
+  SELECT
+	ta.id,
+	ta.takearea,
+	ta.takebeizhu,
+	ta.takename,
+	ta.takephone,
+	ta.takeyoubian
+  FROM
+	t_take ta
+</select>
+<!--前台添加收货地址-->
+<insert id="saveShuoHuoArea" parameterType="com.jk.model.Take">
+    insert into t_take(takename,takearea,takeyoubian,takephone,takebeizhu) values (#{takename},#{takearea},#{takeyoubian},#{takephone},#{takebeizhu})
+</insert>
+<!--前台修改收货地址-->
+<update id="updateShuoHouArea" parameterType="com.jk.model.Take">
+    update t_take ta set  ta.takename=#{takename},ta.takearea=#{takearea},ta.takeyoubian=#{takeyoubian},ta.takephone=#{takephone},ta.takebeizhu=#{takebeizhu} where id = #{id}
+</update>
 
 </mapper>

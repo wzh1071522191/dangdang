@@ -14,6 +14,7 @@ import com.jk.mapper.MeberMapper;
 import com.jk.model.LoginUser;
 import com.jk.model.Member;
 import com.jk.model.MemberUser;
+import com.jk.model.Take;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -87,5 +88,36 @@ public class MeberServiceImpl implements MeberServiceApi{
     public void updateMemberUser(Member member) {
         meberMapper.updateMemberUser(member);
     }
+    //前台会员个人信息展示
+    @Override
+    public List<Member> queryMemberUserList() {
+        return meberMapper.queryMemberUserList();
+    }
+    //前台密码修改
+    @Override
+    public void updatePassword(Member member) {
+        meberMapper.updatePassword(member);
+    }
+    //密码修改返回页面
+    @Override
+    public List<Member> queryUpdateMemberList() {
+        return meberMapper.queryUpdateMemberList();
+    }
+    //收货地址列表查询
+    @Override
+    public List<Take> queryTakeAreaList() {
+        return meberMapper.queryTakeAreaList();
+    }
+    //前台添加收货地址
+    @Override
+    public void saveShuoHuoArea(Take take) {
+        meberMapper.saveShuoHuoArea(take);
+    }
+    //前台修改收货地址
+    @Override
+    public void updateShuoHouArea(Take take) {
+        meberMapper.updateShuoHouArea(take);
+    }
+
 
 }

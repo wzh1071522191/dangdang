@@ -9,9 +9,6 @@
  * 作者姓名           修改时间           版本号              描述
  */
 package com.jk.model;
-
-import lombok.Data;
-
 import java.io.Serializable;
 
 /**

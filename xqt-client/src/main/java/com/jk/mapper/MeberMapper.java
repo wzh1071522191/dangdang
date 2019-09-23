@@ -1,8 +1,7 @@
 package com.jk.mapper;
-
-import com.jk.model.LoginUser;
 import com.jk.model.Member;
 import com.jk.model.MemberUser;
+import com.jk.model.Take;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -33,7 +32,19 @@ public interface MeberMapper {
     void savemeMberUser(MemberUser memberUser);
     //前台列表查询
     List<Member> queryMemberList();
-
+    //前台修改会员信息
     void updateMemberUser(Member member);
+    //前台展示个人信息
+    List<Member> queryMemberUserList();
+    //前台密码修改
+    void updatePassword(Member member);
+    //密码修改返回页面
+    List<Member> queryUpdateMemberList();
+    //收货地址列表查询
+    List<Take> queryTakeAreaList();
+    //前台添加收货地址
+    void saveShuoHuoArea(Take take);
+    //前台修改收货地址
+    void updateShuoHouArea(Take take);
 
 }

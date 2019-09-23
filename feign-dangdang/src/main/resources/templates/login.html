@@ -1,11 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>铛铛书城欢迎登录</title>
 <link type="text/css" href="../css/css.css" rel="stylesheet" />
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/js.js"></script>
+ <style>
+  .dl{color:#FFF0F5;}
+ </style>
 </head>
 <body style=" background:#FFF;">
  <div class="loginLogo">
@@ -20,15 +23,15 @@
   <div class="loginLeft">
    <img src="../images/logoinimg.jpg" width="716" height="376" />
   </div><!--loginLeft/-->
-  <form id="loginForm" class="loginRight">
+  <form id="loginForm2" class="loginRight">
    <h2>当当会员登录</h2>
    <h3>用户名</h3>
    <input type="text" class="name" name="username"/>
    <h3>密码</h3>
    <input type="password" class="pwd" name="password"/>
-
+   <br/><br/>
    <div class="subs">
-    <input type="image" onclick="membelogin()"  src="../images/sub.jpg" width="290px" class="submit" />
+    <input type="button"  style="background-color:red;width:286px;height: 35px" value="登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录✌" onclick="membelogin()" class="dl" />
    </div>
   </form><!--loginRight/-->
   <div class="clears"></div>
@@ -37,25 +40,28 @@
 <script>
  /*登录ajax*/
  function membelogin(){
-  $.ajax({
-   url:"../jumpMeber/memberLogin",
-   data:$("#loginForm").serialize(),
-   success:function(data){
+       $.ajax({
+           url:"../jumpMeber/memberLogin2",
+           data:$("#loginForm2").serialize(),
+           type:"post",
+           success:function(data){
+                 if (data==1) {
+                 alert("用户不存在");
+                }else if (data==2) {
+                 alert("密码错误");
+                }else  if (data==3){
+                 alert("登录成功!");
+                 location.href="../jumpMeber/queryMemberList";
+                }
+                },
+            error:function() {
+              alert("登录失败,请重新输入账号,密码!")
+            }
 
-    if (data==1) {
-     alert("用户不存在");
-    }else
-    if (data==2) {
-     alert("密码错误");
-    }else
-    if (data==3) {
-     //alert("成功");
-     location.href="../jumpMeber/queryMemberList";
-    }
-   },error:function(){
-    alert("登录失败,请重新输入账号与密码!");
-   }
-  })
+           })
+
  }
+
+
 </script>
 </html>
