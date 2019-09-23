@@ -99,7 +99,6 @@
             <version>3.1.10.RELEASE</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
