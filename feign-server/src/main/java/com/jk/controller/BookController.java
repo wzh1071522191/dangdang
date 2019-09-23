@@ -111,7 +111,12 @@ public class BookController {
     @RequestMapping("updateStatus")
     @ResponseBody
     public String updateStatus(Book book){
-        return bookService.updateStatus(book);
+        Book book1=bookService.updateStatus(book);
+        bookRepository.deleteById (book.getBookId ());
+        if(book.getBookStatus ()==2){
+            bookRepository.save (book1);
+        }
+        return null;
     }
 
     @RequestMapping("toUpdatePage")

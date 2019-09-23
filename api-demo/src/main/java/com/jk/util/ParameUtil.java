@@ -22,5 +22,8 @@ public class ParameUtil implements Serializable {
     private Integer carbrandid;
     private String typename;
     private String carareaid;
+    private Integer typeId;
+    private Integer typePid;
+
 
 }

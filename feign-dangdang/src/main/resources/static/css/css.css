@@ -67,7 +67,7 @@ a:hover{color:#F00;}
 .rdProBox{height:205px;height:auto !important;min-height:205px;padding:2px 0; display:none;}
 .rdPro dl{width:132px;float:left;margin-left:6px;border:#fff 1px solid;padding:3px; display:inline;}
 .rdPro dl.rddlstyle{border:red 1px solid;}
-.rdPro dt,.rdPro dt img{width:132px;height:129px;}
+.rdPro dt,.rdPro dt img{width:100px;height:150px;}
 .rdPro dd{line-height:15px;margin-top:2px;}
 .rdPro .cheng{font-size:14px;color:#eb9d23; font-weight:bold;height:33px;line-height:33px;margin:0;}
 .rdRight{width:221px;float:right;}

@@ -50,4 +50,6 @@ public interface BookDao {
 
 
     List<Book> queryBookLike ();
+
+    List<Book> queryBookByType (Integer typeId);
 }

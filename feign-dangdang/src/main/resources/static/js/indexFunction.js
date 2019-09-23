@@ -10,9 +10,6 @@
 
 
 
-queryBookByType=function (typeId) {
-    alert(typeId);
-}
 
 toMessage=function (bookId) {
     //alert(t);

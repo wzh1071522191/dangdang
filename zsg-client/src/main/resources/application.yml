@@ -6,12 +6,12 @@ spring:
     name: server-zsg
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/1902?useUnicode=true&characterEncoding=utf-8
-    #url: jdbc:mysql://192.168.2.111:3307/1902?useUnicode=true&characterEncoding=utf-8
-    #username: root
-    #password:
-    data-username: root
-    data-password: 0604
+    #url: jdbc:mysql://localhost:3306/1902?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.2.106:3307/1902?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password:
+    #data-username: root
+    #data-password: 0604
 
 
 eureka:

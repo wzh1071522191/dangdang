@@ -38,5 +38,11 @@ public class ConsumerBookServiceImpl implements ConsumerBookServiceApi{
         return bookDao.queryBookById (bookId);
     }
 
+    @Override
+    public List<Book> queryBookByType (Integer typeId) {
+
+        return bookDao.queryBookByType(typeId);
+    }
+
 
 }

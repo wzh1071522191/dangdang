@@ -3,6 +3,7 @@ package com.jk.service;
 import com.jk.model.Book;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,9 @@ public interface ConsumerBookServiceApi {
 
     @RequestMapping("toMessage")
     Book queryBookById (@RequestBody Integer bookId);
+
+    @RequestMapping("queryBookByType")
+    List<Book> queryBookByType (@RequestBody Integer typeId);
 
    /* @RequestMapping("toIndex")
     List<Book> queryBookStatus ();*/
