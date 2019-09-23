@@ -7,11 +7,6 @@ server:
 spring:
   application:
     name: feign-dangdang
-  thymeleaf:
-    cache: false
-    prefix: classpath:/templates/
-    suffix: .html
-
   redis:
     host: localhost
     jedis:
@@ -22,10 +17,7 @@ spring:
         min-idle: 0
     port: 6379
     timeout: 10000
-  thymeleaf:
-    cache: false
-    prefix: classpath:/templates/
-    suffix: .html
+
   data:
     mongodb:
       database: haha
