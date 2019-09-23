@@ -1,6 +1,7 @@
 package com.jk.dao;
 
 
+import com.jk.model.Books;
 import com.jk.model.Comments;
 import com.jk.model.LoginUser;
 import com.jk.model.Tree;
@@ -31,4 +32,14 @@ public interface UserDao {
     void add(Comments c);
 
     List<Comments> pinglun();
+
+    List<Comments> pinglun1();
+
+    Integer azong(com.jk.util.Param param);
+
+    List<Books> acha(@Param("page") Integer page, @Param("rows") Integer pageSize);
+
+    void tongyi(@Param("id") Integer id);
+
+    void jujue(@Param("id")Integer id);
 }
