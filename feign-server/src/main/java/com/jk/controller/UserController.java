@@ -3,6 +3,7 @@ package com.jk.controller;
 
 import com.jk.model.Comments;
 import com.jk.model.LoginUser;
+import com.jk.model.Role;
 import com.jk.model.Tree;
 import com.jk.service.UserService;
 
@@ -85,11 +86,11 @@ public class UserController {
     }
     //查树和上面一起的
   @RequestMapping("ChildNode")
-  @ResponseBody
-    public List<Tree> ChildNode(Integer id){
+   @ResponseBody
+    public List<Tree> ChildNode(Integer id,HttpServletRequest request){
         List<Tree> treenode=userService.treenode(id);
-      return treenode;
-
+       request.getSession().setAttribute("treenode",treenode);
+ return treenode;
   }
   //评论跳转pinglun.html的后台页面
   @RequestMapping("comments1")
@@ -149,6 +150,71 @@ public class UserController {
     @ResponseBody
     public void jujue(Integer id){
         userService.jujue(id);
+}
+//用户查询跳转的页面
+    @RequestMapping("role1")
+    public  String role1(){
+        return "Role";
+    }
+
+    //用户查询
+    @RequestMapping("role")
+    @ResponseBody
+    public Map role(@RequestBody Param param){
+        return userService.role(param);
+    }
+   @RequestMapping("setRole")
+    public  String setRole(Integer id,Model model){
+        List<Role> list=userService.setDep(id);
+       model.addAttribute("id",id);
+       model.addAttribute("list",list);
+       return "updateRole";
+   }
+    @RequestMapping("updateRole")
+    @ResponseBody
+    public void updateRole(Integer uid,Integer rid) {
+
+        userService.updatero(uid,rid);
+    }
+    //角色查询跳转页面
+    @RequestMapping("Jurisdiction1")
+    public String Jurisdiction1 (){
+        return "Jurisdiction";
+    }
+   @RequestMapping("Jurisdiction")
+    @ResponseBody
+    public Map Jurisdiction(@RequestBody Param param){
+        return userService.Jurisdiction(param);
+   }
+    @RequestMapping("toUpdateMenu")
+    public String toUpdateMenu(Integer id ,Model model){
+        model.addAttribute("id",id);
+        return "updateMenu";
+    }
+    @RequestMapping("queryMenuByRid")
+    @ResponseBody
+    public List<Tree> queryMenuByRid(Integer id){
+
+
+        Integer pid=0;
+
+        List<Tree> list = userService.queryMenuByRid(id,pid);
+
+
+
+        return list;
+    }
+
+    //绑定权限
+    @RequestMapping("updateMenu")
+    @ResponseBody
+    public void updateMenu(Integer[] ids,Integer roleid){
+        userService.updateMenu(ids,roleid);
+        Integer pid=0;
+        Integer id=roleid;
+        List<Tree> list= userService.queryMenuByRid(id,pid);
+
+
     }
 
 }

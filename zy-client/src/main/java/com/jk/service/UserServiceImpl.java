@@ -1,11 +1,9 @@
 package com.jk.service;
 
-import com.jk.dao.UserDao;
 
-import com.jk.model.Books;
-import com.jk.model.Comments;
-import com.jk.model.LoginUser;
-import com.jk.model.Tree;
+import com.jk.dao.UserDao;
+import com.alibaba.fastjson.JSONObject;
+import com.jk.model.*;
 import com.jk.util.Param;
 import com.jk.util.ParameUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,4 +92,116 @@ public class UserServiceImpl implements UserService{
   public void jujue(Integer id) {
     userDao.jujue(id);
   }
+
+  @Override
+  public Map role(Param param) {
+    Integer count= userDao.rzong(param);
+    Integer page=(param.getPageNumber()-1)*param.getPageSize();
+    List<LoginUser> list=userDao.rcha(page,param.getPageSize());
+    Map ma=new HashMap();
+    ma.put("total",count);
+    ma.put("rows",list);
+    return ma;
+  }
+
+  @Override
+  public List<Role> setDep(Integer id) {
+    List<Integer> queryId=userDao.queryRoleById(id);
+    List<Role> queryAllRole=userDao.queryAllRole();
+    for (int i = 0; i < queryId.size(); i++) {
+      for (int j = 0; j < queryAllRole.size(); j++) {
+        if (queryAllRole.get(j).getId()==queryId.get(i)) {
+          queryAllRole.get(j).setChecked("true");
+        }
+      }
+    }
+    return queryAllRole;
+  }
+
+  @Override
+  public void updatero(Integer uid, Integer rid) {
+    userDao.deleteRole(uid);
+
+    userDao.updateRole(uid,rid);
+  }
+
+  @Override
+  public Map Jurisdiction(Param param) {
+      Integer count=userDao.jzong();
+      Integer page=(param.getPageNumber()-1)*param.getPageSize();
+      List<Role> list=userDao.jcha(page,param.getPageSize());
+      Map ma=new HashMap();
+      ma.put("total",count);
+      ma.put("rows",list);
+
+    return ma;
+  }
+
+  @Override
+  public List<Tree> queryMenuByRid(Integer id, Integer pid) {
+    JSONObject json = new JSONObject();
+    List<Tree> list = queryOrgAll3(pid);
+    List<Tree> list2 = queryOrgAll2(id, pid);
+    Map map = new HashMap();
+    for (int i = 0; i < list.size(); i++) {
+      for (int j = 0; j < list2.size(); j++) {
+        if (list.get(i).getId() == list2.get(j).getId()) {
+          list.get(i).getId();
+          json.put("checked", true);
+          list.get(i).setState(json);
+        }
+      }
+      if (list.size() > 0) {
+        for (int s = 0; s < list.size(); s++) {
+          List<Tree> list3 = queryMenuByRid(id, list.get(s).getId());
+          list.get(s).setNodes(list3);
+        }
+      }
+    }
+    return list;
+  }
+
+  public List<Tree> queryOrgAll3(Integer pid) {
+    // 根据pid查询子节点
+    List<Tree> menu = userDao.queryMenuAll(pid);
+    // 如果查询到子节点集合
+    if(menu != null && menu.size()>0){
+      // 循环集合，将每个机构对象的id作为pid 继续查询子节点集合
+      for (int i = 0; i < menu.size(); i++) {
+        List<Tree> orgs2 = queryOrgAll3(menu.get(i).getId());
+        // 将查询的子节点集合放到该结构对象的children属性中
+        menu.get(i).setNodes(orgs2);
+      }
+    }
+    return menu;
+  }
+
+  public List<Tree> queryOrgAll2(Integer id, Integer pid) {
+    // 根据pid查询子节点
+    Map<String,Object> map =new HashMap<String,Object>();
+
+    List<Tree> orgs = userDao.queryMenuAllById(id,pid);
+    // 如果查询到子节点集合
+    if(orgs != null && orgs.size()>0){
+      // 循环集合，将每个机构对象的id作为pid 继续查询子节点集合
+      for (int i = 0; i < orgs.size(); i++) {
+        List<Tree> orgs2 = queryOrgAll2(id,orgs.get(i).getId());
+        // 将查询的子节点集合放到该结构对象的children属性中
+        orgs.get(i).setNodes(orgs2);
+      }
+    }
+    return orgs;
+  }
+
+  @Override
+  public void updateMenu(Integer[] ids, Integer roleid) {
+    userDao.deleteRoleMenu(roleid);
+    for (int i = 0; i <ids.length ; i++) {
+      TreeAndRole rm=new TreeAndRole();
+      rm.setTreeid(ids[i]);
+      rm.setRoleid(roleid);
+      userDao.addRoleMenu(rm);
+    }
+  }
+
 }

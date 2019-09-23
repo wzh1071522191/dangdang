@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+﻿
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	  xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
@@ -361,7 +361,7 @@ function link_operating(name,title){
 
 					<div id="menu_style" class="menu_style" >
 					<ul class="nav nav-list" id="nav_list"  >
-				     <li class="home"  ><a href="../javascript:void(0)" name="home.html" class="iframeurl" title=""><i class="icon-home"></i><span class="menu-text"> 系统首页 </span></a></li>
+				     <li class="home"  ><a href="javascript:void(0)" name="home.html" class="iframeurl" title=""><i class="icon-home"></i><span class="menu-text"> 系统首页 </span></a></li>
 					<!--	<div >-->
 <!--
 						<li class="home" th:each="u:${session.tree}" ><a href="../javascript:void(0)" th:name="${u.url}" class="iframeurl" title=""><i th:class="${u.iconclass}"></i><span class="menu-text"> <font th:text="${u.text}"></font> </span></a></li>
@@ -369,11 +369,11 @@ function link_operating(name,title){
 
 
 						<li th:each="u:${session.tree}" >
-						<input type="hidden" th:value="${u.id}" id="11">
+						<!--<input type="hidden" th:value="//${u.id}" id="11">-->
 
-							<a href="javascript:llll()" class="dropdown-toggle"><i th:class="${u.iconclass} "></i><span class="menu-text"><font th:text="${u.text}"></font></span><b class="arrow icon-angle-down"></b></a>
-						<ul class="submenu" >
-                             <span id="sssssss"></span>
+							<a  th:onclick="'llll(\''+${u.id}+'\')'" class="dropdown-toggle"><i th:class="${u.iconclass} "></i><span class="menu-text"><font th:text="${u.text}"></font></span><b class="arrow icon-angle-down"></b></a>
+						<ul class="submenu">
+                             <span th:id="${u.id}"></span>
 
 						</ul>
 					</li>
@@ -459,26 +459,25 @@ function link_operating(name,title){
 					</ul>
 					</div>
 					<script type="text/javascript">
-						$(function(){
-							llll()
-						})
 
-						function llll() {
-						var pid= $("#11").val();
 
+						function llll(id) {
+						/*var pid= $("#11").val();*/
 
 							$.ajax({
-								url:"../user/ChildNode?id="+pid,
+								url:"../user/ChildNode?",
+								data:{id:id},
 								type:"post",
 								success:function (data) {
+
 
 									/*var da = eval("("+data+")");*/
 
 									var html = "";
 									for (var i = 0; i < data.length; i++) {
-										html+='<li class="home"><a href="../javascript:void(0)" name="advertising.html" class="iframeurl"><i class="icon-double-angle-right">'+data[i].text+'</i></a></li>';
+										html+='<li class="home"><a href="../user/login" name="login.html" class="iframeurl"><i class="icon-double-angle-right"></i>'+data[i].text+'</a></li>';
 									}
-									$("#sssssss").html(html);
+									$("#"+id).html(html);
 								}
 							})
 						}
