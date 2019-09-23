@@ -1,9 +1,18 @@
 package com.jk.service;
 
+import com.jk.model.Comments;
 import com.jk.model.LoginUser;
 
+import com.jk.model.Tree;
+import com.jk.util.Param;
+import com.jk.util.ParameUtil;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author ： 朱友
@@ -14,6 +23,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @FeignClient(value = "server-zy")
 public interface UserService {
-       @RequestMapping("LoginUser")
-       LoginUser loginUser(String username);
+    @RequestMapping("loginUser")
+    LoginUser loginUser(@RequestParam String username);
+    @RequestMapping("tree")
+    List<Tree> tree(@RequestParam Integer userid);
+    @RequestMapping("ChildNode")
+    List<Tree> treenode(@RequestParam Integer id);
+    @RequestMapping("comments")
+    Map comments(@RequestBody Param param);
+     @RequestMapping("add")
+    void add(@RequestParam String content);
+     @RequestMapping("pinglun1")
+     List<Comments> pinglun();
+    @RequestMapping("audit")
+    Map audit(@RequestBody Param param);
+    @RequestMapping("tongyi")
+    void tongyi(@RequestParam Integer id);
+    @RequestMapping("jujue")
+    void jujue(@RequestParam Integer id);
 }

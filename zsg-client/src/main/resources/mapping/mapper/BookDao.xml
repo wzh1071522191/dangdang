@@ -4,33 +4,145 @@
 
     <!--Integer queryBookCount ()-->
     <select id="queryBookCount" resultType="int">
-        SELECT COUNT(*) FROM book b LEFT JOIN booktype bt ON b.booktypeid=bt.typeid
+        SELECT COUNT(*) FROM book b LEFT JOIN booktype bt ON b.bookTypeId=bt.typeId
     </select>
 
-    <!--List<Book> queryBookList (ParameUtil parameUtil)-->
+    <!--List<Book> queryBookList (ParameUtil parameUtil)
     <resultMap id="bookList" type="Book">
-        <id column="bookid" property="bookId"/>
-        <result column="bookname" property="bookName" />
-        <result column="bookauthor" property="bookAuthor"/>
-        <result column="booktypeid" property="bookTypeId"/>
+        <id column="bookId" property="bookId"/>
+        <result column="bookName" property="bookName" />
+        <result column="bookAuthor" property="bookAuthor"/>
+        <result column="bookTypeId" property="bookTypeId"/>
         <result column="press" property="press"/>
-        <result column="bookcontent" property="bookContent"/>
-        <result column="bookprice" property="bookPrice"/>
-        <result column="bookdate" property="bookDate"/>
-        <result column="bookstatus" property="bookStatus"/>
-        <result column="bookcount" property="bookCount"/>
+        <result column="bookContent" property="bookContent"/>
+        <result column="bookPrice" property="bookPrice"/>
+        <result column="bookDate" property="bookDate"/>
+        <result column="bookStatus" property="bookStatus"/>
+        <result column="bookCount" property="bookCount"/>
         <result column="hits" property="hits"/>
-        <result column="bookstar" property="bookStar"/>
-        <result column="bookimg1" property="bookImg1"/>
-        <result column="bookimg2" property="bookImg2"/>
-        <result column="bookimg3" property="bookImg3"/>
+        <result column="bookStar" property="bookStar"/>
+        <result column="bookImg1" property="bookImg1"/>
+        <result column="bookImg2" property="bookImg2"/>
+        <result column="bookImg3" property="bookImg3"/>
+        <result column="typeName" property="typeName"/>
         <association property="bookType" javaType="BookType">
-            <id column="typeid" property="typeId"/>
-            <result column="typename" property="typeName"/>
+            <id column="typeId" property="typeId"/>
+            <result column="typeName" property="typeName"/>
+            <result column="pid" property="pid"/>
+        </association>
+    </resultMap>-->
+    <select id="queryBookList" resultType="Book">
+        SELECT * FROM book b LEFT JOIN booktype bt ON b.bookTypeId=bt.typeId LIMIT #{pageNumber},#{pageSize}
+    </select>
+
+    <!--void addBook (Book book)-->
+    <insert id="addBook" parameterType="Book" useGeneratedKeys="true">
+        <selectKey resultType="int" keyProperty="bookId" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+        book(bookName, bookAuthor,bookTypeId, press, bookContent,bookPrice, bookDate, bookStatus,bookCount, hits, bookStar,bookImg1, bookImg2, bookImg3,buyCount,bookAudit,bookTypePid)
+        VALUES(#{bookName}, #{bookAuthor}, #{bookTypeId}, #{press}, #{bookContent},#{bookPrice}, #{bookDate}, 1,#{bookCount}, 0, #{bookStar},#{bookImg1}, #{bookImg2}, #{bookImg3},0,3,#{bookTypePid})
+    </insert>
+
+    <!--void updateStatus (Book book)-->
+    <update id="updateStatus" parameterType="Book">
+        UPDATE book
+        <if test="bookStatus==1">
+            SET bookStatus=2
+        </if>
+        <if test="bookStatus==2">
+            SET bookStatus=1
+        </if>
+
+        WHERE bookId =#{bookId}
+    </update>
+
+    <!--void updateBook (Book book)-->
+    <update id="updateBook" parameterType="Book">
+        UPDATE book
+        <set >
+            <if test="bookName != null" >
+                bookName = #{bookName},
+            </if>
+            <if test="bookAuthor != null" >
+                bookAuthor = #{bookAuthor},
+            </if>
+            <if test="bookTypeId != null" >
+                bookTypeId = #{bookTypeId},
+            </if>
+            <if test="press != null" >
+                press = #{press},
+            </if>
+            <if test="bookContent != null" >
+                bookContent = #{bookContent},
+            </if>
+            <if test="bookPrice != null" >
+                bookPrice = #{bookPrice},
+            </if>
+            <if test="bookDate != null" >
+                bookDate = #{bookDate},
+            </if>
+            <if test="bookStatus != null" >
+                bookStatus = #{bookStatus},
+            </if>
+            <if test="bookCount != null" >
+                bookCount = #{bookCount},
+            </if>
+            <if test="hits != null" >
+                hits = #{hits},
+            </if>
+            <if test="bookStar != null" >
+                bookStar = #{bookStar},
+            </if>
+            <if test="bookImg1 != null" >
+                bookImg1 = #{bookImg1},
+            </if>
+            <if test="bookImg2 != null" >
+                bookImg2 = #{bookImg2},
+            </if>
+            <if test="bookImg3 != null" >
+                bookImg3 = #{bookImg3},
+            </if>
+        </set>
+        where bookId = #{bookId}
+    </update>
+
+    <!--queryBookById-->
+    <resultMap id="book" type="Book">
+        <id column="bookId" property="bookId"/>
+        <result column="bookName" property="bookName" />
+        <result column="bookAuthor" property="bookAuthor"/>
+        <result column="bookTypeId" property="bookTypeId"/>
+        <result column="press" property="press"/>
+        <result column="bookContent" property="bookContent"/>
+        <result column="bookPrice" property="bookPrice"/>
+        <result column="bookDate" property="bookDate"/>
+        <result column="bookStatus" property="bookStatus"/>
+        <result column="bookCount" property="bookCount"/>
+        <result column="hits" property="hits"/>
+        <result column="bookStar" property="bookStar"/>
+        <result column="bookImg1" property="bookImg1"/>
+        <result column="bookImg2" property="bookImg2"/>
+        <result column="bookImg3" property="bookImg3"/>
+        <association property="bookType" javaType="BookType">
+            <id column="typeId" property="typeId"/>
+            <result column="typeName" property="typeName"/>
             <result column="pid" property="pid"/>
         </association>
     </resultMap>
-    <select id="queryBookList" resultMap="bookList">
-        SELECT * FROM book b LEFT JOIN booktype bt ON b.booktypeid=bt.typeid
+    <select id="queryBookById" resultMap="book">
+        SELECT * FROM book b LEFT JOIN booktype bt ON b.bookTypeId=bt.typeId WHERE bookId=#{id}
+    </select>
+
+    <!--Book queryBookByIdEs (Integer id)-->
+    <select id="queryBookByIdEs" resultType="Book">
+        SELECT b.*,bt.typename FROM book b LEFT JOIN booktype bt ON b.bookTypeId=bt.typeId WHERE b.bookId = #{id}
+    </select>
+
+
+    <!--List<Book> queryBookByType (Integer typeId)-->
+    <select id="queryBookByType" resultType="Book">
+        SELECT * FROM book b WHERE  b.bookTypeId=#{typeId}
     </select>
 </mapper>

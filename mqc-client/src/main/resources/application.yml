@@ -1,11 +1,28 @@
 server:
-  port: 8082
+  port: 8083
 
 spring:
   application:
-    name: server-mqc
+    name: mqc-client
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    #url: jdbc:mysql://localhost:8066/zsg?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.2.110:3307/1902?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password:
+    #data-username: root
+    #data-password:
+
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8080/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 2
+
+mybatis:
+  config-locations: classpath:confg.xml
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.jk.model
