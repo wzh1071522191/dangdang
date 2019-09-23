@@ -13,6 +13,7 @@ public class Role implements Serializable {
     private Integer id;
     private Integer roleid;
     private String roleplay;
+    private  String checked;
 
     public Integer getId() {
         return id;
@@ -36,5 +37,13 @@ public class Role implements Serializable {
 
     public void setRoleplay(String roleplay) {
         this.roleplay = roleplay;
+    }
+
+    public String getChecked() {
+        return checked;
+    }
+
+    public void setChecked(String checked) {
+        this.checked = checked;
     }
 }
