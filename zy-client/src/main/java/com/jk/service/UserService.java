@@ -30,4 +30,12 @@ public interface UserService {
     void add(Comments c);
 
     List<Comments> pinglun();
+
+    List<Comments> pinglun1();
+
+    Map audit(Param param);
+
+    void tongyi(Integer id);
+
+    void jujue(Integer id);
 }

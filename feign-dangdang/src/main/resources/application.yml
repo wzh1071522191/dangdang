@@ -7,6 +7,7 @@ server:
 spring:
   application:
     name: feign-dangdang
+<<<<<<< HEAD
   redis:
     host: localhost
     jedis:
@@ -26,3 +27,10 @@ spring:
       database: haha
       host: localhost
       port: 27017
+=======
+
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+>>>>>>> origin/master

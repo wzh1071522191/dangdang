@@ -36,8 +36,20 @@
     <script type="text/javascript" src="../zsg/fileinput/themes/fa/theme.js"></script>
 </head>
 <body>
+<form id="queryForm" >
+    <div class="form-group">
+        <label>书名:</label>
+        <label for="name"><input type="text" id="name" placeholder="名称" class="form-control"></label>
+    </div>
+    <button type="button" class="btn btn-success" onclick="queryData()">搜索</button>
+</form>
+    <div style="margin-top:2%;margin-left:1%;">
+    <button type='button' class='btn btn-info' onclick='addBook()'>添加书籍</button></div>
+
     <!--  表格 -->
-    <table id="dataGrid" class="table table-striped table-bordered table-hover" ></table>
+    <div style="margin-left:1%;">
+        <table id="dataGrid" class="table table-striped table-bordered table-hover" ></table>
+    </div>
 </body>
 <script>
     $(function(){
@@ -85,27 +97,22 @@
                     pageNumber: params.pageNumber,
                     pageSize: params.pageSize,
                     sortName: params.sortName,
-                    sortOrder: params.sortOrder
-                    // name: $("#name").val()
-
+                    sortOrder: params.sortOrder,
+                    typename: $("#name").val()
                 };
                 return param;
             },
             columns: [
                 {field: 'checkbox', checkbox: true},  //开启复选框
-                {field: 'bookId', title: '书籍编号', width: 100},      //  列    field   代表是 后台  传过来的值
-                {field: 'bookName', title: '书名', width: 300,
+                {field: 'bookId', title: '书籍编号', width: 50},      //  列    field   代表是 后台  传过来的值
+                {field: 'bookName', title: '书名', width: 200,
                     formatter:function(value,row,index){
                         return "《"+value+"》";
                     }
                 },
                 {field: 'bookAuthor', title: '作者', width: 80},
-                {field: 'bookType', title: '类型', width: 300,
-                    formatter:function(value,row,index){
-                        return value.typeName;
-                    }
-                },
-                {field: 'press', title: '出版社', width: 300},
+                {field: 'typeName', title: '类型', width: 150},
+                {field: 'press', title: '出版社', width: 200},
                 {field: 'bookContent', title: '简介', width: 300,
                     formatter:function(value,row,index){
                         if(value.length>50){
@@ -116,32 +123,42 @@
                         }
                     }
                 },
-                {field: 'bookPrice', title: '价格', width: 100},
-                {field: 'bookDate', title: '出版日期', width: 300},
-                {field: 'bookStatus', title: '状态', width: 300},
-                {field: 'bookCount', title: '数量', width: 300},
-                {field: 'hits', title: '点击量', width: 300},
-                {field: 'bookStar', title: '点击量', width: 300},
-                {field: 'bookImg1', title: '图1', width: 300,
+                {field: 'bookPrice', title: '价格', width: 50},
+                {field: 'bookDate', title: '出版日期', width: 150},
+                {field: 'bookStatus', title: '状态', width: 80,
                     formatter:function(value,row,index){
-                        return "<img src='"+value+"' style='width: 100px;height: 80px'/>";
+                        return value==1?"<span style='color: #0000a1'>上架</span>":"<span style='color: red'>下架</span>";
                     }
                 },
-                {field: 'bookImg2', title: '图2', width: 300,
+                {field: 'bookCount', title: '数量', width: 80},
+                {field: 'hits', title: '点击量', width: 50},
+                {field: 'bookStar', title: '星级', width: 80},
+                {field: 'bookImg1', title: '宣传图片', width: 300,
                     formatter:function(value,row,index){
-                        return "<img src='"+value+"' style='width: 100px;height: 80px'/>";
+                        return "<img src='"+value+"' style='width: 100%;height: 80px'/>";
                     }
                 },
-                {field: 'bookImg3', title: '图3', width: 300,
+                {field: 'bookImg2', title: '书籍样图', width: 300,
                     formatter:function(value,row,index){
-                        return "<img src='"+value+"' style='width: 100px;height: 80px'/>";
+                        return "<img src='"+value+"' style='width: 100%;height: 80px'/>";
+                    }
+                },
+                {field: 'bookImg3', title: '封面', width: 300,
+                    formatter:function(value,row,index){
+                        return "<img src='"+value+"' style='width: 100%;height: 80px'/>";
                     }
                 },
                 {field: 'xxxx', title: '操作', width: 300,
                     formatter:function(value,row,index){
                         //var id = JSON.stringify(row.id);
-                        return "<button type='button' class='btn btn-info' onmouseup='delBook("+row.id+")'>删除</button>"+
-                            "<button type='button' class='btn btn-info' onmouseup='updateBook("+row.id+")'>修改</button>";
+                        var status ;
+                        if(row.bookStatus==1){
+                            status="<button type='button' class='btn btn-info' onclick='updateStatus("+row.bookId+",1)'>下架</button>&nbsp;&nbsp;";
+                        }else {
+                            status="<button type='button' class='btn btn-info' onclick='updateStatus("+row.bookId+",2)'>上架</button>&nbsp;&nbsp;";
+                        }
+                        return status+ "<button type='button' class='btn btn-danger' onclick='delBook("+row.bookId+")'>删除</button>&nbsp;&nbsp;"+
+                                "<button type='button' class='btn btn-warning' onclick='updateBook("+row.bookId+")'>修改</button>";
 
                     }
                 }
@@ -149,5 +166,139 @@
             ]
         });
     }
+
+
+    function queryData() {
+
+        $("#dataGrid").bootstrapTable("refresh", {
+            "query": {
+                typename: $("#name").val(),
+
+            }
+        });
+    }
+//=====================
+    var res;
+    function createAddContent(url) {
+        $.ajax({
+            url: url,
+            async: false,
+            success: function (data) {
+                res = data;
+            }
+        });
+        return res;
+    }
+//==========================新增==========================
+    addBook=function () {
+        bootbox.dialog({
+            title: '新增',
+            message:createAddContent("../book/toAddPage"),
+            closeButton: true,//是否显示关闭按钮
+            buttons: {
+                "success": {
+                    "label": "<i class='icon-ok'></i> 保存",
+                    "className": "btn-sm btn-success",
+                    "callback": function () {
+
+
+                        $.ajax({
+                            url: '../book/addBook',
+                            type: 'post',
+                            data: $("#addForm").serialize(),
+                            success: function (data) {
+                                if(data==1){
+                                    alert("新增成功");
+                                    location.href=location;
+                                   // $('#dataGrid').bootstrapTable("refresh");
+                                }
+
+                                //刷新表格
+                            }, error: function () {
+                                alert("新增失败");
+                            }
+                        });
+                    }
+                },
+                "cancel": {
+                    "label": "<i class='icon-info'></i> 取消",
+                    "className": "btn-sm btn-danger",
+                    "callback": function () {
+
+                    }
+                }
+            }
+
+        });
+    }
+
+    delBook=function (id) {
+        if(confirm("是否删除此条信息")){
+            $.ajax({
+                url:"../book/delBook?id="+id,
+                type:"post",
+                success:function () {
+                    $('#dataGrid').bootstrapTable("refresh");
+                }
+            })
+        }
+    }
+
+//更改上下架状态
+    updateStatus=function (id,flag) {
+        $.ajax({
+            url:"../book/updateStatus",
+            type:"post",
+            data:{bookId:id,bookStatus:flag},
+            success:function (data) {
+                if(data==0){
+                    //location.href=location;
+                    $('#dataGrid').bootstrapTable("refresh");
+                }
+            }
+        })
+
+    }
+
+//=======================修改========================
+    updateBook=function (id) {
+        bootbox.dialog({
+            title: '修改信息',
+            message: createAddContent("../book/toUpdatePage?id="+id),
+            closeButton: true,//是否显示关闭按钮
+            buttons: {
+                "success": {
+                    "label": "<i class='icon-ok'></i> 保存",
+                    "className": "btn-sm btn-success",
+                    "callback": function () {
+
+                        $.ajax({
+                            url: '../book/addBook',
+                            type: 'post',
+                            cache:false,
+                            data: $("#addForm").serialize(),
+                            success: function (data) {
+
+                                    location.href=location;
+
+
+                            }, error: function () {
+                                alert("失败");
+                            }
+                        });
+                    }
+                },
+                "cancel": {
+                    "label": "<i class='icon-info'></i> 取消",
+                    "className": "btn-sm btn-danger",
+                    "callback": function () {
+
+                    }
+                }
+            }
+
+        });
+    }
+
 </script>
 </html>

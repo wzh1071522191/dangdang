@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.LbDao" >
+    <select id="querylblist"  resultType="com.jk.model.LunBo">
+select * from lunbotu limit #{pageNumber},#{pageSize}
+    </select>
+
+<select id="sumco" resultType="Integer">
+select count(*) from lunbotu
+</select>
+
+<select id="sum1" resultType="Integer">
+    select count(*) from t_order where orderdate >'2019-01-01' and orderdate &lt; '2019-12-30'
+</select>
+
+<select id="yuedan" resultType="java.util.LinkedHashMap">
+    select sum((select sum(tc.bookcount) from t_order tc)) count,date_format(orderdate,'%m') week
+     from t_order where orderdate >'2019-01-01' and orderdate &lt; '2019-12-30'
+     group by date_format(orderdate,'%m')
+</select>
+    <!--近7天下单情况-->
+<select id="queryBingZhuang" resultType="java.util.LinkedHashMap">
+    select sum(bookcount) count ,date_format(orderdate,'%w') week
+    from t_order where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt; date(orderdate)
+    group by date_format(orderdate,'%w')
+
+</select>
+
+   <select id="queryZhuzhuang" resultType="java.util.LinkedHashMap">
+ select sum(bookcount) count ,orderstatus status
+    from t_order
+    group by orderstatus
+   </select>
+
+
+
+
+
+
+</mapper>

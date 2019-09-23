@@ -23,6 +23,22 @@ select t.* from loginuser l,role r,tree t,userandrole u,roleandtree a where l.us
     insert into comments(content,dtime,userid) values (#{content},#{dtime},#{userid})
   </insert>
   <select id="pinglun" resultType="com.jk.model.Comments">
-    select *  from comments
+    select *  from comments t,user u  where t.userid=u.userid
   </select>
+  <select id="pinglun1" resultType="com.jk.model.Comments">
+    select *  from comments t,user u  where t.userid=u.userid
+  </select>
+  <select id="azong" resultType="java.lang.Integer">
+   select count(*) from book b , booktype t where b.bookTypeId=t.typeId and b.bookAudit=3
+  </select>
+  <select id="acha"  resultType="com.jk.model.Books">
+    select * from book b , booktype t where b.bookTypeId=t.typeId  and b.bookAudit=3
+    limit #{page},#{rows}
+  </select>
+  <update id="tongyi" parameterType="java.lang.Integer">
+       update  book set bookAudit=1 where bookid=#{id}
+  </update>
+  <update id="jujue" parameterType="java.lang.Integer">
+       update  book set bookAudit=2 where bookid=#{id}
+  </update>
 </mapper>

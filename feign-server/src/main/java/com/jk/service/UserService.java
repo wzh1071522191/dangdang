@@ -33,6 +33,12 @@ public interface UserService {
     Map comments(@RequestBody Param param);
      @RequestMapping("add")
     void add(@RequestParam String content);
-     @RequestMapping("pinglun")
+     @RequestMapping("pinglun1")
      List<Comments> pinglun();
+    @RequestMapping("audit")
+    Map audit(@RequestBody Param param);
+    @RequestMapping("tongyi")
+    void tongyi(@RequestParam Integer id);
+    @RequestMapping("jujue")
+    void jujue(@RequestParam Integer id);
 }

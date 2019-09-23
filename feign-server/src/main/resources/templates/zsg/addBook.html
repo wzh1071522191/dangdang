@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .stars{ overflow: hidden; clear: both; margin: 10px; padding: 10px; border: 1px #ffffff solid;}
+        .stars span{ float: left; height: 30px; line-height: 30px; cursor:default;}
+        .stars i{width: 30px; height: 30px; line-height: 30px; float: left; margin-right: 30px; background: #ffffff; color: #4b4b4b; text-align: center; cursor:default; font-style: normal;}
+        .stars .on{ color: #ff191d;}
+    </style>
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="../jsTwo/jquery-1.9.1.min.js"></script>
+    <!-- 引入bootstrap的css、js -->
+    <link rel="stylesheet" href="../jsTwo/bootstrap3/css/bootstrap.css">
+    <script type="text/javascript" src="../jsTwo/bootstrap3/js/bootstrap.js"></script>
+    <!-- 引入tree的js、css -->
+    <link rel="stylesheet" href="../jsTwo/bootstrap-treeview/bootstrap-treeview.min.css">
+    <script type="text/javascript" src="../jsTwo/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+    <!-- 引入选项卡的js、css -->
+    <link rel="stylesheet" href="../jsTwo/bootStrap-addTabs/bootstrap.addtabs.css">
+    <script type="text/javascript" src="../jsTwo/bootStrap-addTabs/bootstrap.addtabs.min.js"></script>
+    <!-- 引入table的css、js -->
+    <link rel="stylesheet" href="../jsTwo/bootstrap-table/bootstrap-table.css">
+    <script type="text/javascript" src="../jsTwo/bootstrap-table/bootstrap-table.js"></script>
+    <script type="text/javascript" src="../jsTwo/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <!-- 引入删除提示框 -->
+    <script type="text/javascript" src="../jsTwo/bootbox/bootbox.min.js"></script>
+    <!-- 引入时间的css、js -->
+    <link rel="stylesheet" href="../jsTwo/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <script  src="../jsTwo/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script  src="../jsTwo/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <!-- 引入文件上传的css、js -->
+    <link rel="stylesheet" href="../jsTwo/bootstrap-fileinput/css/fileinput.css">
+
+    <script type="text/javascript" src="../jsTwo/bootstrap-fileinput/js/fileinput.js"></script>
+
+    <script type="text/javascript" src="../jsTwo/bootstrap-fileinput/js/locales/zh.js"></script>
+
+</head>
+<body>
+    <form role="form" id="addForm">
+        <div class="form-group">
+            <label>书名:&nbsp; &nbsp; &nbsp;&nbsp;</label>
+            <label>
+                <input type="text" class="form-control"  name="bookName" placeholder="书名"/>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>作者:&nbsp; &nbsp; &nbsp;&nbsp;</label>
+            <label>
+                <input type="text" class="form-control"  name="bookAuthor"/>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>类型:&nbsp; &nbsp; &nbsp;&nbsp;</label>
+            <label for="tid">
+                <select class="form-control" id="tid" onchange="queryType(this.value)">
+                </select>
+            </label>
+            <label for="pid">
+                <select class="form-control" name="bookTypeId" id="pid">
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>价格:&nbsp; &nbsp; &nbsp;&nbsp;</label>
+            <label>
+                <input class="form-control"  onkeyup="this.value=this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"  placeholder="只限数字,最多输入两位小数"  name="bookPrice" />
+            </label>
+        </div>
+        <div class="form-group">
+            <label>库存:&nbsp; &nbsp; &nbsp;&nbsp;</label>
+            <label>
+                <input class="form-control"  onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="只限数字"  name="bookCount" />
+            </label>
+        </div>
+        <div class="form-group">
+            <label>出版社:&nbsp; &nbsp;</label>
+            <label>
+                <input type="text" class="form-control"  name="press"/>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>出版日期</label>
+            <label>
+                <input type="date" class="form-control"  name="bookDate">
+            </label>
+        </div>
+        <div class="stars">
+            <span><label>推荐星级:</label></span>
+            <i>★</i>
+            <i>★</i>
+            <i>★</i>
+            <i>★</i>
+            <i>★</i>
+            <input type="hidden" name="bookStar"/>
+        </div>
+
+        <div class="form-group">
+            <label>内容描述:</label>
+            <label>
+                <textarea name="bookContent" cols="70px" rows="5px"></textarea>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>宣传图片:</label>
+                <input type="hidden" id="upFile" name="bookImg1" />
+                <input type="file" class="form-control" id="imgName" name="imgName" >
+        </div>
+        <div class="form-group">
+            <label>书籍样图:</label>
+            <input type="hidden" id="upFile1" name="bookImg2" />
+            <input type="file" class="form-control" id="imgName1" name="imgName" >
+        </div>
+        <div class="form-group">
+            <label>封面:</label>
+            <input type="hidden" id="upFile2" name="bookImg3" />
+            <input type="file" class="form-control" id="imgName2" name="imgName" >
+        </div>
+    </form>
+
+</body>
+<script>
+
+    $(function () {
+        const pid = 0;
+        queryType(pid);
+        uploadImg();
+        uploadImg1();
+        uploadImg2();
+        setStarts();
+
+
+    })
+
+    queryType=function (pid) {
+        $.ajax({
+            url:"../book/queryBookType?pid="+pid,
+            type:"post",
+            success:function (data) {
+                var op="<option value=''>请选择</option>";
+                for (var i = 0; i < data.length; i++) {
+                    op+="<option value='"+data[i].typeId+"'>"+data[i].typeName+"</option>";
+                }
+                if(pid==0){
+                    $("#tid").html(op);
+                }else {
+                    $("#pid").html(op);
+                }
+
+            }
+        })
+    }
+
+    function uploadImg(url){
+        $('#imgName').fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: '../book/upLoadFile', //上传的地址
+            allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+            showUpload: true, //是否显示上传按钮
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            dropZoneEnabled: false,//是否显示拖拽区域
+            //minImageWidth: 50, //图片的最小宽度
+            //minImageHeight: 50,//图片的最小高度
+            //maxImageWidth: 1000,//图片的最大宽度
+            //maxImageHeight: 1000,//图片的最大高度
+            //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+            //minFileCount: 0,
+            maxFileCount: 10, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount:true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+
+        }).on('fileuploaded', function(event, data, previewId, index) {
+
+            var imgval = $('#upFile').val();
+
+            if(imgval == null || imgval == "" || imgval == undefined){
+                imgval = data.response.responseText;
+            }/*else{
+			imgval += ","+"http://<%= request.getServerName()%>:<%=request.getServerPort()%><%=request.getContextPath()%>/"+data.response;
+		}*/
+            $('#upFile').val(imgval);
+        });
+    }
+
+    function uploadImg1(url){
+        $('#imgName1').fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: '../book/upLoadFile', //上传的地址
+            allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+            showUpload: true, //是否显示上传按钮
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            dropZoneEnabled: false,//是否显示拖拽区域
+            //minImageWidth: 50, //图片的最小宽度
+            //minImageHeight: 50,//图片的最小高度
+            //maxImageWidth: 1000,//图片的最大宽度
+            //maxImageHeight: 1000,//图片的最大高度
+            //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+            //minFileCount: 0,
+            maxFileCount: 10, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount:true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+
+        }).on('fileuploaded', function(event, data, previewId, index) {
+
+            var imgval = $('#upFile1').val();
+
+            if(imgval == null || imgval == "" || imgval == undefined){
+                imgval = data.response.responseText;
+            }/*else{
+			imgval += ","+"http://<%= request.getServerName()%>:<%=request.getServerPort()%><%=request.getContextPath()%>/"+data.response;
+		}*/
+            $('#upFile1').val(imgval);
+        });
+    }
+
+    function uploadImg2(url){
+        $('#imgName2').fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: '../book/upLoadFile', //上传的地址
+            allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+            showUpload: true, //是否显示上传按钮
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            dropZoneEnabled: false,//是否显示拖拽区域
+            //minImageWidth: 50, //图片的最小宽度
+            //minImageHeight: 50,//图片的最小高度
+            //maxImageWidth: 1000,//图片的最大宽度
+            //maxImageHeight: 1000,//图片的最大高度
+            //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+            //minFileCount: 0,
+            maxFileCount: 10, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount:true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+
+        }).on('fileuploaded', function(event, data, previewId, index) {
+
+            var imgval = $('#upFile2').val();
+
+            if(imgval == null || imgval == "" || imgval == undefined){
+                imgval = data.response.responseText;
+            }/*else{
+			imgval += ","+"http://<%= request.getServerName()%>:<%=request.getServerPort()%><%=request.getContextPath()%>/"+data.response;
+		}*/
+            $('#upFile2').val(imgval);
+        });
+    }
+    
+    function setStarts() {
+        /*
+        * 鼠标点击，该元素包括该元素之前的元素获得样式,并给隐藏域input赋值
+        * 鼠标移入，样式随鼠标移动
+        * 鼠标移出，样式移除但被鼠标点击的该元素和之前的元素样式不变
+        * 每次触发事件，移除所有样式，并重新获得样式
+        * */
+        var stars = $('.stars');
+        var Len = stars.length;
+        //遍历每个评分的容器
+        for(i=0;i<Len;i++){
+            //每次触发事件，清除该项父容器下所有子元素的样式所有样式
+            function clearAll(obj){
+                obj.parent().children('i').removeClass('on');
+            }
+            stars.eq(i).find('i').click(function(){
+                var num = $(this).index();
+                clearAll($(this));
+                //当前包括前面的元素都加上样式
+                $(this).addClass('on').prevAll('i').addClass('on');
+                //给隐藏域input赋值
+                $(this).siblings('input').val(num);
+            });
+            stars.eq(i).find('i').mouseover(function(){
+                var num = $(this).index();
+                clearAll($(this));
+                //当前包括前面的元素都加上样式
+                $(this).addClass('on').prevAll('i').addClass('on');
+            });
+            stars.eq(i).find('i').mouseout(function(){
+                clearAll($(this));
+                //触发点击事件后input有值
+                var score = $(this).siblings('input').val();
+                for(i=0;i<score;i++){
+                    $(this).parent().find('i').eq(i).addClass('on');
+                }
+            });
+        }
+    }
+</script>
+</html>
