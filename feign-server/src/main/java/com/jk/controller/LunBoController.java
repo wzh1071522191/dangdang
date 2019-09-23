@@ -1,8 +1,10 @@
 package com.jk.controller;
 
 import com.jk.model.LunBo;
+import com.jk.model.MyOrder;
 import com.jk.service.lbserver;
 import com.jk.util.AlYunOssUtil;
+import com.jk.util.ExportExcel;
 import com.jk.util.ParameUtil;
 import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +41,14 @@ public class LunBoController {
 
         return lbserv.lblist(param);
    }
+   //
+
+
+
+
+
+
+
 
 
 //addImgJsp 跳转新增页面
@@ -91,12 +102,34 @@ public String querym(){
     return "mqc/tuxing1";
 }
 
+    @RequestMapping("tubiao2")
+    public String querym2(){
+        return "mqc/tuxing2";
+    }
+
+
+
+
 //查询2019年所有数据
 @RequestMapping("querymouthxl")
 @ResponseBody
     public Map<String ,Object> querymouth(@RequestBody ParameUtil param){
         return lbserv.querymouth(param);
 }
+
+    //querymouthxl2
+
+    @RequestMapping("querymouthxl2")
+    @ResponseBody
+    public Map<String ,Object> querymouth2(@RequestBody ParameUtil param){
+        return lbserv.querymouth2(param);
+    }
+//七天数据
+
+
+
+
+
 //2019每个月下单量
     @RequestMapping("yuexiadan")
     @ResponseBody
@@ -247,6 +280,40 @@ public Map<String,Object> queryShoppingZhuxingByWeek(){
      </div><!--kinMaxShow/-->
     </div><!--banner/-->
 */
+    @RequestMapping("exportExcel2019")
+    public void exportExcelGaikuangThree(HttpServletResponse response){
+        //导出的excel的标题
+        String title = "2019月份销量";
+        //导出excel的列名
+        String[] rowName = {"id","排序","类型","价格","时间","销量","状态","图书id"};
+        //导出的excel数据
+        List<Object[]>  dataList = new ArrayList<Object[]>();
+        //查询的数据库的商品概况
+        List<MyOrder> list=   lbserv.queryExportExcelGaikuangThree();
+        //循环商品概况
+        for(MyOrder car:list){
+            Object[] obj =new Object[rowName.length];
+            obj[0]=car.getOrderid();
+            obj[1]=car.getOrdernumber();
+            obj[2]=car.getBookname();
+            obj[3]=car.getOrderprice();
+            obj[4]=car.getOrderdate();
+            obj[5]=car.getBookcount();
+            obj[6]=car.getOrderstatus();
+            obj[7]=car.getOrderallid();
+            dataList.add(obj);
+        }
+        ExportExcel exportExcel =new ExportExcel(title,rowName,dataList,response);
+        try {
+            exportExcel.export();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
 
 
 }

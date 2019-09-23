@@ -34,4 +34,10 @@ public interface LbDao {
     List<Map<String, Object>> queryZhuzhuang();
 @Select("select * from lunbotu where status=1")
     List<LunBo> getlbtu();
+
+    Integer sumco2(ParameUtil param);
+
+    List<MyOrder> querylblist2(ParameUtil param);
+
+    List<MyOrder> exall();
 }

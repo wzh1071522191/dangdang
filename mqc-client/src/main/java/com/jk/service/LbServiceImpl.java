@@ -83,4 +83,21 @@ public class LbServiceImpl implements LunBoService{
 
         return lbdao.getlbtu();
     }
+
+    @Override
+    public Map<String, Object> querymouth2(ParameUtil param) {
+        Integer sum=lbdao.sumco2(param);
+        Integer page=param.getPageNumber();
+        param.setPageNumber((page-1)*param.getPageSize());
+        List<MyOrder> list=lbdao.querylblist2(param);
+        Map<String,Object>map=new HashMap<>();
+        map.put("rows",list);
+        map.put("total",sum);
+        return map;
+    }
+
+    @Override
+    public List<MyOrder> queryExportExcelGaikuangThree() {
+        return lbdao.exall();
+    }
 }

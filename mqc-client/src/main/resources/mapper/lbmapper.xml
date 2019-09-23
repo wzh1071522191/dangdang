@@ -33,8 +33,20 @@ select count(*) from lunbotu
    </select>
 
 
+    <select id="sumco2" resultType="java.lang.Integer">
+select count(*)
+        from t_order where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt; date(orderdate)
+    </select>
+
+    <select id="querylblist2" resultType="com.jk.model.MyOrder">
+        select *
+        from t_order where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt; date(orderdate) limit #{pageNumber},#{pageSize}
+    </select>
 
 
+    <select id="exall" resultType="com.jk.model.MyOrder">
 
+    select * from t_order where orderdate >'2019-01-01' and orderdate &lt; '2019-12-30'
+    </select>
 
 </mapper>

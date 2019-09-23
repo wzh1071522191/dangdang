@@ -1,6 +1,7 @@
 package com.jk.service;
 
 import com.jk.model.LunBo;
+import com.jk.model.MyOrder;
 import com.jk.util.ParameUtil;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,5 +45,8 @@ public interface LunBoService {
     @RequestMapping("getlbtu")
     List<LunBo> getlbtu();
 
-
+    @RequestMapping("querymouthxl2")
+    Map<String, Object> querymouth2(@RequestBody ParameUtil param);
+    @RequestMapping("exportExcel2019")
+    List<MyOrder> queryExportExcelGaikuangThree();
 }

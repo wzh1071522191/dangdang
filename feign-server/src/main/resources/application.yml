@@ -6,7 +6,7 @@ eureka:
     lease-renewal-interval-in-seconds: 1
     lease-expiration-duration-in-seconds: 2
 server:
-  port: 8088
+  port: 8081
 spring:
   application:
     name: server-feign
