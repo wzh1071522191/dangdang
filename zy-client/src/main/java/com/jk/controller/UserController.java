@@ -70,4 +70,27 @@ public class UserController {
     public List<Comments> pinglun(){
         return userService.pinglun();
  }
+    @RequestMapping("pinglun1")
+    @ResponseBody
+    public List<Comments> pinglun1(){
+        return userService.pinglun1();
+    }
+    @RequestMapping("audit")
+    @ResponseBody
+    public  Map audit(@RequestBody Param param){
+        return  userService.audit(param);
+    }
+    //同意按钮实现
+    @RequestMapping("tongyi")
+    @ResponseBody
+    public void tongyi(Integer id){
+        System.out.println(id);
+        userService.tongyi(id);
+    }
+    //拒绝按钮实现
+    @RequestMapping("jujue")
+    @ResponseBody
+    public void jujue(Integer id){
+        userService.jujue(id);
+    }
 }

@@ -2,6 +2,7 @@ package com.jk.service;
 
 import com.jk.dao.UserDao;
 
+import com.jk.model.Books;
 import com.jk.model.Comments;
 import com.jk.model.LoginUser;
 import com.jk.model.Tree;
@@ -58,12 +59,39 @@ public class UserServiceImpl implements UserService{
 
   @Override
   public void add(Comments c) {
-    System.err.print(c.getContent());
+    System.err.print(c.getContent()+"444");
     userDao.add(c);
   }
 
   @Override
   public List<Comments> pinglun() {
-    return userDao.pinglun();
+
+    return  userDao.pinglun();
+  }
+
+  @Override
+  public List<Comments> pinglun1() {
+    return userDao.pinglun1();
+  }
+
+  @Override
+  public Map audit(Param param) {
+    Integer  count= userDao.azong(param);
+    Integer page=(param.getPageNumber()-1)*param.getPageSize();
+    List<Books> list=userDao.acha(page,param.getPageSize());
+    Map ma=new HashMap();
+    ma.put("total",count);
+    ma.put("rows",list);
+    return ma;
+  }
+
+  @Override
+  public void tongyi(Integer id) {
+    userDao.tongyi(id);
+  }
+
+  @Override
+  public void jujue(Integer id) {
+    userDao.jujue(id);
   }
 }

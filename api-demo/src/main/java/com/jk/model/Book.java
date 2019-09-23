@@ -49,4 +49,7 @@ public class Book {
     private String bookImg3;
 
     private BookType bookType;
+
+
+
 }
