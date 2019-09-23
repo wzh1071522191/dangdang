@@ -25,8 +25,70 @@ public class MyOrder implements Serializable {
     private Date orderdate;
     private Integer bookcount;
     private Integer orderstatus;
-    private String orderallid;
-    private String username;
-    private String userphone;
+    private Integer orderallid;
+
+    public Integer getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(Integer orderid) {
+        this.orderid = orderid;
+    }
+
+    public String getOrdernumber() {
+        return ordernumber;
+    }
+
+    public void setOrdernumber(String ordernumber) {
+        this.ordernumber = ordernumber;
+    }
+
+    public String getBookname() {
+        return bookname;
+    }
+
+    public void setBookname(String bookname) {
+        this.bookname = bookname;
+    }
+
+    public Double getOrderprice() {
+        return orderprice;
+    }
+
+    public void setOrderprice(Double orderprice) {
+        this.orderprice = orderprice;
+    }
+
+    public Date getOrderdate() {
+        return orderdate;
+    }
+
+    public void setOrderdate(Date orderdate) {
+        this.orderdate = orderdate;
+    }
+
+    public Integer getBookcount() {
+        return bookcount;
+    }
+
+    public void setBookcount(Integer bookcount) {
+        this.bookcount = bookcount;
+    }
+
+    public Integer getOrderstatus() {
+        return orderstatus;
+    }
+
+    public void setOrderstatus(Integer orderstatus) {
+        this.orderstatus = orderstatus;
+    }
+
+    public Integer getOrderallid() {
+        return orderallid;
+    }
+
+    public void setOrderallid(Integer orderallid) {
+        this.orderallid = orderallid;
+    }
 }
 

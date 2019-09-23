@@ -2,24 +2,14 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8080/eureka/
-  instance:
-    lease-renewal-interval-in-seconds: 1
-    lease-expiration-duration-in-seconds: 2
 server:
-  port: 8088
+  port: 8090
 spring:
   application:
     name: server-feign
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
   main:
     allow-bean-definition-overriding: true
-    thymeleaf:
-      cache: false
-      prefix: classpath:/templates/
-      suffix: .html
-
-elasticsearch:
-  clusterName: my-application
-  ip: 127.0.0.1
-  firstPort: 9300
-  secondPort: 9301
-  thirdPort: 9302
