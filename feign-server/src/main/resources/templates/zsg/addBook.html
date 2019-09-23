@@ -55,7 +55,7 @@
         <div class="form-group">
             <label>类型:&nbsp; &nbsp; &nbsp;&nbsp;</label>
             <label for="tid">
-                <select class="form-control" id="tid" onchange="queryType(this.value)">
+                <select class="form-control" name="bookTypePid" id="tid" onchange="queryType(this.value)">
                 </select>
             </label>
             <label for="pid">
@@ -105,17 +105,17 @@
         </div>
         <div class="form-group">
             <label>宣传图片:</label>
-                <input type="hidden" id="upFile" name="bookImg1" />
+                <input type="" id="upFile" name="bookImg1" />
                 <input type="file" class="form-control" id="imgName" name="imgName" >
         </div>
         <div class="form-group">
             <label>书籍样图:</label>
-            <input type="hidden" id="upFile1" name="bookImg2" />
+            <input type="" id="upFile1" name="bookImg2" />
             <input type="file" class="form-control" id="imgName1" name="imgName" >
         </div>
         <div class="form-group">
             <label>封面:</label>
-            <input type="hidden" id="upFile2" name="bookImg3" />
+            <input type="" id="upFile2" name="bookImg3" />
             <input type="file" class="form-control" id="imgName2" name="imgName" >
         </div>
     </form>
@@ -133,6 +133,30 @@
 
 
     })
+
+
+    /*upLoadFile=function(){
+        var file=$("#file").val();
+        var formData = new FormData($("#ftpForm")[0]);
+        alert(formData);
+        $.ajax({
+            url:"../book/upLoadFileFtp",
+            type:"post",
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (returndata) {
+                $("#filename").val(returndata);
+                alert(returndata);
+            },
+            error: function (returndata) {
+                alert(returndata);
+            }
+
+        })
+    }*/
 
     queryType=function (pid) {
         $.ajax({

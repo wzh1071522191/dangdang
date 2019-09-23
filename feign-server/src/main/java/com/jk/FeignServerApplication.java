@@ -15,7 +15,7 @@ import java.util.concurrent.ForkJoinPool;
 public class FeignServerApplication {
 
     public static void main(String[] args) {
-
+        System.setProperty("es.set.netty.runtime.available.processors","false");
         SpringApplication.run(FeignServerApplication.class, args);
     }
 

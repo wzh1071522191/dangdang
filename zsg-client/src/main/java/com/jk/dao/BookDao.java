@@ -41,4 +41,15 @@ public interface BookDao {
     void updateBook (Book book);
 
     Book queryBookByIdEs (Integer id);
+
+    @Select ("SELECT * FROM book")
+    List<Book> queryBookAll ();
+
+    @Select ("SELECT * FROM book WHERE bookStatus =1")
+    List<Book> queryBookStatus ();
+
+
+    List<Book> queryBookLike ();
+
+    List<Book> queryBookByType (Integer typeId);
 }

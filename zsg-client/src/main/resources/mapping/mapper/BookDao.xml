@@ -41,8 +41,8 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
         INSERT INTO
-        book(bookName, bookAuthor,bookTypeId, press, bookContent,bookPrice, bookDate, bookStatus,bookCount, hits, bookStar,bookImg1, bookImg2, bookImg3)
-        VALUES(#{bookName}, #{bookAuthor}, #{bookTypeId}, #{press}, #{bookContent},#{bookPrice}, #{bookDate}, 2,#{bookCount}, 0, #{bookStar},#{bookImg1}, #{bookImg2}, #{bookImg3})
+        book(bookName, bookAuthor,bookTypeId, press, bookContent,bookPrice, bookDate, bookStatus,bookCount, hits, bookStar,bookImg1, bookImg2, bookImg3,buyCount,bookAudit,bookTypePid)
+        VALUES(#{bookName}, #{bookAuthor}, #{bookTypeId}, #{press}, #{bookContent},#{bookPrice}, #{bookDate}, 1,#{bookCount}, 0, #{bookStar},#{bookImg1}, #{bookImg2}, #{bookImg3},0,3,#{bookTypePid})
     </insert>
 
     <!--void updateStatus (Book book)-->
@@ -138,5 +138,11 @@
     <!--Book queryBookByIdEs (Integer id)-->
     <select id="queryBookByIdEs" resultType="Book">
         SELECT b.*,bt.typename FROM book b LEFT JOIN booktype bt ON b.bookTypeId=bt.typeId WHERE b.bookId = #{id}
+    </select>
+
+
+    <!--List<Book> queryBookByType (Integer typeId)-->
+    <select id="queryBookByType" resultType="Book">
+        SELECT * FROM book b WHERE  b.bookTypeId=#{typeId}
     </select>
 </mapper>

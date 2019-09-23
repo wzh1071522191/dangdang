@@ -25,7 +25,7 @@ public class MyOrder implements Serializable {
     private Date orderdate;
     private Integer bookcount;
     private Integer orderstatus;
-    private Integer orderallid;
+    private String  orderallid;
 
     public Integer getOrderid() {
         return orderid;
@@ -83,11 +83,11 @@ public class MyOrder implements Serializable {
         this.orderstatus = orderstatus;
     }
 
-    public Integer getOrderallid() {
+    public String  getOrderallid() {
         return orderallid;
     }
 
-    public void setOrderallid(Integer orderallid) {
+    public void setOrderallid(String  orderallid) {
         this.orderallid = orderallid;
     }
 }
