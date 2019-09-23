@@ -2,8 +2,13 @@ package com.jk.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,14 +19,16 @@ import java.util.Date;
  * @Package :   com.jk.model
  */
 @Data
-public class Book {
+@Document(indexName = "bookindex",shards = 5,type = "book")
+public class Book implements Serializable {
 
+    @Id
     private Integer bookId;
-
+    @Field(type = FieldType.Text,analyzer = "ik_max_word",searchAnalyzer = "ik_max_word",copyTo = "copy")
     private String bookName;
-
+    @Field(type = FieldType.Text,analyzer = "ik_max_word",searchAnalyzer = "ik_max_word",copyTo = "copy")
     private String bookAuthor;
-
+    @Field(type=FieldType.Integer)
     private Integer bookTypeId;
 
     private String press;
@@ -32,6 +39,7 @@ public class Book {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @Field(type = FieldType.Date,pattern = "yyyy-MM-dd")
     private Date bookDate;
 
     private Integer bookStatus;
@@ -50,6 +58,7 @@ public class Book {
 
     private BookType bookType;
 
+    private String typeName;
 
-
+    private Integer buyCount;
 }
