@@ -1,17 +1,18 @@
 package com.jk.util;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-public class CheckImgUtil {
+public class CheckImgUtil implements Serializable {
 	/** <pre>buildCheckImg(构建验证码方法)   
 	 * 创建人：梁国栋 634369607@qq.com     
 	 * 创建时间：2018-1-10 下午1:49:22    
@@ -22,7 +23,7 @@ public class CheckImgUtil {
 	 * @param request
 	 * @param response</pre>    
 	 */
-	public static void buildCheckImg(HttpServletRequest request, HttpServletResponse response) {
+	public static void buildCheckImg(HttpServletRequest request,HttpServletResponse response) {
 		try {
 			checkImg(request,response);
 		} catch (Exception e) {
@@ -54,8 +55,8 @@ public class CheckImgUtil {
         // 设置输出字体  
         graphics2d.setFont(new Font("宋体", Font.BOLD, 18));  
           
-        //定义一个包含大小写字母和数组的字符串ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz加上这个就可以生成字母
-         String words ="1234567890"; 
+        //定义一个包含大小写字母和数组的字符串
+         String words ="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"; 
          //生成一个随机数
          Random random = new Random();// 生成随机数  
          // 定义StringBuffer  用来拼接生成的四位验证码
@@ -84,7 +85,7 @@ public class CheckImgUtil {
              x += 30;  
          }  
          //******将生成的四位验证码存到session中
-         request.getSession().setAttribute("checkcode", sb.toString());
+         request.getSession().setAttribute("checkcode", sb.toString());  
         
          //对验证码图片样式的设置
          graphics.setColor(getRandColor(160, 200));  
