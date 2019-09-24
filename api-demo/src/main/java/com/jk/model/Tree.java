@@ -18,9 +18,7 @@ public class Tree implements Serializable {
     private String url;
     private String iconclass;
     private JSON state ;
-
     //private String status;
-
     private String checked;
 
     public JSON getState() {

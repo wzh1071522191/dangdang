@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class lbtype implements Serializable {
+    private static final long serialVersionUID = 5165824000574500303L;
     private Integer typeid;
     private String typename;
     private String typedesc;

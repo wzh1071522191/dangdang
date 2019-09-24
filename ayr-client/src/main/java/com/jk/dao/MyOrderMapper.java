@@ -1,6 +1,5 @@
 package com.jk.dao;
 
-import com.jk.model.MyOrder;
 import com.jk.util.ParameUtil;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

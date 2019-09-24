@@ -3,7 +3,6 @@ package com.jk.service;
 import com.jk.dao.BookMapper;
 import com.jk.dao.MyOrderMapper;
 import com.jk.model.Book;
-import com.jk.model.MyOrder;
 import com.jk.util.ParameUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

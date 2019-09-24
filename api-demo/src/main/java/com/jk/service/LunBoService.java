@@ -2,13 +2,9 @@ package com.jk.service;
 
 import com.jk.model.LunBo;
 import com.jk.util.ParameUtil;
-
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,5 +40,22 @@ public interface LunBoService {
     @RequestMapping("getlbtu")
     List<LunBo> getlbtu();
 
+    @RequestMapping("querymouthxl2")
+    Map<String, Object> querymouth2(@RequestBody ParameUtil param);
+    @RequestMapping("exportExcel2019")
+    List<MyOrder> queryExportExcelGaikuangThree();
+
+    @RequestMapping("querytu2")
+    List<Map<String, Object>> yuedan2();
+
+    @RequestMapping("getshushu")
+    MyOrder getzong();
+
+    @RequestMapping("exportExcelseven")
+    List<MyOrder> queryExportExcelGaikuang7();
+
+   /* @RequestMapping("xiaobing1")
+    HashMap<String,Object> xiaobing1();
+*/
 
 }

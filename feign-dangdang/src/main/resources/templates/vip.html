@@ -17,6 +17,7 @@
 <body>
  <div class="mianCont">
   <div class="top">
+
    <span>您好！欢迎来到当当商城 请&nbsp;<a href="javascript:tologins()">[登录]</a>&nbsp;<a href="javascript:toregs()">[注册]</a></span>
    <span class="topRight">
     <a href="../vip.html">我的当当</a>&nbsp;|
@@ -33,6 +34,7 @@
      <input type="image" src="../images/subimg.png" width="63" height="34" class="sub" />
      <div class="hotWord">
       热门搜索：
+      <font th:if="${session.loginUsername==null? '888':'9999'}"></font>
       <a href="../proinfo.html">春日序曲</a>&nbsp;
       <a href="../proinfo.html">汉声数学</a> &nbsp;
       <a href="../proinfo.html">帝国失格</a>&nbsp;
@@ -169,7 +171,7 @@
      <li><a href="../index.html">商城首页</a></li>
      <li><a href="../product.html">促销中心</a></li>
      <li><a href="../login.html">会员中心</a></li>
-     <li><a href="../help.html">帮助中心</a></li>
+     <li><a href="javascript:bangzhu()">帮助中心</a></li>
      <div class="clears"></div>
      <div class="phone">TEL：021-12345678</div>
     </ul><!--nav/-->
@@ -279,10 +281,10 @@
    <div class="inHLeft">
     <h4>帮助中心</h4>
     <ul class="inHeList">
-     <li><a href="../help.html">购物指南</a></li>
+     <li><a href="javascript:gouwuzhinan()">购物指南</a></li>
      <li><a href="../help.html">支付方式</a></li>
      <li><a href="../help.html">售后服务</a></li>
-     <li><a href="../about.html">企业简介</a></li>
+     <li><a href="javascript:qiyejianjei()">企业简介</a></li>
      <div class="clears"></div>
     </ul><!--inHeList/-->
    </div><!--inHLeft/-->
@@ -313,7 +315,7 @@
    <a href="../order.html">我的订单</a>&nbsp;|&nbsp;
    <a href="../new.html">新闻动态</a>&nbsp;|&nbsp;
    <a href="../login.html">会员中心</a>&nbsp;|&nbsp;
-   <a href="../help.htmll">帮助中心</a>
+   <a href="javascript:helpbutton()">帮助中心</a>
    </p>
    <p>
    </p>
@@ -389,5 +391,18 @@ function toxinxigeren(){
  function shouhuoarea(){
   location.href="../jumpMeber/queryTakeAreaList";
  }
+ //跳转购物指南
+ function gouwuzhinan(){
+  location.href="../jumpMeber/tohelp";
+ }
+ //跳转企业简介
+ function qiyejianjei(){
+  location.href="../jumpMeber/toabout";
+ }
+ //跳转帮助中心
+ function helpbutton(){
+  location.href="../jumpMeber/tohelp";
+ }
+
 </script>
 </html>

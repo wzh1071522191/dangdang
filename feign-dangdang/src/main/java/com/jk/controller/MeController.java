@@ -75,6 +75,24 @@ public class MeController {
 
     return "vipTuihuo";
     }
+    //跳转购物指南
+    @RequestMapping("tohelp")
+    public String tohelp(){
+
+        return "help";
+    }
+    //联系方式
+    @RequestMapping("tocontact")
+    public String tocontact(){
+
+        return "contact";
+    }
+    //企业简介
+    @RequestMapping("toabout")
+    public String toabout(){
+
+        return "about";
+    }
     //前台会员登录
     @RequestMapping("memberLogin2")
     @ResponseBody
@@ -88,6 +106,7 @@ public class MeController {
         }
         request.getSession().setAttribute("loginUser", loginUser);
         request.getSession().setAttribute("loginUsername",memberUser.getUsername());
+        request.getSession().setAttribute("userid",memberUser.getUserid());
         return "3";
     }
     //前台会员注册
@@ -150,7 +169,7 @@ public class MeController {
         model.addAttribute("take",take);
         return "vipAdress";
     }
-    //前台添加收货地址
+    //前台添加收货地址---------不可用
     @RequestMapping("saveShuoHuoArea")
     @ResponseBody
     public void saveShuoHuoArea(Take take){
