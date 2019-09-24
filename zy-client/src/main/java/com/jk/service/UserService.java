@@ -2,6 +2,7 @@ package com.jk.service;
 
 import com.jk.model.Comments;
 import com.jk.model.LoginUser;
+import com.jk.model.Role;
 import com.jk.model.Tree;
 import com.jk.util.Param;
 import com.jk.util.ParameUtil;
@@ -38,4 +39,16 @@ public interface UserService {
     void tongyi(Integer id);
 
     void jujue(Integer id);
+
+    Map role(Param param);
+
+    List<Role> setDep(Integer id);
+
+    void updatero(Integer uid, Integer rid);
+
+    Map Jurisdiction(Param param);
+
+    List<Tree> queryMenuByRid(Integer id, Integer pid);
+
+    void updateMenu(Integer[] ids, Integer roleid);
 }

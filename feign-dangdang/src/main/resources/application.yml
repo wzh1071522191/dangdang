@@ -3,12 +3,38 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8080/eureka/
 server:
-  port: 8091
+  port: 8095
 spring:
   application:
     name: feign-dangdang
+  redis:
+    host: localhost
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+    port: 6379
+    timeout: 10000
 
-  thymeleaf:
-    cache: false
-    prefix: classpath:/templates/
-    suffix: .html
+  data:
+    mongodb:
+      database: haha
+      host: localhost
+      port: 27017
+
+
+  main:
+    allow-bean-definition-overriding: true
+    thymeleaf:
+      cache: false
+      prefix: classpath:/templates/
+      suffix: .html
+
+elasticsearch:
+  clusterName: my-application
+  ip: 127.0.0.1
+  firstPort: 9300
+  secondPort: 9301
+  thirdPort: 9302

@@ -34,7 +34,7 @@ public interface BookServiceApi {
     void delBook (@RequestBody Integer id);
 
     @RequestMapping("updateStatus")
-    String updateStatus (@RequestBody Book book);
+    Book updateStatus (@RequestBody Book book);
 
     @RequestMapping("toUpdatePage")
     Book queryBookById (@RequestBody Integer id);

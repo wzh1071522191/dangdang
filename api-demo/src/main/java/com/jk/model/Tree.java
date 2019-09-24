@@ -1,6 +1,8 @@
 package com.jk.model;
 
+import com.alibaba.fastjson.JSON;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author ： 朱友
@@ -15,6 +17,37 @@ public class Tree implements Serializable {
     private Integer pid;
     private String url;
     private String iconclass;
+    private JSON state ;
+
+    //private String status;
+
+    private String checked;
+
+    public JSON getState() {
+        return state;
+    }
+
+    public void setState(JSON state) {
+        this.state = state;
+    }
+
+    public String getChecked() {
+        return checked;
+    }
+
+    public void setChecked(String checked) {
+        this.checked = checked;
+    }
+
+    public List<Tree> getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(List<Tree> nodes) {
+        this.nodes = nodes;
+    }
+
+    private List<Tree> nodes;
 
     public Integer getId() {
         return id;

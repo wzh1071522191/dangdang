@@ -41,4 +41,40 @@ select t.* from loginuser l,role r,tree t,userandrole u,roleandtree a where l.us
   <update id="jujue" parameterType="java.lang.Integer">
        update  book set bookAudit=2 where bookid=#{id}
   </update>
+  <select id="rzong" resultType="java.lang.Integer">
+  select count(*) from loginuser
+  </select>
+  <select id="rcha" resultType="com.jk.model.LoginUser">
+    select  * from loginuser  limit #{page},#{rows}
+  </select>
+  <select id="queryRoleById" resultType="java.lang.Integer">
+    select roleid from userandrole where userid=#{id}
+  </select>
+  <select id="queryAllRole" resultType="com.jk.model.Role">
+    select * from role
+  </select>
+  <delete id="deleteRole">
+    delete  from userandrole where userid=#{uid}
+  </delete>
+  <insert id="updateRole">
+    insert into userandrole(userid,roleid) values(#{uid},#{rid})
+  </insert>
+  <select id="jzong" resultType="java.lang.Integer">
+    select  count(*) from role
+  </select>
+  <select id="jcha" resultType="com.jk.model.Role">
+    select * from role limit #{page},#{rows}
+  </select>
+  <select id="queryMenuAll" resultType="com.jk.model.Tree">
+    select * from tree where pid=#{pid}
+  </select>
+<select id="queryMenuAllById" resultType="com.jk.model.Tree">
+  select * from tree t,roleandtree r where t.id=r.treeid and r.roleid=#{id} and t.pid=#{pid}
+</select>
+  <delete id="deleteRoleMenu">
+delete from roleandtree where roleid=#{roleid}
+  </delete>
+  <insert id="addRoleMenu" >
+insert into roleandtree(roleid,treeid) values(#{roleid},#{treeid})
+  </insert>
 </mapper>

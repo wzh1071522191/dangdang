@@ -63,9 +63,10 @@ public class BookServiceImpl implements BookServiceApi{
     }
 
     @Override
-    public String updateStatus (Book book) {
+    public Book updateStatus (Book book) {
         bookDao.updateStatus(book);
-        return "0";
+        Book book1 = bookDao.queryBookByIdEs (book.getBookId ());
+        return book1;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.jk.dao;
 
 import com.jk.model.Book;
 import com.jk.model.BookType;
+import com.jk.model.LunBo;
 import com.jk.util.ParameUtil;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -41,4 +42,21 @@ public interface BookDao {
     void updateBook (Book book);
 
     Book queryBookByIdEs (Integer id);
+
+    @Select ("SELECT * FROM book")
+    List<Book> queryBookAll ();
+
+    @Select ("SELECT * FROM book WHERE bookStatus =1")
+    List<Book> queryBookStatus ();
+
+
+    List<Book> queryBookLike ();
+
+    List<Book> queryBookByType (Integer typeId);
+
+    @Select ("SELECT * FROM book WHERE bookStatus=1 ORDER BY bookId DESC")
+    List<Book> queryListBook ();
+
+    @Select ("SELECT * FROM lunbotu ")
+    List<LunBo> queryImg ();
 }
