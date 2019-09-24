@@ -14,8 +14,9 @@ import java.util.Date;
  * @package ：com.jk.model
  * @version:
  */
-@Data
+
 public class MyOrder implements Serializable {
+    private static final long serialVersionUID = -6998754870362202827L;
     private Integer orderid;
     private String ordernumber;
     private String bookname;
@@ -25,11 +26,10 @@ public class MyOrder implements Serializable {
     private Date orderdate;
     private Integer bookcount;
     private Integer orderstatus;
-    private Integer orderallid;
-    private Integer sumprice;
-    private  Integer sumcount;
-    private double  stu;//状态占比
-
+    private String orderallid;
+    private String username;
+    private String userphone;
+    private Integer userid;
 
     public Integer getOrderid() {
         return orderid;
@@ -87,36 +87,53 @@ public class MyOrder implements Serializable {
         this.orderstatus = orderstatus;
     }
 
-    public Integer getOrderallid() {
+    public String getOrderallid() {
         return orderallid;
     }
 
-    public void setOrderallid(Integer orderallid) {
+    public void setOrderallid(String orderallid) {
         this.orderallid = orderallid;
     }
 
-    public Integer getSumprice() {
-        return sumprice;
+    public String getUsername() {
+        return username;
     }
 
-    public void setSumprice(Integer sumprice) {
-        this.sumprice = sumprice;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Integer getSumcount() {
-        return sumcount;
+    public String getUserphone() {
+        return userphone;
     }
 
-    public void setSumcount(Integer sumcount) {
-        this.sumcount = sumcount;
+    public void setUserphone(String userphone) {
+        this.userphone = userphone;
     }
 
-    public double getStu() {
-        return stu;
+    public Integer getUserid() {
+        return userid;
     }
 
-    public void setStu(double stu) {
-        this.stu = stu;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
+
+    @Override
+    public String toString() {
+        return "MyOrder{" +
+                "orderid=" + orderid +
+                ", ordernumber='" + ordernumber + '\'' +
+                ", bookname='" + bookname + '\'' +
+                ", orderprice=" + orderprice +
+                ", orderdate=" + orderdate +
+                ", bookcount=" + bookcount +
+                ", orderstatus=" + orderstatus +
+                ", orderallid='" + orderallid + '\'' +
+                ", username='" + username + '\'' +
+                ", userphone='" + userphone + '\'' +
+                ", userid=" + userid +
+                '}';
     }
 }
 

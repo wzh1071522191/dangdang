@@ -221,7 +221,6 @@ public class BookController {
             b.setBookContent (hit.getSourceAsMap().get("bookContent").toString ());
             b.setBookStatus ((Integer)hit.getSourceAsMap().get("bookStatus"));
             b.setBookCount ((Integer)hit.getSourceAsMap().get("bookCount"));
-            b.setHits ((Integer) hit.getSourceAsMap().get("hits"));
             b.setBookStar ((Integer)hit.getSourceAsMap().get("bookStar"));
             b.setBookImg1 (hit.getSourceAsMap().get("bookImg1").toString ());
             b.setBookImg2 (hit.getSourceAsMap().get("bookImg2").toString ());

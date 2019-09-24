@@ -2,7 +2,6 @@ package com.jk.service;
 
 import com.jk.dao.LbDao;
 import com.jk.model.LunBo;
-import com.jk.model.MyOrder;
 import com.jk.util.ParameUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;

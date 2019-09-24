@@ -1,16 +1,13 @@
 package com.jk.controller;
 
 import com.jk.model.LunBo;
-import com.jk.model.MyOrder;
 import com.jk.service.lbserver;
 import com.jk.util.AlYunOssUtil;
 import com.jk.util.ExportExcel;
 import com.jk.util.ParameUtil;
-import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

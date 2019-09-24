@@ -1,10 +1,8 @@
 package com.jk.dao;
 
 import com.jk.model.LunBo;
-import com.jk.model.MyOrder;
 import com.jk.util.ParameUtil;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
