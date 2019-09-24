@@ -10,7 +10,8 @@
 
 <script type="text/javascript">
 $(function(){
-	$("#kinMaxShow").kinMaxShow();
+	//$("#kinMaxShow").kinMaxShow();
+
 });
 </script>
 
@@ -19,7 +20,7 @@ $(function(){
 <body>
  <div class="mianCont">
   <div class="top">
-   <span>您好！欢迎来到当当商城 请&nbsp;<a href="../jumpMeber/tologin">[登录]</a>&nbsp;<a href="../reg.html">[注册]</a></span>
+   <span>您好！欢迎来到当当商城 请&nbsp;<a href="../jumpMeber/tologin">[登录]</a>&nbsp;<a href="../jumpMeber/toreg">[注册]</a></span>
    <span class="topRight">
     <a href="../vip.html">我的当当</a>&nbsp;|
     <a href="../order.html">我的订单</a>&nbsp;|
@@ -35,10 +36,10 @@ $(function(){
      <input type="button"  width="63px" height="34" class="sub" value="搜索" onclick="queryBookName()"/>
      <div class="hotWord">
       热门搜索：
-      <a href="../proinfo.html">春日序曲</a>&nbsp;
-      <a href="../proinfo.html">汉声数学</a> &nbsp;
-      <a href="../proinfo.html">帝国失格</a>&nbsp;
-      <a href="../proinfo.html">儿童时间管理</a>  &nbsp;
+      <a href="../consumerBook/index?key='春日序曲'">春日序曲</a>&nbsp;
+      <a href="../consumerBook/index?key='汉声数学'">汉声数学</a> &nbsp;
+      <a href="../consumerBook/index?key='帝国失格'">帝国失格</a>&nbsp;
+      <a href="../consumerBook/index?key='儿童时间管理'">儿童时间管理</a>  &nbsp;
      </div><!--hotWord/-->
     </div><!--subBoxDiv/-->
    </form><!--subBox/-->
@@ -169,14 +170,14 @@ $(function(){
    <div class="pntRight">
     <ul class="nav">
      <li class="navCur"><a href="../consumerBook/index">商城首页</a></li>
-     <li><a href="../product.html">促销中心</a></li>
+     <li><a href="../consumerBook/index">促销中心</a></li>
      <li><a href="../jumpMeber/queryMemberList">会员中心</a></li>
      <li><a href="../help.html">帮助中心</a></li>
      <div class="clears"></div>
      <div class="phone">TEL：021-12345678</div>
     </ul><!--nav/-->
     <div class="banner">
-     <div id="kinMaxShow">
+     <div id="kinMaxShow" >
       <div>
        <a href="../#"><img src="../images/ban1.jpg" height="360px"  /></a>
       </div> 		
@@ -211,18 +212,19 @@ $(function(){
         <dd >《<span th:text="${b.bookName}"></span>》</dd>
        <dd>作者：<span th:text="${b.bookAuthor}"></span></dd>
            <dd>成交量：<span th:text="${b.buyCount}"></span>本</dd>
+        <dd>点击量：<span th:text="${b.hits}"></span></dd>
        <dd class="cheng">价格：<span th:text="${b.bookPrice}"></span>/本</dd>
      </dl>
       </div>
     </div><!--rdPro/-->
     <div class="rdProBox">
-     <div th:each="b:${b}">
+     <div th:each="bk:${blist}">
       <dl>
-       <dt><img th:src="${b.bookImg1}" width="180" height="300" th:id="${b.bookId}" onclick="toMessage(this.id)"/></dt>
-       <dd>《<span th:text="${b.bookName}"></span>》</dd>
-       <dd>作者:</span><span th:text="${b.bookAuthor}"></span></dd>
-          <dd>成交量:</span><span th:text="${b.buyCount}"></span>本</dd>
-       <dd class="cheng">价格:<span th:text="${b.bookPrice}"></span>/本</dd>
+       <dt><img th:src="${bk.bookImg2}" width="180" height="300" th:id="${bk.bookId}" onclick="toMessage(this.id)"/></dt>
+       <dd>《<span th:text="${bk.bookName}"></span>》</dd>
+       <dd>作者:</span><span th:text="${bk.bookAuthor}"></span></dd>
+          <dd>成交量:</span><span th:text="${bk.buyCount}"></span>本</dd>
+       <dd class="cheng">价格:<span th:text="${bk.bookPrice}"></span>/本</dd>
       </dl>
      </div>
     </div><!--rdPro/-->
@@ -238,14 +240,14 @@ $(function(){
   <div class="floor" id="floor1">
    <h3 class="floorTitle">
    1F&nbsp;&nbsp;&nbsp;&nbsp;猜你喜欢
-   <a href="../proinfo.html" class="more">更多 &gt;</a>
+   <a href="../consumerBook/index" class="more">更多 &gt;</a>
    </h3>
    <div class="floorBox">
     <div class="floorLeft">
      <ul class="flList">
-      <li>单层纸杯</li>
+      <li><a href="../consumerBook/index">单层纸杯</a></li>
       <li>双层纸杯</li>
-      <li>瓦楞纸杯</li>
+      <li><a href="../consumerBook/index">瓦楞纸杯</a></li>
       <li>PET透明杯</li>
       <li>冰淇淋杯</li>
       <li><a href="../proinfo.html">更多&gt;&gt;</a></li>
@@ -979,15 +981,13 @@ $(function(){
    <div class="inHRight">
     <h4>全国统一免费服务热线</h4>
     <div class="telBox">400-0000-0000</div>
-    <div class="weibo">
-    <wb:follow-button uid="2991975565" type="red_1" width="67" height="24" ></wb:follow-button>
-    </div>
+
    </div><!--inHRight/-->
    <div class="clears"></div>
   </div><!--inHelp/-->
   <div class="footer">
    <p>
-   <a href="../#">进入当当官网</a>&nbsp;|&nbsp;
+   <a href="../consumerBook/index">进入当当官网</a>&nbsp;|&nbsp;
    <a href="../consumerBook/index">商城首页</a>&nbsp;|&nbsp;
    <a href="../product.html">促销中心</a>&nbsp;|&nbsp;
    <a href="../order.html">我的订单</a>&nbsp;|&nbsp;
@@ -1012,12 +1012,12 @@ $(function(){
   location.href="../consumerBook/index?key="+bookName;
  }
  toMessage=function (bookId) {
-  //alert(t);
+  //alert(t); location.href="http://192.168.2.118:8091/order/queryRedisGWC?bookid="+bookId;
   //var bookId=this.$("dl").attr(id);
-   location.href="../order/queryGwd?bookid="+bookId;
+   location.href="../order/queryRedisGWC?bookid="+bookId;
  }
  function queryBookByTypePid(typePid) {
-  alert(typePid);
+  //alert(typePid);
    location.href="../consumerBook/index?typePid="+typePid;
  }
 </script>

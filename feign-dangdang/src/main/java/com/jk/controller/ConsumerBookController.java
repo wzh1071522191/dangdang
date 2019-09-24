@@ -1,6 +1,7 @@
 package com.jk.controller;
 
 import com.jk.model.Book;
+import com.jk.model.LunBo;
 import com.jk.service.ConsumerBookService;
 import com.jk.util.ParameUtil;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -63,11 +64,11 @@ public class ConsumerBookController {
         return "Index";
     }
 
-    @RequestMapping("toMessage")
+   /* @RequestMapping("toMessage")
     public String toMessage(Integer bookId){
         Book book = consumerBookService.queryBookById(bookId);
         return "proinfo";
-    }
+    }*/
 
 
 
@@ -79,7 +80,8 @@ public class ConsumerBookController {
     }
 
     @RequestMapping("index")
-    public String queryBook(ParameUtil parm,Model model,String key){
+    public ModelAndView queryBook(ParameUtil parm,Model model,String key){
+        ModelAndView mv =new  ModelAndView();
        /* if (parm.getPageSize() == null)
             parm.setPageSize(1);
         if (parm.getPageNumber() == null)
@@ -117,8 +119,6 @@ public class ConsumerBookController {
                 // .addSort("bookprice", SortOrder.DESC)//设置排序策略，这里是对价格进行倒序排序
                /* .setFrom((parm.getPageNumber() - 1) *parm.getPageSize())//设置分页起始条数
                 .setSize(parm.getPageSize());//设置每页条数*/
-
-
         //获取响应体
         SearchResponse searchResponse = searchRequestBuilder.get();
         SearchHits hits = searchResponse.getHits();
@@ -149,7 +149,7 @@ public class ConsumerBookController {
             b.setBookContent (hit.getSourceAsMap().get("bookContent").toString ());
             b.setBookStatus ((Integer)hit.getSourceAsMap().get("bookStatus"));
             b.setBookCount ((Integer)hit.getSourceAsMap().get("bookCount"));
-            b.setHits ((Double) hit.getSourceAsMap().get("hits"));
+            b.setHits ((Integer) hit.getSourceAsMap().get("hits"));
             b.setBookStar ((Integer)hit.getSourceAsMap().get("bookStar"));
             b.setBookImg1 (hit.getSourceAsMap().get("bookImg1").toString ());
             b.setBookImg2 (hit.getSourceAsMap().get("bookImg2").toString ());
@@ -159,21 +159,21 @@ public class ConsumerBookController {
             if(b.getBuyCount ()==null){
                 b.setBuyCount (0);
             }
-
-            // System.out.println (hit.getSourceAsMap().get("bookdate"));
             book.add(b);
         }
-        /*map.put("total",totalHits);
-        map.put("rows",book);*/
-        //map.put("rows",book);*/
-        //System.out.println (totalHits);
-        /*int a = 0;
-        for (int i = 0; i < totalHits; i++) {
-            System.out.println (book.get (i).getBookId ());
-        }*/
+        HashMap<String,Object> query=consumerBookService.queryAll();
+       // List<Book> queryListBook=consumerBookService.queryListBook();
 
-        model.addAttribute ("book",book);
-        return "index";
+        /*model.addAttribute ("b",queryListBook);
+        model.addAttribute ("book",book);*/
+        //List<LunBo> queryImg=consumerBookService.queryImg();
+        mv.addObject ("imgs",query.get ("img"));
+        mv.addObject ("blist",query.get ("blist"));
+        mv.addObject ("book",book);
+        mv.setViewName ("index");
+        return mv;
     }
+
+
 
 }

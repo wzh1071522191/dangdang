@@ -45,7 +45,7 @@ public class Book implements Serializable {
 
     private Integer bookCount;
 
-    private Double hits;
+    private Integer hits;
 
     private Integer bookStar;
 

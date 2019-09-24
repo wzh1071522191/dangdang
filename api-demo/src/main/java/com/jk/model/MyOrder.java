@@ -14,8 +14,8 @@ import java.util.Date;
  * @package ：com.jk.model
  * @version:
  */
+@Data
 public class MyOrder implements Serializable {
-    private static final long serialVersionUID = 2119238707992678404L;
     private Integer orderid;
     private String ordernumber;
     private String bookname;
@@ -25,7 +25,11 @@ public class MyOrder implements Serializable {
     private Date orderdate;
     private Integer bookcount;
     private Integer orderstatus;
-    private String  orderallid;
+    private Integer orderallid;
+    private Integer sumprice;
+    private  Integer sumcount;
+    private double  stu;//状态占比
+
 
     public Integer getOrderid() {
         return orderid;
@@ -83,26 +87,36 @@ public class MyOrder implements Serializable {
         this.orderstatus = orderstatus;
     }
 
-    public String getOrderallid() {
+    public Integer getOrderallid() {
         return orderallid;
     }
 
-    public void setOrderallid(String orderallid) {
+    public void setOrderallid(Integer orderallid) {
         this.orderallid = orderallid;
     }
 
-    @Override
-    public String toString() {
-        return "MyOrder{" +
-                "orderid=" + orderid +
-                ", ordernumber='" + ordernumber + '\'' +
-                ", bookname='" + bookname + '\'' +
-                ", orderprice=" + orderprice +
-                ", orderdate=" + orderdate +
-                ", bookcount=" + bookcount +
-                ", orderstatus=" + orderstatus +
-                ", orderallid='" + orderallid + '\'' +
-                '}';
+    public Integer getSumprice() {
+        return sumprice;
+    }
+
+    public void setSumprice(Integer sumprice) {
+        this.sumprice = sumprice;
+    }
+
+    public Integer getSumcount() {
+        return sumcount;
+    }
+
+    public void setSumcount(Integer sumcount) {
+        this.sumcount = sumcount;
+    }
+
+    public double getStu() {
+        return stu;
+    }
+
+    public void setStu(double stu) {
+        this.stu = stu;
     }
 }
 

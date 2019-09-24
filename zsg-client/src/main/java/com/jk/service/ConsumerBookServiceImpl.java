@@ -2,6 +2,7 @@ package com.jk.service;
 
 import com.jk.dao.BookDao;
 import com.jk.model.Book;
+import com.jk.model.LunBo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,6 +43,16 @@ public class ConsumerBookServiceImpl implements ConsumerBookServiceApi{
     public List<Book> queryBookByType (Integer typeId) {
 
         return bookDao.queryBookByType(typeId);
+    }
+
+    @Override
+    public HashMap<String, Object> queryAll () {
+        List<Book> bookList = bookDao.queryListBook ();
+        List<LunBo> lunBos = bookDao.queryImg ();
+        HashMap<String, Object> hashMap = new HashMap<> ();
+        hashMap.put("blist",bookList);
+        hashMap.put ("img",lunBos);
+        return hashMap;
     }
 
 

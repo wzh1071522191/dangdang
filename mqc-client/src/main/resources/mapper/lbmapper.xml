@@ -33,8 +33,44 @@ select count(*) from lunbotu
    </select>
 
 
+    <select id="sumco2" resultType="java.lang.Integer">
+select count(*)
+        from t_order where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt; date(orderdate)
+    </select>
+
+    <select id="querylblist2" resultType="com.jk.model.MyOrder">
+        select *
+        from t_order where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt; date(orderdate) limit #{pageNumber},#{pageSize}
+    </select>
 
 
+    <select id="exall" resultType="com.jk.model.MyOrder">
+
+    select * from t_order where orderdate >'2019-01-01' and orderdate &lt; '2019-12-30'
+    </select>
+
+    <select id="yuedan2" resultType="java.util.LinkedHashMap">
+select round(sum(tt.bookcount*tt.orderprice)) count, date_format(tt.orderdate,'%m') week from t_order tt where tt.orderdate >'2019-01-01' and tt.orderdate &lt; '2019-12-30'
+group by date_format(tt.orderdate,'%m')
+    </select>
+<select id="getshu" resultType="com.jk.model.MyOrder">
+   select sum(tt.orderprice*tt.bookcount) sumprice ,sum(tt.bookcount) sumcount
+from t_order tt
+</select>
+
+<!--
+   <select id="xiaobing1" resultType="com.jk.model.MyOrder">
+       select sum(t.orderprice*t.bookcount)sumstu,t.orderstatus stu from t_order t where t.orderstatus=1
+ </select>
+
+    <select id="xiaobing2" resultType="com.jk.model.MyOrder">
+select sum(t.orderprice*t.bookcount) sumprice from t_order t
+   </select>
+-->
+<select id="exall7" resultType="com.jk.model.MyOrder">
+select *
+        from t_order where DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt; date(orderdate)
+</select>
 
 
 </mapper>

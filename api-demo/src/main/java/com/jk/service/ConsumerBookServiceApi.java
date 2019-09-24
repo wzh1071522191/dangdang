@@ -1,6 +1,7 @@
 package com.jk.service;
 
 import com.jk.model.Book;
+import com.jk.model.LunBo;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +26,15 @@ public interface ConsumerBookServiceApi {
 
     @RequestMapping("queryBookByType")
     List<Book> queryBookByType (@RequestBody Integer typeId);
+
+   /* @RequestMapping("index")
+    List<Book> queryListBook ();
+
+    @RequestMapping("index")
+    List<LunBo> queryImg ();*/
+
+    @RequestMapping("index")
+    HashMap<String, Object> queryAll ();
 
    /* @RequestMapping("toIndex")
     List<Book> queryBookStatus ();*/
