@@ -14,8 +14,9 @@ import java.util.Date;
  * @package ：com.jk.model
  * @version:
  */
-@Data
+
 public class MyOrder implements Serializable {
+    private static final long serialVersionUID = -6998754870362202827L;
     private Integer orderid;
     private String ordernumber;
     private String bookname;
@@ -25,7 +26,10 @@ public class MyOrder implements Serializable {
     private Date orderdate;
     private Integer bookcount;
     private Integer orderstatus;
-    private String  orderallid;
+    private String orderallid;
+    private String username;
+    private String userphone;
+    private Integer userid;
 
     public Integer getOrderid() {
         return orderid;
@@ -83,12 +87,53 @@ public class MyOrder implements Serializable {
         this.orderstatus = orderstatus;
     }
 
-    public String  getOrderallid() {
+    public String getOrderallid() {
         return orderallid;
     }
 
-    public void setOrderallid(String  orderallid) {
+    public void setOrderallid(String orderallid) {
         this.orderallid = orderallid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUserphone() {
+        return userphone;
+    }
+
+    public void setUserphone(String userphone) {
+        this.userphone = userphone;
+    }
+
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
+
+    @Override
+    public String toString() {
+        return "MyOrder{" +
+                "orderid=" + orderid +
+                ", ordernumber='" + ordernumber + '\'' +
+                ", bookname='" + bookname + '\'' +
+                ", orderprice=" + orderprice +
+                ", orderdate=" + orderdate +
+                ", bookcount=" + bookcount +
+                ", orderstatus=" + orderstatus +
+                ", orderallid='" + orderallid + '\'' +
+                ", username='" + username + '\'' +
+                ", userphone='" + userphone + '\'' +
+                ", userid=" + userid +
+                '}';
     }
 }
 

@@ -4,7 +4,7 @@
 
     <!--Integer queryBookCount ()-->
     <select id="queryBookCount" resultType="int">
-        SELECT COUNT(*) FROM book b LEFT JOIN booktype bt ON b.bookTypeId=bt.typeId
+        SELECT COUNT(*) FROM book b LEFT JOIN booktype bt ON b.bookTypeId=bt.typeId <include refid="tiaocha"/>
     </select>
 
     <!--List<Book> queryBookList (ParameUtil parameUtil)
@@ -32,8 +32,17 @@
         </association>
     </resultMap>-->
     <select id="queryBookList" resultType="Book">
-        SELECT * FROM book b LEFT JOIN booktype bt ON b.bookTypeId=bt.typeId LIMIT #{pageNumber},#{pageSize}
+        SELECT * FROM book b LEFT JOIN booktype bt ON b.bookTypeId=bt.typeId <include refid="tiaocha"/> LIMIT #{pageNumber},#{pageSize}
     </select>
+
+    <sql id="tiaocha">
+        <where>
+            and 1=1
+            <if test="typename!=null and typename!=''">
+             and   b.bookName=#{typename}
+            </if>
+        </where>
+    </sql>
 
     <!--void addBook (Book book)-->
     <insert id="addBook" parameterType="Book" useGeneratedKeys="true">

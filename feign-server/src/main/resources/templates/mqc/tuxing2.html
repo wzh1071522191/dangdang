@@ -47,49 +47,9 @@
     <script src="../js/highcharts/code/highcharts.js"></script>
 
 </head>
-
-<!--  表格 -->
 <body>
-<div id="toolbar">
-</div>
-<div>
-
-    <center><!--
-        <input type="button" value="导出2019出售数量表" onclick="exportExcel2019()" style="background-color: #00C1B3">--->
-
-        <table>
-            <tr>
-               <td>
-                    <table id="AnaTodayTable">
-                        <center><font color="green" size="5px">图书分析2019年数据概览</font>
-                        </center>
-           <button onclick="dj()"  class="btn" style="background:#E8E8D0"><b>点击事件</b></button>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-         <button onclick="exportExcelGaikuangThree()" type="button" class="btn" style="background:#E8E8D0"><b>Excle导出2019数据概况</b></button>
 
 
-                    </table>
-
-                </td>
-            </tr>
-        </table>
-    </center>
-</div>
-<center>
-    <div>
-        <!--===============展示折线图====================-->
-
-
-
-            <span id="da">
-            <div style="background-color:#eee8aa" >
-                <font size="5px"   color="#191970"><b>2019每月下单数量趋势图</b></font>
-               <!--折线图--><div id="container" style="min-width: 1500px; height: 550px; max-width: 1250px; margin: 0 auto"></div>
-            </div>
-            </span>
-
-    </div>
-</center><!--
 <center><font color="#191970" size="5px">图书分析最近7日数据全部概览</font></center>
 <button onclick="dj1()"  class="btn" style="background:#E8E8D0"><b>我也能点哦</b></button>
 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -98,25 +58,23 @@
 <table id="bb"></table>
 <span id="d2">
 <div id="AnaSevenTable"  style="float:left;width:1000px;background-color:#5f9ea0">
-    &lt;!&ndash;-
-<input type="button" value="导出近七日出售数量表" onclick="exportExcelseven()" style="background-color: #00C1B3">
-    &ndash;&gt;
+
     <center><font color="#191970" size="5px">近七天数据展示</font></center>
 
-    <div id="container2" style="min-width: 500px; height: 400px; max-width: 450px; margin: 0 auto"></div>
+    <div id="container2" style="min-width: 500px; height: 500px; max-width: 450px; margin: 0 auto"></div>
 </div>
 
 <div id="AnaThirtyTable"  style="float:left;width:880px;background-color:#5f9ea0" >
-    <center><font color="green" size="5px">图书状态占比信息全部概览</font></center>
+    <center><font color="#191970" size="5px">图书状态占比信息全部概览</font></center>
 
-    <div id="container3" style="min-width: 500px; height: 400px; max-width: 450px; margin: 0 auto">
+    <div id="container3" style="min-width: 500px; height: 500px; max-width: 450px; margin: 0 auto">
 </div>
 </div>
-</span>-->
+</span>
+
 </body>
-
-<script type="text/javascript">
-   /* //第二个点击
+<script>
+    //第二个点击
     var kkkw = document.getElementById("d2");
     kkkw.style.display = "none";
     function  dj1(){
@@ -124,114 +82,27 @@
             kkkw.style.display = "block";
         else
             kkkw.style.display = "none";
-    }*/
-    //第一个点击
-    var kkw = document.getElementById("da");
-    kkw.style.display = "none";
-    function  dj(){
-        if(kkw.style.display == "none")
-            kkw.style.display = "block";
-        else
-            kkw.style.display = "none";
     }
 
-
-
-
-
-
-    function exportExcelGaikuangThree(){
-        location.href="../lb/exportExcel2019";
+    function exportExcelGaikuang(){
+        location.href="../lb/exportExcelseven";
     }
-
-
-
 
     $(function(){
-        initDataAnaToday();
-       // initDataAnaToday2();
+       // initDataAnaToday();
+        initDataAnaToday2();
 
         //initDataAnaSeven();
-       // initDataAnaThirty();
-        yuedan();
-      //  binzhuangtu();
-       // zhuzhuang();
+        // initDataAnaThirty();
+       // yuedan();
+        binzhuangtu();
+        zhuzhuang();
     });
 
 
-    //所有
 
-    //查询2019年数据
-    function initDataAnaToday(){
-        $('#AnaTodayTable').bootstrapTable({
-            url:'../lb/querymouthxl',
-            method: 'post',
-            striped: true,  	// 斑马线效果     默认false
-            //只允许选中一行
-            singleSelect: false,
-            //选中行是不选中复选框或者单选按钮
-            clickToSelect: true,
-            showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
-            cardView: false,                    //是否显示详细视图
-            uniqueId: "orderid",                 //每一行的唯一标识，一般为主键列
-            showColumns: true,                  //是否显示所有的列
-            showRefresh: true,                  //是否显示刷新按钮
-            minimumCountColumns: 2,     //  最少留两列
-            detailView: false,                  //是否显示父子表
-            toolbar: '#tabToolBar',   //  工具定义位置
-            sidePagination: 'server',
-            toolbar: '#toolbar',
-            pagination: true, //是否展示分页
-            pageList: [1, 2, 3, 5, 8],//分页组件
-            pageNumber: 1,
-            pageSize: 2,//默认每页条数
-            //启动回车键做搜索功能
-            searchOnEnterKey: true,
-            //设置为false 将禁止所有列的排序。
-            sortable: true,
-            //设置默认排序为 name,直接对应数据库的字段
-            sortName: 'lbid',
-            //定义排序方式，'asc' 或者 'desc'。
-            sortOrder: "desc",
-            //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder
-            // 设置为limit可以获取limit, offset, search, sort, order
-            queryParamsType: 'undefined',
-            // 请求服务器数据
-            queryParams: function queryParams(params) {
-                var param = {
-                    pageNumber: params.pageNumber,
-                    pageSize: params.pageSize,
-                    sortName: params.sortName,
-                    sortOrder: params.sortOrder,
 
-                };
-                return param;
-            },
-            columns: [
-                {field: 'checkbox', checkbox: true},  //开启复选框
-                {field: 'orderid', title: 'id', width: 300},      //  列    field   代表是 后台  传过来的值
-                {field: 'ordernumber', title: '排序', width: 300},
-                {field: 'bookname', title: '类型', width: 300},
-                {field: 'orderprice', title: '价格', width: 300},
-                {field: 'orderdate', title: '上传时间', width: 300},
-                {field: 'bookcount', title: '图书出售数量', width: 300},
-                {field: 'orderstatus', title: '状态', width: 300,
-                    formatter: function (value, row, index) {
-                        if(value=="1"){return "付款失败"}
-                        if(value=="2"){return "已付款"}
-                        if(value=="3"){return "待发货"}
-                        if(value=="4"){return "已发货"}
-                        if(value=="5"){return "收货失败"}
-                         if(value=="6"){return "收获成功"}
-                         if(value=="31"){return "发货前退"}
-                           if(value=="32"){return "发货后退款"}}
-                    },
-                {field: 'orderallid', title: '图书id', width: 300}
-            ]
-        });
-    }
-    //////////////////////////////////////////////////////////////////////////////////////////////
-    /*function initDataAnaToday2(){
+    function initDataAnaToday2(){
         $('#bb').bootstrapTable({
             url:'../lb/querymouthxl2',
             method: 'post',
@@ -298,47 +169,13 @@
                 {field: 'orderallid', title: '图书id', width: 300}
             ]
         });
-    }*/
-    ///////////////////////////////////////////////////////////////////////////////////////
+    }
 
-  //每月下单数
-    function yuedan(){
-        $.ajax({
-            url:"../lb/yuexiadan",
-            type:"post",
-            dataType:"json",
-            success:function (data) {
-                Highcharts.chart('container', {
-                    title: {
-                        text: '每月下单数'
-                    },
-                    xAxis: {
-                        categories: data.week,
-                        crosshair: true
-                    },
-                    yAxis: {
-                        title: {
-                            text: '图书下单量'
-                        }
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle'
-                    },
-                    series: [
-                        {
-                        name: '数量/月份',
-                        data: data.count
-                    }
-                    ]
-                });
-            },error:function () {
-                alert("查询失败");
-            }
-        })
-    }/*
-//饼状图
+
+
+
+
+    //饼状图
     function binzhuangtu(){
         $.ajax({
             url:'../lb/queryBingZhuang',
@@ -374,7 +211,7 @@
                     },
 
 
-                series: [{
+                    series: [{
                         name: 'Brands',
                         colorByPoint: true,
                         data: data,
@@ -388,7 +225,7 @@
         })
 
     }
-//17/19柱状图
+    //17/19柱状图
     function zhuzhuang(){
         $.ajax({
             url:"../lb/queryZhuzhuang",
@@ -437,9 +274,7 @@
         })
     }
 
-*/
 
 
 
 </script>
-</html>

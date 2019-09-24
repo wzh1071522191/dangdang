@@ -14,6 +14,7 @@ import java.util.Date;
  * @version:
  */
 public class Books implements Serializable {
+    private static final long serialVersionUID = 1055534179681697786L;
     private Integer bookId;
 
     private String bookName;

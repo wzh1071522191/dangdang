@@ -1,6 +1,7 @@
 package com.jk.controller;
 
 import com.jk.model.Book;
+import com.jk.model.LunBo;
 import com.jk.service.ConsumerBookService;
 import com.jk.util.ParameUtil;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -51,11 +52,7 @@ public class ConsumerBookController {
     @RequestMapping("toIndex1")
     public String toIndex(Model model){
         HashMap<String,Object> hashMap =consumerBookService.queryBookAll();
-       /* List<Book> bookList = consumerBookService.queryBookAll();
-        List<Book> bookList2 = consumerBookService.queryBookStatus();*/
-        /*ModelAndView mv = new ModelAndView();
-        mv.addObject ("book",bookList);
-        mv.setViewName ("Index");*/
+
         List<Book> bookList =(List<Book>) hashMap.get ("book");
         List<Book> bookList2=(List<Book>) hashMap.get ("b");
         model.addAttribute ("book",bookList);
@@ -63,11 +60,7 @@ public class ConsumerBookController {
         return "Index";
     }
 
-    @RequestMapping("toMessage")
-    public String toMessage(Integer bookId){
-        Book book = consumerBookService.queryBookById(bookId);
-        return "proinfo";
-    }
+
 
 
 
@@ -79,11 +72,9 @@ public class ConsumerBookController {
     }
 
     @RequestMapping("index")
-    public String queryBook(ParameUtil parm,Model model,String key){
-       /* if (parm.getPageSize() == null)
-            parm.setPageSize(1);
-        if (parm.getPageNumber() == null)
-            parm.setPageNumber(1);*/
+    public ModelAndView queryBook(ParameUtil parm,Model model,String key,Integer bookTypeId){
+        ModelAndView mv =new  ModelAndView();
+
         Map<String, Object> map = new HashMap<>();
         //创建一个查询组件
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
@@ -112,12 +103,8 @@ public class ConsumerBookController {
                 .setExplain(true)//设置是否对相关度排序
                 .highlighter(highlightBuilder)//设置高亮策略
                 .setFrom (0)
-                .setSize (1000)
+                .setSize (100)
                 .setQuery(boolQueryBuilder);//设置查询策略
-                // .addSort("bookprice", SortOrder.DESC)//设置排序策略，这里是对价格进行倒序排序
-               /* .setFrom((parm.getPageNumber() - 1) *parm.getPageSize())//设置分页起始条数
-                .setSize(parm.getPageSize());//设置每页条数*/
-
 
         //获取响应体
         SearchResponse searchResponse = searchRequestBuilder.get();
@@ -149,7 +136,7 @@ public class ConsumerBookController {
             b.setBookContent (hit.getSourceAsMap().get("bookContent").toString ());
             b.setBookStatus ((Integer)hit.getSourceAsMap().get("bookStatus"));
             b.setBookCount ((Integer)hit.getSourceAsMap().get("bookCount"));
-            b.setHits ((Double) hit.getSourceAsMap().get("hits"));
+
             b.setBookStar ((Integer)hit.getSourceAsMap().get("bookStar"));
             b.setBookImg1 (hit.getSourceAsMap().get("bookImg1").toString ());
             b.setBookImg2 (hit.getSourceAsMap().get("bookImg2").toString ());
@@ -159,21 +146,29 @@ public class ConsumerBookController {
             if(b.getBuyCount ()==null){
                 b.setBuyCount (0);
             }
-
-            // System.out.println (hit.getSourceAsMap().get("bookdate"));
             book.add(b);
         }
-        /*map.put("total",totalHits);
-        map.put("rows",book);*/
-        //map.put("rows",book);*/
-        //System.out.println (totalHits);
-        /*int a = 0;
-        for (int i = 0; i < totalHits; i++) {
-            System.out.println (book.get (i).getBookId ());
-        }*/
+        if(bookTypeId==null){
+            bookTypeId=23;
+        }
+        HashMap<String,Object> query=consumerBookService.queryAll(bookTypeId);
+        mv.addObject ("imgs",query.get ("img"));
+        mv.addObject ("blist",query.get ("blist"));
+        mv.addObject ("bk",query.get ("bk1"));
+        mv.addObject ("bk2",query.get ("bk2"));
+        mv.addObject ("bk3",query.get ("bk3"));
+        mv.addObject ("bk4",query.get ("bk4"));
+        mv.addObject ("kj",query.get ("kj"));
+        mv.addObject ("bookChird",query.get ("bookChird"));
+        mv.addObject ("book",book);
 
-        model.addAttribute ("book",book);
-        return "index";
+        mv.setViewName ("index");
+        return mv;
     }
+
+
+
+
+
 
 }
