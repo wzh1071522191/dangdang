@@ -57,7 +57,7 @@ public class OrderController {
 }*/
 @RequestMapping("addOrder")
 @ResponseBody
-public void addOrder(@RequestParam String  bookallid,@RequestParam Double orderprice,HttpSession session){
+public void addOrder(@RequestParam String  bookallid,@RequestParam Double orderprice,HttpSession session,@RequestParam Integer bookcount){
     int userid=1;
     String orderCode = OrderCodeFactory.getOrderCode((long) userid);
     String key="myorder"+userid;
@@ -66,10 +66,10 @@ public void addOrder(@RequestParam String  bookallid,@RequestParam Double orderp
     List<Showorder> list=new ArrayList<>();
     MyOrder myOrder =new MyOrder();
     Showorder showorder =new Showorder();
-    showorder.setOrdernumber(orderCode);
-    myOrder.setBookcount(2);
+    showorder.setOrdernumber("12019092316513002191297750097159");
+    myOrder.setBookcount(bookcount);
     myOrder.setOrderallid(bookallid);
-    myOrder.setOrdernumber(orderCode);
+    myOrder.setOrdernumber("12019092316513002191297750097159");
     myOrder.setOrderprice(orderprice);
     myOrder.setOrderdate(new Date());
     myOrder.setOrderstatus(1);
@@ -80,7 +80,8 @@ public void addOrder(@RequestParam String  bookallid,@RequestParam Double orderp
 @RequestMapping("queryMyOrder")
     public String  queryMyOrder(HttpSession session, Model model){
     List<Showorder> list =null;
-    int userid=1;
+    MemberUser loginUser = (MemberUser)session.getAttribute("loginUser");
+    int userid=loginUser.getUserid();
     String key="myorder"+userid;
     List<Book> bookList =null;
     List<Showorder> list1=new ArrayList<>();
@@ -161,18 +162,22 @@ public void addOrder(@RequestParam String  bookallid,@RequestParam Double orderp
     }*/
  @RequestMapping("addGWD")
  @ResponseBody
- public  void userGWCvalue(@RequestParam String userGWCvalue){
-     int userid=1;
+ public  void userGWCvalue(@RequestParam String userGWCvalue,HttpSession session){
+     MemberUser loginUser = (MemberUser)session.getAttribute("loginUser");
+     int userid=loginUser.getUserid();
      String key="userGwd"+userid;
      redisTemplate1.delete(key);
      redisTemplate1.opsForValue().set(key, userGWCvalue);
      System.out.println("redisTemplate1"+redisTemplate1.opsForValue().get(key));
  }
     @RequestMapping("queryRedisGWC")
-    public String  queryRedisGWC(Model model,HttpSession session){
+    public String  queryRedisGWC(Model model,HttpSession session,Integer bookid){
+     int flag=0;
+        flag=orderservice.updateCount(bookid);
        //session 获取userID
-        int userid=1;
-        Book book =orderservice.queryBookById(1);
+        MemberUser loginUser = (MemberUser)session.getAttribute("loginUser");
+        int userid=loginUser.getUserid();
+        Book book =orderservice.queryBookById(bookid);
         model.addAttribute("book", book);
         String key="userGwd"+userid;
         String userGWCvalue="";
@@ -222,7 +227,8 @@ public void addOrder(@RequestParam String  bookallid,@RequestParam Double orderp
     }*/
     @RequestMapping("queryGwd")
     public String queryGwd(HttpSession session,Model model){
-        String key="userGwd"+1;
+        MemberUser loginUser = (MemberUser)session.getAttribute("loginUser");
+        String key="userGwd"+loginUser.getUserid();
         String gwcid="";
         if (redisTemplate1.hasKey(key)) {
             String s = redisTemplate1.opsForValue().get(key);
@@ -240,6 +246,91 @@ public void addOrder(@RequestParam String  bookallid,@RequestParam Double orderp
         model.addAttribute("list", bookList);
         return  "order";
     }
+    @RequestMapping("updMyOrderzt")
+    public String  updMyOrderzt(HttpSession session){
+        MemberUser loginUser = (MemberUser)session.getAttribute("loginUser");
+        MyOrder myOrder = (MyOrder) session.getAttribute("myOrder");
+        System.out.println("myorder-----in"+myOrder);
+        String key="myorder"+loginUser.getUserid();
+        List<Showorder> Showorderlist = redisTemplate.opsForList().range(key, 0, -1);
+        List<Showorder>  Showorderlist1=new ArrayList<>();
 
+        for (Showorder showorder : Showorderlist) {
+            if(!"12019092316513002191297750097159".equals(showorder.getMyorder().getOrdernumber())){
+                MyOrder myOrder1 =new MyOrder();
+                Showorder showorder1 =new Showorder();
+                System.out.println(showorder.getMyorder());
+                myOrder1.setOrdernumber(showorder.getMyorder().getOrdernumber());
+                myOrder1.setBookcount(showorder.getMyorder().getBookcount());
+                myOrder1.setOrderallid(showorder.getMyorder().getOrderallid());
+                myOrder1.setOrderprice(showorder.getMyorder().getOrderprice());
+                myOrder1.setOrderdate(showorder.getMyorder().getOrderdate());
+                myOrder1.setUserid(1);
+                showorder1.setMyorder(myOrder1);
+                System.out.println(showorder1);
+                Showorderlist1.add(showorder1);
+            }
+        }
+
+      /*  for (int i=0;i<Showorderlist.size();i++){
+            if(Showorderlist.get(i).getOrdernumber()!=myOrder.getOrdernumber()){
+                Showorder showorder =new Showorder();
+                System.out.println(Showorderlist.get(i).getMyorder());
+              //  showorder.setMyorder(Showorderlist.get(i).getMyorder());
+                //Showorderlist1.add(showorder);
+            }
+        }*/
+        redisTemplate.delete(key);
+        System.out.println("successok");
+        for (int i=0;i<Showorderlist1.size();i++){
+            redisTemplate.opsForList().leftPush(key, Showorderlist1.get(i));
+        }
+
+        System.out.println("myorder-----in"+myOrder);
+        int userid=1;
+        orderservice.addMyOrder(myOrder);
+         return "success";
+    }
+    @RequestMapping("queryqueryDAIFAHUO")
+    public String queryqueryDAIFAHUO(HttpSession session,Model model){
+        MemberUser loginUser = (MemberUser)session.getAttribute("loginUser");
+           int userid=loginUser.getUserid();
+          List<Showorder> Showorderlist = new ArrayList<>();
+          List<MyOrder> myOrders =orderservice.queryMyOrderById(userid);
+            for (int i=0;i<myOrders.size();i++){
+                Showorder showorders=new Showorder();
+                List<Book> bookList =orderservice.queryBookComment(myOrders.get(i).getOrderallid());
+                showorders.setMyorder(myOrders.get(i));
+                showorders.setBookList(bookList);
+                Showorderlist.add(showorders);
+            }
+            model.addAttribute("fkOrder", Showorderlist);
+           System.out.println(Showorderlist);
+         return "FkOrder";
+    }
+    @RequestMapping("delOrder")
+    @ResponseBody
+    public void delOrder(HttpSession session,@RequestParam String ordernumber){
+        MemberUser loginUser = (MemberUser)session.getAttribute("loginUser");
+        Integer userid=loginUser.getUserid();
+        orderservice.delOrder(ordernumber,userid);
+    }
+    @RequestMapping("queryTk")
+    public String queryTk(HttpSession session,Model model){
+        MemberUser loginUser = (MemberUser)session.getAttribute("loginUser");
+        int userid=loginUser.getUserid();
+        List<Showorder> Showorderlist = new ArrayList<>();
+        List<MyOrder> myOrders =orderservice.queryMyOrderByStatus(userid);
+        for (int i=0;i<myOrders.size();i++){
+            Showorder showorders=new Showorder();
+            List<Book> bookList =orderservice.queryBookComment(myOrders.get(i).getOrderallid());
+            showorders.setMyorder(myOrders.get(i));
+            showorders.setBookList(bookList);
+            Showorderlist.add(showorders);
+        }
+        model.addAttribute("tkOrder", Showorderlist);
+        System.out.println(Showorderlist);
+        return "Tk";
+    }
 }
 

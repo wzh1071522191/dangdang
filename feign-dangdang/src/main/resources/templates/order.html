@@ -324,16 +324,18 @@
       bookallid+=","+this.value;
      })
      bookallid=bookallid.substr(1);
-     alert(bookallid);
-     alert($("#allprice").val());
+    // alert(bookallid);
+    // alert($("#allprice").val());
+     alert($("#countid").val())
      $.ajax({
       url: '../order/addOrder',
       data: {
        "bookallid": bookallid,
-       "orderprice":$("#allprice").val()
+       "orderprice":$("#allprice").val(),
+       "bookcount":$("#countid").val()
       },
       success: function () {
-      // alert("成功!!!");
+       // alert("成功!!!");
        location.href ="../order/queryMyOrder";
       }, error: function () {
        alert("no way !!!")

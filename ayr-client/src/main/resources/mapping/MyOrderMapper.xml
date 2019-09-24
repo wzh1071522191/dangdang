@@ -96,8 +96,8 @@
       #{orderprice,jdbcType=DOUBLE}, #{orderdate,jdbcType=DATE}, #{bookcount,jdbcType=INTEGER}, 
       #{orderstatus,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.jk.model.MyOrder" >
-    insert into order
+  <insert id="addMyOrder" parameterType="com.jk.model.MyOrder" >
+    insert into t_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="orderid != null" >
         orderid,
@@ -119,6 +119,15 @@
       </if>
       <if test="orderstatus != null" >
         orderstatus,
+      </if>
+      <if test="orderallid != null" >
+        orderallid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="userphone != null" >
+        userphone,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -142,6 +151,15 @@
       </if>
       <if test="orderstatus != null" >
         #{orderstatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderallid != null" >
+        #{orderallid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null" >
+        #{userphone,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

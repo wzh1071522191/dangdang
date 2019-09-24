@@ -27,23 +27,12 @@
 				</div>
 				<div class="tools-box">
 					<div class="operator-box-btn"><span class="face-icon"  >☺</span></div>
-					<div class="submit-btn"><input type="button" onClick="out()"value="提交评论" />
-					</div>
-					</div>
+					<div class="submit-btn"><input type="button" onClick="out()"value="提交评论" /></div>
 				</div>
-
+			</div>
 		</div>
 		<div id="info-show">
-			<ul><li th:each="a:${session.list}">
-				<div class="head-face">
-					<img th:src="${a.url}" />
-				</div>
-				<div class="reply-cont">
-					<p class="username">aa</p>
-					<p class="comment-body"><font th:text="${a.content}"></font></p>
-					<p class="comment-footer"><font th:text="${a.dtime}"></font></p>
-				</div>
-			</li></ul>
+			<ul></ul>
 		</div>
 	</div>
 </div>
@@ -59,7 +48,7 @@
 	// 测试本地解析
 	function out() {
 		var inputText = $('.text').val();
-
+		alert("aaa")
 		$.ajax({
 		  url:"../user/add",
 			type:"post",
@@ -75,7 +64,9 @@
 
 
 	}
-
+	function cha(){
+     	
+	 }
 	/* var html;
 	 function rep(content){
 		 html  = '<li>';

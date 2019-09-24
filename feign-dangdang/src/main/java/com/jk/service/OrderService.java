@@ -1,6 +1,7 @@
 package com.jk.service;
 
 import com.jk.model.Book;
+import com.jk.model.MyOrder;
 import com.jk.util.ParameUtil;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,4 +26,14 @@ public interface OrderService {
     List<Book> queryBookComment(@RequestParam String orderallid);
     @RequestMapping(value="/queryBookById")
     Book queryBookById(@RequestParam Integer bookid);
+    @RequestMapping(value="/addMyOrder")
+    void addMyOrder(@RequestBody MyOrder myOrder);
+    @RequestMapping(value="/updateCount")
+    int updateCount(@RequestParam Integer bookid);
+    @RequestMapping(value="/queryMyOrderById")
+    List<MyOrder> queryMyOrderById(@RequestParam int userid);
+    @RequestMapping(value="/delOrder")
+    void delOrder(@RequestParam String ordernumber,@RequestParam Integer userid);
+    @RequestMapping(value="/queryMyOrderByStatus")
+    List<MyOrder> queryMyOrderByStatus(@RequestParam  int userid);
 }

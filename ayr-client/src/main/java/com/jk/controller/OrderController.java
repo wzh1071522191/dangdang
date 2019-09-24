@@ -70,6 +70,31 @@ public class OrderController {
     public Book queryBookById(@RequestParam Integer bookid){
        return orderservice.queryBookById(bookid);
    }
-
+    @RequestMapping("addMyOrder")
+    @ResponseBody
+    public void addMyOrder(@RequestBody MyOrder myOrder){
+        orderservice.addMyOrder(myOrder);
+    }
+    @RequestMapping("updateCount")
+    @ResponseBody
+    public int updateCount(@RequestParam Integer bookid){
+       int flag=orderservice.updateCount(bookid);
+       return flag;
+    }
+    @RequestMapping("queryMyOrderById")
+    @ResponseBody
+    public List<MyOrder>  queryMyOrderById(@RequestParam int userid){
+        return orderservice.queryMyOrderById(userid);
+    }
+    @RequestMapping("delOrder")
+    @ResponseBody
+    public void  delOrder(@RequestParam String ordernumber,@RequestParam Integer userid){
+        orderservice.delOrder(ordernumber,userid);
+    }
+    @RequestMapping("queryMyOrderByStatus")
+    @ResponseBody
+    public List<MyOrder>  queryMyOrderByStatus(@RequestParam int userid){
+        return orderservice.queryMyOrderByStatus(userid);
+    }
 }
 

@@ -7,6 +7,7 @@ import com.jk.model.MyOrder;
 import com.jk.util.ParameUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 import java.util.List;
@@ -86,6 +87,36 @@ private BookMapper bookmapper;
     @Override
     public Book queryBookById(Integer bookid) {
         return bookmapper.queryBookById(bookid);
+    }
+
+    @Override
+    public void addMyOrder(MyOrder myOrder) {
+        ordermapper.addMyOrder(myOrder);
+    }
+
+    @Override
+    public int updateCount(Integer bookid) {
+        int flag=bookmapper.updateCount(bookid);
+
+        if(flag>0){
+             return 1;
+        }
+        return 0;
+    }
+
+    @Override
+    public List<MyOrder> queryMyOrderById(int userid) {
+        return ordermapper.queryMyOrderById(userid);
+    }
+
+    @Override
+    public void delOrder(String ordernumber, Integer userid) {
+        ordermapper.delOrder(ordernumber,userid);
+    }
+
+    @Override
+    public List<MyOrder> queryMyOrderByStatus(int userid) {
+        return ordermapper.queryMyOrderByStatus(userid);
     }
 
    /* @Override

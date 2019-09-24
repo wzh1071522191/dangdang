@@ -6,6 +6,7 @@ import com.jk.util.ParameUtil;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,16 @@ public interface OrderService {
     Map queryOrderFH(@RequestBody ParameUtil parm);
     @RequestMapping(value="/queryBookById")
     Book queryBookById(@RequestParam Integer bookid);
+    @RequestMapping(value="/addMyOrder")
+    void addMyOrder(@RequestBody  MyOrder myOrder);
+    @RequestMapping(value="/updateCount")
+    int updateCount(@RequestParam Integer bookid);
+    @RequestMapping(value="/queryMyOrderById")
+    List<MyOrder> queryMyOrderById(@RequestParam int userid);
+    @RequestMapping(value="/delOrder")
+    void delOrder(@RequestParam String ordernumber,@RequestParam Integer userid);
+    @RequestMapping(value="/queryMyOrderByStatus")
+    List<MyOrder> queryMyOrderByStatus(@RequestParam int userid);
    /* @RequestMapping(value="/queryMyOrder")
     Map queryMyOrder(@RequestBody ParameUtil parm);*/
 }

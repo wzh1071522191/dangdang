@@ -1,6 +1,9 @@
 package com.jk.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * @author ： 安雅茹
@@ -16,6 +19,11 @@ public class ExpressDiscription {
     private  String comment;
     private String personname;
     private String personnumber;
+    @JsonFormat(
+            pattern = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
+    private Date expressdate;
 
 }
 

@@ -1,5 +1,6 @@
 package com.jk.controller;
 
+import com.jk.model.MyOrder;
 import com.jk.service.OrderService;
 import com.jk.util.ParameUtil;
 import org.springframework.beans.factory.annotation.Autowired;

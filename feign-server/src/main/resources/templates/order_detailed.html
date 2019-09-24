@@ -67,8 +67,8 @@
       <p>作者：<input th:text="${book.bookAuthor}" type="hidden" th:value="${book.bookAuthor}"></p>
       <p>出版日期：<input th:text="${book.bookDate}" type="hidden" th:value="${book.bookDate}"></p>
       <p>价格：<b class="price"><i>￥</i><input th:text="${book.bookPrice}" type="hidden" th:value="${book.bookPrice}"></b></p>
-      <p>库存：<i class="label label-success radius"> <td th:if="${book.bookCount} >=3" th:text="有货"></td>
-                        <td th:if="${book.bookCount} <=2" th:text="缺货,请尽快进货"></td></i></p>
+      <p>库存：<i class="label label-success radius"> <input th:text="${book.bookCount}" type="hidden" th:value="${book.bookCount}">
+                       </i></p>
 
       </div>
 

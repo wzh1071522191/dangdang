@@ -21,16 +21,7 @@ public class Comments implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
      private Date dtime;
      private Integer userid;
-    private  String url;
      private String username;
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public Integer getId() {
         return id;
