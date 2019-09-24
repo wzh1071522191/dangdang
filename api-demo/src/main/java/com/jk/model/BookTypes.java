@@ -10,6 +10,7 @@ import java.io.Serializable;
  * @version:
  */
 public class BookTypes implements Serializable {
+    private static final long serialVersionUID = -8265108735229764903L;
     private Integer typeId;
 
     private String typeName;
@@ -38,5 +39,14 @@ public class BookTypes implements Serializable {
 
     public void setPid(Integer pid) {
         this.pid = pid;
+    }
+
+    @Override
+    public String toString() {
+        return "BookTypes{" +
+                "typeId=" + typeId +
+                ", typeName='" + typeName + '\'' +
+                ", pid=" + pid +
+                '}';
     }
 }

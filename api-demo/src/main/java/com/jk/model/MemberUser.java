@@ -11,7 +11,9 @@
 package com.jk.model;
 
 import java.io.Serializable;
-
+/*
+* //会员登录表
+* */
 public class MemberUser implements Serializable {
     private static final long serialVersionUID = -1276509982996208347L;
     private Integer userid;

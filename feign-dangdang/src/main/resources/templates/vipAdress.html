@@ -194,7 +194,7 @@
       </dd>
      <dt>账户设置</dt>
       <dd>
-       <a href="javascript:gerenxinxi()">个人信息</a>
+       <a href="javascript:xinxi()">个人信息</a>
        <a href="javascript:mimaxiugai()">密码修改</a>
        <a href="shouhuo2()" class="vipCur">收货地址</a>
       </dd>
@@ -247,7 +247,7 @@
        </td>
       </tr>
       <tr>
-       <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button"  style="background-color:red;width:224px;height: 30px" value="保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存✎" onclick="updateArea()" class="baocun" /></td>
+       <td colspan="2"><input type="button"  style="background-color:red;width:224px;height: 30px" value="保&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存✎" onclick="updateArea()" class="baocun" /></td>
       </tr>
      </table>
     </form>
@@ -274,7 +274,7 @@
      <td th:text="${take.takearea}"></td>
      <td th:text="${take.takephone}"></td>
      <td th:text="${take.takeyoubian}"></td>
-     <td><span class="green upd">[修改]</span> | <span class="green add">[添加]</span> </td>
+     <td><span class="green upd">[修改]</a></span> | <a href="javascript:addarea()"><span class="green add">[添加]</span> </a></td>
     </tr>
     <!--ar a = $("valueid").val;
          $("[name='id']").val(a);-->
@@ -332,36 +332,28 @@
 </body>
 <script>
  //修改
-function updateArea(){
-  var form = $("#updateArea").serialize();
-  var valueid=$("#valueid2").val();
-  $.ajax({
-   url:"../jumpMeber/updateShuoHouArea?id="+valueid,
-   type:"post",
-   data:form,
-   success:function(){
-    alert("修改成功");
-    location.href= "../jumpMeber/queryTakeAreaList";
-   },error:function(){
-    alert("修改失败");
-   }
-  })
- }
- //新增
-/* function updateArea(){
-  var form = $("#updateArea").serialize();
-  $.ajax({
-   url:"../jumpMeber/saveShuoHuoArea",
-   type:"post",
-   data:form,
-   success:function(){
-    alert("添加成功");
-    location.href= "../jumpMeber/queryTakeAreaList";
-   },error:function(){
-    alert("添加失败");
-   }
-  })
- }*/
+function updateArea() {
+ var form = $("#updateArea").serialize();
+ var valueid = $("#valueid2").val();
+ var aid = $("#valueid2").val();
+   $.ajax({
+    url: "../jumpMeber/updateShuoHouArea?id=" + valueid,
+    type: "post",
+    data: form,
+    success: function () {
+     alert("修改成功");
+     location.href = "../jumpMeber/queryTakeAreaList";
+    }, error: function () {
+     alert("修改失败");
+    }
+   })
+
+}
+function addarea(){
+ alert(11)
+ $("#updateArea")[0].reset();
+}
+
 //登录
  function denglu8(){
   location.href="../jumpMeber/tologin";
@@ -389,8 +381,8 @@ function updateArea(){
   location.href="../jumpMeber/queryMemberList";
  }
  //个人信息
- function gerenxinxi(){
-  location.href="../jumpMeber/updateMemberUser";
+ function xinxi(){
+  location.href="../jumpMeber/queryMemberUserList";
  }
  //密码修改
  function mimaxiugai(){

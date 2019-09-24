@@ -14,8 +14,8 @@ import java.util.Date;
  * @package ：com.jk.model
  * @version:
  */
-@Data
 public class MyOrder implements Serializable {
+    private static final long serialVersionUID = 2119238707992678404L;
     private Integer orderid;
     private String ordernumber;
     private String bookname;
@@ -83,12 +83,26 @@ public class MyOrder implements Serializable {
         this.orderstatus = orderstatus;
     }
 
-    public String  getOrderallid() {
+    public String getOrderallid() {
         return orderallid;
     }
 
-    public void setOrderallid(String  orderallid) {
+    public void setOrderallid(String orderallid) {
         this.orderallid = orderallid;
+    }
+
+    @Override
+    public String toString() {
+        return "MyOrder{" +
+                "orderid=" + orderid +
+                ", ordernumber='" + ordernumber + '\'' +
+                ", bookname='" + bookname + '\'' +
+                ", orderprice=" + orderprice +
+                ", orderdate=" + orderdate +
+                ", bookcount=" + bookcount +
+                ", orderstatus=" + orderstatus +
+                ", orderallid='" + orderallid + '\'' +
+                '}';
     }
 }
 
