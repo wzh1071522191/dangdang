@@ -5,9 +5,6 @@ import com.jk.model.LunBo;
 import com.jk.model.MyOrder;
 import com.jk.util.ParameUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -100,4 +97,33 @@ public class LbServiceImpl implements LunBoService{
     public List<MyOrder> queryExportExcelGaikuangThree() {
         return lbdao.exall();
     }
+
+    @Override
+    public List<Map<String, Object>> yuedan2() {
+        return lbdao.yuedan2();
+    }
+
+    @Override
+    public MyOrder getzong() {
+        MyOrder order= lbdao.getshu();
+        return order;
+    }
+
+    @Override
+    public List<MyOrder> queryExportExcelGaikuang7() {
+        return lbdao.exall7();
+    }
+/*
+    @Override
+    public HashMap<String,Object> xiaobing1() {
+        HashMap<String,Object> hashMap =new HashMap<String,Object>();
+        List<MyOrder> list=lbdao.xiaobing1();
+        List<MyOrder> list1=lbdao.xiaobing2();
+        hashMap.put("sumstu",list);
+        hashMap.put("sumprice",list1);
+        return hashMap;
+    }*/
+
+
+
 }

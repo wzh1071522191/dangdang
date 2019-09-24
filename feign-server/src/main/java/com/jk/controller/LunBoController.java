@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,14 +42,6 @@ public class LunBoController {
 
         return lbserv.lblist(param);
    }
-   //
-
-
-
-
-
-
-
 
 
 //addImgJsp 跳转新增页面
@@ -103,7 +96,7 @@ public String querym(){
 }
 
     @RequestMapping("tubiao2")
-    public String querym2(){
+    public String querymm(){
         return "mqc/tuxing2";
     }
 
@@ -265,12 +258,22 @@ public Map<String,Object> queryShoppingZhuxingByWeek(){
 
 @RequestMapping("getlbtu")
 @ResponseBody
-    public  String getlbtu(Model model){
+    public  List getlbtu(Model model){
     List<LunBo>list=lbserv.getlbtu();
-        model.addAttribute("list",list);
-    System.out.println(list);
-        return "index";
+
+
+        return list;
 }
+
+    @RequestMapping("tubiao3")
+    public  String getlbtu2(Model model){
+        MyOrder myOrder=lbserv.getzong();
+        model.addAttribute("myOrder",myOrder);
+        System.out.println(myOrder);
+
+        return "transaction";
+    }
+
 /*<div class="banner">
      <div id="kinMaxShow"  th:each="img:${list}">
       <div>
@@ -310,6 +313,134 @@ public Map<String,Object> queryShoppingZhuxingByWeek(){
             e.printStackTrace();
         }
     }
+//导出最近七天数据
+@RequestMapping("exportExcelseven")
+public void exportExcelGaikuang(HttpServletResponse response){
+    //导出的excel的标题
+    String title = "最近七天数据概览";
+    //导出excel的列名
+    String[] rowName = {"id","排序","类型","价格","时间","销量","状态","图书id"};
+    //导出的excel数据
+    List<Object[]>  dataList = new ArrayList<Object[]>();
+    //查询的数据库的商品概况
+    List<MyOrder> list=lbserv.queryExportExcelGaikuang7();
+    //循环商品概况
+    for(MyOrder car:list){
+        Object[] obj =new Object[rowName.length];
+        obj[0]=car.getOrderid();
+        obj[1]=car.getOrdernumber();
+        obj[2]=car.getBookname();
+        obj[3]=car.getOrderprice();
+        obj[4]=car.getOrderdate();
+        obj[5]=car.getBookcount();
+        obj[6]=car.getOrderstatus();
+        obj[7]=car.getOrderallid();
+        dataList.add(obj);
+    }
+    ExportExcel exportExcel =new ExportExcel(title,rowName,dataList,response);
+    try {
+        exportExcel.export();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+
+//每月收入
+@RequestMapping("querytu2")
+@ResponseBody
+public Map<String,Object> yuedan2(){
+
+    List<Map<String,Object>> list = lbserv.yuedan2();
+
+    String[] week = new String[list.size()];
+    int[] count = new int[list.size()+1];
+    for (int i=0;i<list.size();i++){
+        if(list.get(i).get("week").equals("01")){
+            week[i] = "一月";
+        }
+        if(list.get(i).get("week").equals("02")){
+            week[i] = "二月";
+        }
+        if(list.get(i).get("week").equals("03")){
+            week[i] = "三月";
+        }
+        if(list.get(i).get("week").equals("04")){
+            week[i] = "四月";
+        }
+        if(list.get(i).get("week").equals("05")){
+            week[i] = "五月";
+        }
+        if(list.get(i).get("week").equals("06")){
+            week[i] = "六月";
+        }
+        if(list.get(i).get("week").equals("07")){
+            week[i] = "七月";
+        }
+        if(list.get(i).get("week").equals("08")){
+            week[i] = "八月";
+        }
+        if(list.get(i).get("week").equals("09")){
+            week[i] = "九月";
+        }
+        if(list.get(i).get("week").equals("10")){
+            week[i] = "十月";
+        }
+        if(list.get(i).get("week").equals("11")){
+            week[i] = "十一月";
+        }
+        if(list.get(i).get("week").equals("12")){
+            week[i] = "十二月";
+        }
+
+         int count1 = (int) Math.round((Double) list.get(i).get("count"));
+
+        count[i] = count1;
+
+
+    }
+    Map<String,Object> map = new HashMap<String,Object>();
+    map.put("week",week);
+    map.put("price",count);
+
+    return map;
+}
+//小饼1xiaobing1
+
+    /*@RequestMapping("xiaobing1")
+    @ResponseBody
+    public List<Map<String, Object>> xiaobing1() {
+        HashMap map2=new HashMap();
+
+        HashMap<String,Object> hashMap =lbserv.xiaobing1();
+        List<MyOrder> list=(List<MyOrder>) hashMap.get("sumstu");
+        List<MyOrder> list2=(List<MyOrder>) hashMap.get("sumprice");
+        List<Map<String, Object>> list1 = new ArrayList<>();
+        for (MyOrder listt : list) {
+            Map<String, Object> map = new HashMap<>();
+        Integer shuliang =  listt.getSumprice();
+            if (shuliang==1) {
+                map.put("name", "付款失败");
+            }
+            map.put("y",map1.get("sumstu"));
+            map.put("sliced", "true");
+            map.put("selected", "true");
+            list1.add(map);
+        }
+        for (Map<String, Object> map1 : list2) {
+            Map<String, Object> map = new HashMap<>();
+            String shuliang2 = (String) map1.get("sumprice");
+            map.put("name","总售出价");
+            map.put("y",shuliang2);
+            map.put("sliced", "true");
+            map.put("selected", "true");
+            list1.add(map);
+        }
+
+        return list1;
+    }
+
+*/
 
 
 

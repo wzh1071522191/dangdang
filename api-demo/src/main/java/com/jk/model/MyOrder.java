@@ -26,6 +26,10 @@ public class MyOrder implements Serializable {
     private Integer bookcount;
     private Integer orderstatus;
     private Integer orderallid;
+    private Integer sumprice;
+    private  Integer sumcount;
+    private double  stu;//状态占比
+
 
     public Integer getOrderid() {
         return orderid;
@@ -89,6 +93,30 @@ public class MyOrder implements Serializable {
 
     public void setOrderallid(Integer orderallid) {
         this.orderallid = orderallid;
+    }
+
+    public Integer getSumprice() {
+        return sumprice;
+    }
+
+    public void setSumprice(Integer sumprice) {
+        this.sumprice = sumprice;
+    }
+
+    public Integer getSumcount() {
+        return sumcount;
+    }
+
+    public void setSumcount(Integer sumcount) {
+        this.sumcount = sumcount;
+    }
+
+    public double getStu() {
+        return stu;
+    }
+
+    public void setStu(double stu) {
+        this.stu = stu;
     }
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>当当商城</title>
@@ -174,22 +174,10 @@ $(function(){
     </ul><!--nav/-->
     <div class="banner">
      <div id="kinMaxShow">
-      <div>
-       <a href="../#"><img src="../images/ban1.jpg" height="360px"  /></a>
-      </div> 		
-      <div>
-       <a href="../#"><img src="../images/ban2.jpg" height="360px"  /></a>
+      <div th:each="img:${list}">
+       <a href="#"><img th:src="${img.img}" height="360px"/></a>
       </div>
-      <div>
-       <a href="../#"><img src="../images/ban3.jpg" height="360px"  /></a>
-      </div>
-      <div>
-       <a href="../#"><img src="../images/ban4.jpg" height="360px"  /></a>
-      </div>
-      <div>
-       <a href="../#"><img src="../images/ban5.jpg" height="360px"  /></a>
-      </div>      
-     </div><!--kinMaxShow/-->
+     </div>kinMaxShow/
     </div><!--banner/-->
    </div><!--pntRight/-->
    <div class="clears"></div>
@@ -1067,4 +1055,27 @@ $(function(){
  </div><!--mianCont/-->
  <a href="../#" class="backTop">&nbsp;</a>
 </body>
+<script>
+    /*$(function(){
+     $.ajax({
+       url:"../lbt/getlbtu",
+       type:"post",
+       success:function (data) {
+         //var data = data.stringify();
+         alert(data.length);
+         var html ="<div id=\"kinMaxShow\">";
+         for( var i = 0;i<data.length;i++){
+           html+= "<div><a href='#'><img src="+data[i].img+" height='360px'></a></div>";
+         }
+         html+="</div>";
+         alert(html);
+        $(".banner").html(html);
+       },error:function(){
+        alert("后台有");
+      }
+     })
+    })*/
+
+
+</script>
 </html>

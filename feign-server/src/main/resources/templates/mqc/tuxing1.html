@@ -61,7 +61,7 @@
             <tr>
                <td>
                     <table id="AnaTodayTable">
-                        <center><font color="green" size="6px">图书分析2019年数据概览</font>
+                        <center><font color="green" size="5px">图书分析2019年数据概览</font>
                         </center>
            <button onclick="dj()"  class="btn" style="background:#E8E8D0"><b>点击事件</b></button>
                         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -83,22 +83,25 @@
 
             <span id="da">
             <div style="background-color:#eee8aa" >
-                <font size="5px"   color="#00ff00"><b>2019每月下单数量趋势图</b></font>
-               <!--折线图--><div id="container" style="min-width: 1500px; height: 250px; max-width: 1250px; margin: 0 auto"></div>
+                <font size="5px"   color="#191970"><b>2019每月下单数量趋势图</b></font>
+               <!--折线图--><div id="container" style="min-width: 1500px; height: 550px; max-width: 1250px; margin: 0 auto"></div>
             </div>
             </span>
 
     </div>
-</center>
-<center><font color="green" size="5px">图书分析最近7日数据全部概览</font></center>
+</center><!--
+<center><font color="#191970" size="5px">图书分析最近7日数据全部概览</font></center>
 <button onclick="dj1()"  class="btn" style="background:#E8E8D0"><b>我也能点哦</b></button>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<button onclick="exportExcelGaikuang()" type="button" class="btn" style="background:#E8E8D0"><b>Excle导出近7日数据概况</b></button>
+
 <table id="bb"></table>
 <span id="d2">
 <div id="AnaSevenTable"  style="float:left;width:1000px;background-color:#5f9ea0">
-    <!---
+    &lt;!&ndash;-
 <input type="button" value="导出近七日出售数量表" onclick="exportExcelseven()" style="background-color: #00C1B3">
-    -->
-    <center><font color="green" size="5px">近七天数据展示</font></center>
+    &ndash;&gt;
+    <center><font color="#191970" size="5px">近七天数据展示</font></center>
 
     <div id="container2" style="min-width: 500px; height: 400px; max-width: 450px; margin: 0 auto"></div>
 </div>
@@ -109,11 +112,11 @@
     <div id="container3" style="min-width: 500px; height: 400px; max-width: 450px; margin: 0 auto">
 </div>
 </div>
-</span>
+</span>-->
 </body>
 
 <script type="text/javascript">
-    //第二个点击
+   /* //第二个点击
     var kkkw = document.getElementById("d2");
     kkkw.style.display = "none";
     function  dj1(){
@@ -121,7 +124,7 @@
             kkkw.style.display = "block";
         else
             kkkw.style.display = "none";
-    }
+    }*/
     //第一个点击
     var kkw = document.getElementById("da");
     kkw.style.display = "none";
@@ -141,21 +144,18 @@
         location.href="../lb/exportExcel2019";
     }
 
-    function exportExcelseven(){
-        location.href="../lb/exportExcelseven";
-    }
 
 
 
     $(function(){
         initDataAnaToday();
-        initDataAnaToday2();
+       // initDataAnaToday2();
 
         //initDataAnaSeven();
        // initDataAnaThirty();
         yuedan();
-        binzhuangtu();
-        zhuzhuang();
+      //  binzhuangtu();
+       // zhuzhuang();
     });
 
 
@@ -231,7 +231,7 @@
         });
     }
     //////////////////////////////////////////////////////////////////////////////////////////////
-    function initDataAnaToday2(){
+    /*function initDataAnaToday2(){
         $('#bb').bootstrapTable({
             url:'../lb/querymouthxl2',
             method: 'post',
@@ -298,7 +298,7 @@
                 {field: 'orderallid', title: '图书id', width: 300}
             ]
         });
-    }
+    }*/
     ///////////////////////////////////////////////////////////////////////////////////////
 
   //每月下单数
@@ -337,7 +337,7 @@
                 alert("查询失败");
             }
         })
-    }
+    }/*
 //饼状图
     function binzhuangtu(){
         $.ajax({
@@ -437,7 +437,7 @@
         })
     }
 
-
+*/
 
 
 

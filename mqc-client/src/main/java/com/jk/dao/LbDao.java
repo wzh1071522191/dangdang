@@ -15,7 +15,7 @@ public interface LbDao {
 
     List<LunBo> querylblist(ParameUtil param);
 
-    @Insert("insert into lunbotu (type,maxlength,minlength,paixu,status,img,addtime) values(#{o.type},#{o.maxlength},#{o.minlength},#{o.paixu},2,#{o.img},now())")
+    @Insert("insert into lunbotu (type,maxlength,minlength,paixu,status,img,addtime) values(#{o.type},#{o.maxlength},#{o.minlength},#{o.paixu},1,#{o.img},now())")
     void addlb(@Param("o") LunBo lb);
     @Update("update lunbotu set status=2 where lbid=#{id}")
     void upstu1(Integer id);
@@ -32,6 +32,7 @@ public interface LbDao {
     List<Map<String, Object>> queryBingZhuang();
 
     List<Map<String, Object>> queryZhuzhuang();
+
 @Select("select * from lunbotu where status=1")
     List<LunBo> getlbtu();
 
@@ -40,4 +41,18 @@ public interface LbDao {
     List<MyOrder> querylblist2(ParameUtil param);
 
     List<MyOrder> exall();
+
+    List<Map<String, Object>> yuedan2();
+
+    MyOrder getshu();
+
+    List<MyOrder> exall7();
+
+   /* List<MyOrder> xiaobing1();
+
+    List<MyOrder> xiaobing2();*/
+
+   /* List<Map<String, Object>> xiaobing1();
+
+    List<Map<String, Object>> xiaobing2();*/
 }

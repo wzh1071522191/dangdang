@@ -322,7 +322,7 @@ div.scott span.disabled{border:#f3f3f3 1px solid;padding:2px 5px;color:#ccc;marg
 .vipMy td{padding:8px 4px;line-height:20px; text-align:center;border:red 1px solid;}
 h1 .vipUp{font-size:14px;margin-left:40px;color:#F00; cursor:pointer;}
 .vipAdress{width:100%;}
-.vipAdress th{background:red;height:25px;line-height:25px;color:#fff; text-align: 
+.vipAdress th{background:red;height:25px;line-height:25px;color:#fff; text-align:center
 ;}
 .vipAdress td{border:#ccc 1px solid;padding:8px 3px;line-height:20px; text-align:center;}
 .orderDeatils{width:100%;}
