@@ -6,6 +6,7 @@ import com.jk.model.LunBo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,14 +47,37 @@ public class ConsumerBookServiceImpl implements ConsumerBookServiceApi{
     }
 
     @Override
-    public HashMap<String, Object> queryAll () {
+    public HashMap<String, Object> queryAll (Integer bookTypeId) {
         List<Book> bookList = bookDao.queryListBook ();
         List<LunBo> lunBos = bookDao.queryImg ();
+        List<Book> bookList1=new ArrayList<> ();
+        List<Book> bookList2 = bookDao.bookList2();
+        List<Book> bookList3=bookDao.bookList3();
+        List<Book> bookList4=bookDao.bookList4();
+        List<Book> bookChird=bookDao.bookChird();
+        List<Book> bookKj=bookDao.bookKj();
+        if(bookTypeId==0||bookTypeId==null){
+            bookList1=bookDao.queryBookByBookTypeAll ();
+        }else {
+            bookList1=bookDao.queryBookByBookType (bookTypeId);
+        }
+
         HashMap<String, Object> hashMap = new HashMap<> ();
         hashMap.put("blist",bookList);
         hashMap.put ("img",lunBos);
+        hashMap.put ("bk1",bookList1);
+        hashMap.put ("bk2",bookList2);
+        hashMap.put ("bk3",bookList3);
+        hashMap.put ("bk4",bookList4);
+        hashMap.put ("kj",bookKj);
+        hashMap.put ("bookChird",bookChird);
         return hashMap;
     }
+
+    /*@Override
+    public List<Book> queryBook (Integer bookTypeId) {
+        return bookDao.queryBookByBookType (bookTypeId);
+    }*/
 
 
 }

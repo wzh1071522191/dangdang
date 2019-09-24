@@ -34,7 +34,10 @@ public interface ConsumerBookServiceApi {
     List<LunBo> queryImg ();*/
 
     @RequestMapping("index")
-    HashMap<String, Object> queryAll ();
+    HashMap<String, Object> queryAll (@RequestBody Integer bookTypeId);
+
+    /*@RequestMapping("queryBookType")
+    List<Book> queryBook (Integer bookTypeId);*/
 
    /* @RequestMapping("toIndex")
     List<Book> queryBookStatus ();*/

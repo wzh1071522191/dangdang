@@ -54,9 +54,30 @@ public interface BookDao {
 
     List<Book> queryBookByType (Integer typeId);
 
-    @Select ("SELECT * FROM book WHERE bookStatus=1 ORDER BY bookId DESC")
+    @Select ("SELECT * FROM book WHERE bookStatus=1  ORDER BY bookId DESC LIMIT 0,10")
     List<Book> queryListBook ();
 
     @Select ("SELECT * FROM lunbotu ")
     List<LunBo> queryImg ();
+
+    @Select ("SELECT * FROM book WHERE bookTypeId=23")
+    List<Book> queryBookByBookType (Integer bookTypeId);
+
+    @Select ("SELECT * FROM book WHERE bookTypeId=23")
+    List<Book> queryBookByBookTypeAll ();
+
+    @Select ("SELECT * FROM book WHERE bookStatus=1 ORDER BY bookPrice DESC LIMIT 0,8")
+    List<Book> bookList2 ();
+
+    @Select ("SELECT * FROM book WHERE bookStatus=1 AND bookTypePid=2 LIMIT 0,8")
+    List<Book> bookList3 ();
+
+    @Select ("SELECT * FROM book WHERE bookStatus=1 AND bookTypePid=1 LIMIT 0,8")
+    List<Book> bookList4 ();
+
+    @Select ("SELECT * FROM book WHERE bookStatus=1 AND bookTypePid=5")
+    List<Book> bookChird ();
+
+    @Select ("SELECT * FROM book WHERE bookStatus=1 AND bookTypePid=10")
+    List<Book> bookKj ();
 }

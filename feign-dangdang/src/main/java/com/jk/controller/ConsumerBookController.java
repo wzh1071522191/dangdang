@@ -52,11 +52,7 @@ public class ConsumerBookController {
     @RequestMapping("toIndex1")
     public String toIndex(Model model){
         HashMap<String,Object> hashMap =consumerBookService.queryBookAll();
-       /* List<Book> bookList = consumerBookService.queryBookAll();
-        List<Book> bookList2 = consumerBookService.queryBookStatus();*/
-        /*ModelAndView mv = new ModelAndView();
-        mv.addObject ("book",bookList);
-        mv.setViewName ("Index");*/
+
         List<Book> bookList =(List<Book>) hashMap.get ("book");
         List<Book> bookList2=(List<Book>) hashMap.get ("b");
         model.addAttribute ("book",bookList);
@@ -64,11 +60,7 @@ public class ConsumerBookController {
         return "Index";
     }
 
-   /* @RequestMapping("toMessage")
-    public String toMessage(Integer bookId){
-        Book book = consumerBookService.queryBookById(bookId);
-        return "proinfo";
-    }*/
+
 
 
 
@@ -80,12 +72,9 @@ public class ConsumerBookController {
     }
 
     @RequestMapping("index")
-    public ModelAndView queryBook(ParameUtil parm,Model model,String key){
+    public ModelAndView queryBook(ParameUtil parm,Model model,String key,Integer bookTypeId){
         ModelAndView mv =new  ModelAndView();
-       /* if (parm.getPageSize() == null)
-            parm.setPageSize(1);
-        if (parm.getPageNumber() == null)
-            parm.setPageNumber(1);*/
+
         Map<String, Object> map = new HashMap<>();
         //创建一个查询组件
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
@@ -114,11 +103,9 @@ public class ConsumerBookController {
                 .setExplain(true)//设置是否对相关度排序
                 .highlighter(highlightBuilder)//设置高亮策略
                 .setFrom (0)
-                .setSize (1000)
+                .setSize (100)
                 .setQuery(boolQueryBuilder);//设置查询策略
-                // .addSort("bookprice", SortOrder.DESC)//设置排序策略，这里是对价格进行倒序排序
-               /* .setFrom((parm.getPageNumber() - 1) *parm.getPageSize())//设置分页起始条数
-                .setSize(parm.getPageSize());//设置每页条数*/
+
         //获取响应体
         SearchResponse searchResponse = searchRequestBuilder.get();
         SearchHits hits = searchResponse.getHits();
@@ -161,18 +148,26 @@ public class ConsumerBookController {
             }
             book.add(b);
         }
-        HashMap<String,Object> query=consumerBookService.queryAll();
-       // List<Book> queryListBook=consumerBookService.queryListBook();
-
-        /*model.addAttribute ("b",queryListBook);
-        model.addAttribute ("book",book);*/
-        //List<LunBo> queryImg=consumerBookService.queryImg();
+        if(bookTypeId==null){
+            bookTypeId=23;
+        }
+        HashMap<String,Object> query=consumerBookService.queryAll(bookTypeId);
         mv.addObject ("imgs",query.get ("img"));
         mv.addObject ("blist",query.get ("blist"));
+        mv.addObject ("bk",query.get ("bk1"));
+        mv.addObject ("bk2",query.get ("bk2"));
+        mv.addObject ("bk3",query.get ("bk3"));
+        mv.addObject ("bk4",query.get ("bk4"));
+        mv.addObject ("kj",query.get ("kj"));
+        mv.addObject ("bookChird",query.get ("bookChird"));
         mv.addObject ("book",book);
+
         mv.setViewName ("index");
         return mv;
     }
+
+
+
 
 
 
