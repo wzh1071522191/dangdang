@@ -50,18 +50,7 @@ public class MeberController {
 
         return "xqt/memberlogin.html";
     }
-    //跳转会员登录页面
-    @RequestMapping("/toupdatemember")
-    public String toupdatemember(){
 
-        return "xqt/updatemember.html";
-    }
-    //跳转会员注册页面
-    @RequestMapping("/tomemberReg")
-    public String tomemberReg(){
-
-        return "xqt/memberReg.html";
-    }
    //用户详细信息分页查询
    @RequestMapping("queryMeberAll")
    @ResponseBody
@@ -106,27 +95,6 @@ public class MeberController {
     public Member queryFindMemberById(Integer id) {
         return meberService.queryFindMemberById(id);
     }
-    //前台会员登录
-    @RequestMapping("memberLogin")
-    @ResponseBody
-    public String memberLogin(MemberUser memberUser, HttpServletRequest request) {
-        MemberUser loginUser=meberService.queryUserName(memberUser.getUsername());
-          if(loginUser == null){
 
-              return "1";
-          }
-          if(!loginUser.getPassword().equals(memberUser.getPassword())){
-              return "2";
-          }
-        request.getSession().setAttribute("u", loginUser);
-        return "3";
-    }
-    //前台会员注册
-    @RequestMapping("savemeMberUser")
-    @ResponseBody
-    public String savemeMberUser(MemberUser memberUser){
-
-        return meberService.savemeMberUser(memberUser);
-    }
 
 }

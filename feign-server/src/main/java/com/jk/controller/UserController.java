@@ -1,13 +1,12 @@
 package com.jk.controller;
 
 
-import com.jk.model.Comments;
-import com.jk.model.LoginUser;
-import com.jk.model.Tree;
+import com.jk.model.*;
 import com.jk.service.UserService;
 
 import com.jk.util.Param;
 import com.jk.util.ParameUtil;
+import com.jk.util.TreeUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -77,11 +76,11 @@ public class UserController {
  return "index";
     }
   @RequestMapping("ChildNode")
-  @ResponseBody
-    public List<Tree> ChildNode(Integer id){
+   @ResponseBody
+    public List<Tree> ChildNode(Integer id,HttpServletRequest request){
         List<Tree> treenode=userService.treenode(id);
-      return treenode;
-
+       request.getSession().setAttribute("treenode",treenode);
+ return treenode;
   }
   @RequestMapping("comments1")
     public String comments(){
@@ -109,4 +108,121 @@ public class UserController {
         model.addAttribute("list",list);
         return "comments";
     }
+<<<<<<< HEAD
+=======
+    //index.html页面的退出登陆方法
+    @RequestMapping("logout")
+    public String logout(HttpSession session, Model model) {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return "login";
+    }
+    //商品的审核页面的跳转   audit：审核
+    @RequestMapping("audit1")
+    public String audit1(){
+  return "audit";
+    }
+
+    //商品audit.html跳转的方法进行查询商品审核信息
+    @RequestMapping("audit")
+    @ResponseBody
+    public  Map audit(@RequestBody Param param ){
+        return  userService.audit(param);
+
+    }
+  //同意按钮实现
+    @RequestMapping("tongyi")
+    @ResponseBody
+    public void tongyi(Integer id){
+      userService.tongyi(id);
+    }
+    //拒绝按钮实现
+    @RequestMapping("jujue")
+    @ResponseBody
+    public void jujue(Integer id){
+        userService.jujue(id);
+}
+//用户查询跳转的页面
+    @RequestMapping("role1")
+    public  String role1(){
+        return "Role";
+    }
+
+    //用户查询
+    @RequestMapping("role")
+    @ResponseBody
+    public Map role(@RequestBody Param param){
+        return userService.role(param);
+    }
+   @RequestMapping("setRole")
+    public  String setRole(Integer id,Model model){
+        List<Role> list=userService.setDep(id);
+       model.addAttribute("id",id);
+       model.addAttribute("list",list);
+       return "updateRole";
+   }
+    @RequestMapping("updateRole")
+    @ResponseBody
+    public void updateRole(Integer uid,Integer rid) {
+
+        userService.updatero(uid,rid);
+    }
+    //角色查询跳转页面
+    @RequestMapping("Jurisdiction1")
+    public String Jurisdiction1 (){
+        return "Jurisdiction";
+    }
+   @RequestMapping("Jurisdiction")
+    @ResponseBody
+    public Map Jurisdiction(@RequestBody Param param){
+        return userService.Jurisdiction(param);
+   }
+    @RequestMapping("toUpdateMenu")
+    public String toUpdateMenu(Integer id ,Model model){
+        model.addAttribute("id",id);
+        return "updateMenu";
+    }
+    @RequestMapping("queryMenuByRid")
+    @ResponseBody
+    public List<Tree> queryMenuByRid(Integer id){
+
+
+        Integer pid=0;
+
+        List<Tree> list = userService.queryMenuByRid(id,pid);
+
+
+
+        return list;
+    }
+
+    //绑定权限
+    @RequestMapping("updateMenu")
+    @ResponseBody
+    public void updateMenu(Integer[] ids,Integer roleid){
+        userService.updateMenu(ids,roleid);
+        Integer pid=0;
+        Integer id=roleid;
+        List<Tree> list= userService.queryMenuByRid(id,pid);
+
+
+    }
+    //查树跳转的页面
+    @RequestMapping("chashu")
+    public String chashu1(){
+        return "Bootstrap";
+    }
+//查树
+    @RequestMapping("chatree")
+    @ResponseBody
+    public List<Tree> chashu(){
+        LoginUser login = (LoginUser) SecurityUtils.getSubject().getSession().getAttribute("login");
+
+       List<Tree> list=userService.chashu(login.getUserid());
+
+      //list = TreeUtil.getFatherNode(list);
+
+       return list;
+    }
+>>>>>>> origin/master
 }

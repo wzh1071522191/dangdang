@@ -13,3 +13,10 @@ spring:
     suffix: .html
   main:
     allow-bean-definition-overriding: true
+
+elasticsearch:
+  clusterName: my-application
+  ip: 127.0.0.1
+  firstPort: 9300
+  secondPort: 9301
+  thirdPort: 9302

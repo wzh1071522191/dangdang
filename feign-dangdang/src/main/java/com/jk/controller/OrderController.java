@@ -86,8 +86,6 @@ public void addOrder(@RequestParam String  bookallid,@RequestParam Double orderp
     List<Book> bookList =null;
     List<Showorder> list1=new ArrayList<>();
     if(redisTemplate.hasKey(key)){
-
-
         List<Showorder> Showorderlist = redisTemplate.opsForList().range(key, 0, -1);
         System.out.println(Showorderlist);
        for (Showorder showorder : Showorderlist) {

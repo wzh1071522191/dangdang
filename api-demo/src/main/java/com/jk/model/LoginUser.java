@@ -18,7 +18,10 @@ public class LoginUser  implements Serializable {
     private  Integer userid;
     private  String password;
     private  String username;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
     public Integer getUserid() {
         return userid;
     }

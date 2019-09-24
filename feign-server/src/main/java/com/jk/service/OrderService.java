@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,7 +23,7 @@ public interface OrderService {
     @RequestMapping(value="/updFHStatus")
     void updFHStatus(@RequestParam Integer orderid, @RequestParam Integer orderstatus);
     @RequestMapping(value="/queryOrderById")
-   MyOrder queryOrderById(@RequestParam Integer orderid);
+    MyOrder queryOrderById(@RequestParam Integer orderid);
     @RequestMapping(value="/queryOrderTK")
     Map queryOrderTK(@RequestBody ParameUtil parm);
     @RequestMapping(value="/queryOrderZF")

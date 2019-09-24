@@ -1,20 +1,42 @@
 package com.jk.model;
 
-import java.io.Serializable;
 
-/**
- * @author ： 朱友
- * @date ：Created in 2019/9/18 21:39
- * @description：
- * @package ：com.jk.model
- * @version:
- */
+
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Tree implements Serializable {
+
     private Integer id;
-    private String text;
+
+    private String name;
+
     private Integer pid;
+
+    private String text;
+
     private String url;
-    private String iconclass;
+
+    private Map state;
+
+    private String description;
+
+    private Boolean checked;
+
+    private Map<String, Object> attributes = new HashMap<String, Object>(); // 添加到节点的自定义属性
+
+    private List<Tree> nodes; //子节点数据
+
+    public Map getState() {
+        return state;
+    }
+
+    public void setState(Map state) {
+        this.state = state;
+    }
 
     public Integer getId() {
         return id;
@@ -24,12 +46,12 @@ public class Tree implements Serializable {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getName() {
+        return name;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     public Integer getPid() {
@@ -40,19 +62,53 @@ public class Tree implements Serializable {
         this.pid = pid;
     }
 
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text == null ? null : text.trim();
+    }
+
     public String getUrl() {
         return url;
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        this.url = url == null ? null : url.trim();
     }
 
-    public String getIconclass() {
-        return iconclass;
+    public Boolean getChecked() {
+        return checked;
     }
 
-    public void setIconclass(String iconclass) {
-        this.iconclass = iconclass;
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
+    }
+
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(Map<String, Object> attributes) {
+        this.attributes = attributes;
+    }
+
+    public List<Tree> getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(List<Tree> nodes) {
+        this.nodes = nodes;
+    }
+
+
 }

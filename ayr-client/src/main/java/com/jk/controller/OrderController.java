@@ -1,7 +1,6 @@
 package com.jk.controller;
 
 import com.jk.model.Book;
-import com.jk.model.MyOrder;
 import com.jk.service.OrderService;
 import com.jk.util.ParameUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.Map;
 
 /**

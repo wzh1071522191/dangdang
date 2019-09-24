@@ -18,4 +18,22 @@ public interface BookServiceApi {
 
     @RequestMapping("queryBook")
     HashMap<String, Object> queryBook (@RequestBody ParameUtil parameUtil);
+<<<<<<< HEAD
+=======
+
+    @RequestMapping("queryBookType")
+    List<BookType> queryBookType (@RequestBody Integer pid);
+
+    @RequestMapping("addBook")
+    Book addBook (@RequestBody Book book);
+
+    @RequestMapping("delBook")
+    void delBook (@RequestBody Integer id);
+
+    @RequestMapping("updateStatus")
+    Book updateStatus (@RequestBody Book book);
+
+    @RequestMapping("toUpdatePage")
+    Book queryBookById (@RequestBody Integer id);
+>>>>>>> origin/master
 }

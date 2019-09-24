@@ -1,14 +1,14 @@
 package com.jk.controller;
 
-import com.jk.model.Comments;
-import com.jk.model.LoginUser;
-import com.jk.model.Tree;
+import com.jk.model.*;
 import com.jk.service.UserService;
 
 import com.jk.util.Param;
 import com.jk.util.ParameUtil;
+import com.jk.util.TreeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -92,5 +92,62 @@ public class UserController {
     @ResponseBody
     public void jujue(Integer id){
         userService.jujue(id);
+    }
+    //角色查询
+    @RequestMapping("role")
+    @ResponseBody
+    public Map role(@RequestBody Param param){
+        return userService.role(param);
+    }
+    @RequestMapping("setRole")
+    @ResponseBody
+    public  List<Role> setRole(Integer id){
+        List<Role> list=userService.setDep(id);
+        return list;
+    }
+    @RequestMapping("updateRole")
+    @ResponseBody
+    public void updateRole(Integer uid,Integer rid) {
+
+        userService.updatero(uid,rid);
+    }
+    //角色查询
+    @RequestMapping("Jurisdiction")
+    @ResponseBody
+    public Map Jurisdiction(@RequestBody Param param){
+        return userService.Jurisdiction(param);
+    }
+    @RequestMapping("queryMenuByRid")
+    @ResponseBody
+    public List<Tree> queryMenuByRid(Integer id){
+
+
+        Integer pid=0;
+
+        List<Tree> list = userService.queryMenuByRid(id,pid);
+
+
+
+        return list;
+    }
+    //绑定权限
+    @RequestMapping("updateMenu")
+    @ResponseBody
+    public void updateMenu(Integer[] ids,Integer roleid){
+        userService.updateMenu(ids,roleid);
+        Integer pid=0;
+        Integer id=roleid;
+        List<Tree> list= userService.queryMenuByRid(id,pid);
+
+
+    }
+    @RequestMapping("chatree")
+    @ResponseBody
+    public List<Tree> chashu(Integer userid){
+
+        List<Tree> list=userService.chashu(userid);
+
+        list = TreeUtil.getFatherNode(list);
+        return list;
     }
 }

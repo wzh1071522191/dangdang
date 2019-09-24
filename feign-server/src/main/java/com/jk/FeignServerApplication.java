@@ -13,6 +13,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class FeignServerApplication {
 
     public static void main(String[] args) {
+<<<<<<< HEAD
+=======
+        System.setProperty("es.set.netty.runtime.available.processors","false");
+>>>>>>> origin/master
         SpringApplication.run(FeignServerApplication.class, args);
     }
 
