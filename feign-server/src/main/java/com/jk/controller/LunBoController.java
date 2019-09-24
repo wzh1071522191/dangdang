@@ -1,6 +1,7 @@
 package com.jk.controller;
 
 import com.jk.model.LunBo;
+import com.jk.model.MyOrder;
 import com.jk.service.lbserver;
 import com.jk.util.AlYunOssUtil;
 import com.jk.util.ExportExcel;

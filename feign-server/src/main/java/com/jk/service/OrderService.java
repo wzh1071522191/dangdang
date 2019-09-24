@@ -1,5 +1,6 @@
 package com.jk.service;
 
+import com.jk.model.MyOrder;
 import com.jk.util.ParameUtil;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ public interface OrderService {
     @RequestMapping(value="/updFHStatus")
     void updFHStatus(@RequestParam Integer orderid, @RequestParam Integer orderstatus);
     @RequestMapping(value="/queryOrderById")
-   MyOrder queryOrderById(@RequestParam Integer orderid);
+    MyOrder queryOrderById(@RequestParam Integer orderid);
     @RequestMapping(value="/queryOrderTK")
     Map queryOrderTK(@RequestBody ParameUtil parm);
     @RequestMapping(value="/queryOrderZF")
