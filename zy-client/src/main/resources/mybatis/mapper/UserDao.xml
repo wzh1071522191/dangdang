@@ -77,4 +77,6 @@ delete from roleandtree where roleid=#{roleid}
   <insert id="addRoleMenu" >
 insert into roleandtree(roleid,treeid) values(#{roleid},#{treeid})
   </insert>
+  <select id="chashu" resultType="com.jk.model.Tree">
+select t.* from loginuser l,role r,tree t,userandrole u,roleandtree a where l.userid=u.userid and r.roleid=u.roleid and a.treeid=t.id and a.roleid=r.roleid and l.userid=1  </select>
 </mapper>

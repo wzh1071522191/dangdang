@@ -1,13 +1,11 @@
 package com.jk.controller;
 
-import com.jk.model.Comments;
-import com.jk.model.LoginUser;
-import com.jk.model.Role;
-import com.jk.model.Tree;
+import com.jk.model.*;
 import com.jk.service.UserService;
 
 import com.jk.util.Param;
 import com.jk.util.ParameUtil;
+import com.jk.util.TreeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -142,5 +140,14 @@ public class UserController {
         List<Tree> list= userService.queryMenuByRid(id,pid);
 
 
+    }
+    @RequestMapping("chatree")
+    @ResponseBody
+    public List<Tree> chashu(Integer userid){
+
+        List<Tree> list=userService.chashu(userid);
+
+        list = TreeUtil.getFatherNode(list);
+        return list;
     }
 }

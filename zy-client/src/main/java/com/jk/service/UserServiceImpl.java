@@ -2,7 +2,7 @@ package com.jk.service;
 
 
 import com.jk.dao.UserDao;
-import com.alibaba.fastjson.JSONObject;
+
 import com.jk.model.*;
 import com.jk.util.Param;
 import com.jk.util.ParameUtil;
@@ -139,16 +139,16 @@ public class UserServiceImpl implements UserService{
 
   @Override
   public List<Tree> queryMenuByRid(Integer id, Integer pid) {
-    JSONObject json = new JSONObject();
+   Map<Object,Object> ma=new HashMap<Object,Object>();
     List<Tree> list = queryOrgAll3(pid);
     List<Tree> list2 = queryOrgAll2(id, pid);
     Map map = new HashMap();
     for (int i = 0; i < list.size(); i++) {
       for (int j = 0; j < list2.size(); j++) {
         if (list.get(i).getId() == list2.get(j).getId()) {
-          list.get(i).getId();
-          json.put("checked", true);
-          list.get(i).setState(json);
+          //list.get(i).getId();
+          ma.put("checked", true);
+          list.get(i).setState(ma);
         }
       }
       if (list.size() > 0) {
@@ -202,6 +202,11 @@ public class UserServiceImpl implements UserService{
       rm.setRoleid(roleid);
       userDao.addRoleMenu(rm);
     }
+  }
+
+  @Override
+  public List<Tree> chashu(Integer userid) {
+    return userDao.chashu(userid);
   }
 
 }

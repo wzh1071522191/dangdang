@@ -1,14 +1,12 @@
 package com.jk.controller;
 
 
-import com.jk.model.Comments;
-import com.jk.model.LoginUser;
-import com.jk.model.Role;
-import com.jk.model.Tree;
+import com.jk.model.*;
 import com.jk.service.UserService;
 
 import com.jk.util.Param;
 import com.jk.util.ParameUtil;
+import com.jk.util.TreeUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -216,5 +214,21 @@ public class UserController {
 
 
     }
+    //查树跳转的页面
+    @RequestMapping("chashu")
+    public String chashu1(){
+        return "Bootstrap";
+    }
+//查树
+    @RequestMapping("chatree")
+    @ResponseBody
+    public List<Tree> chashu(){
+        LoginUser login = (LoginUser) SecurityUtils.getSubject().getSession().getAttribute("login");
 
+       List<Tree> list=userService.chashu(login.getUserid());
+
+      //list = TreeUtil.getFatherNode(list);
+
+       return list;
+    }
 }

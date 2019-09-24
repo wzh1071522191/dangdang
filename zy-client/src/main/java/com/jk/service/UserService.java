@@ -5,7 +5,6 @@ import com.jk.model.LoginUser;
 import com.jk.model.Role;
 import com.jk.model.Tree;
 import com.jk.util.Param;
-import com.jk.util.ParameUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -51,4 +50,6 @@ public interface UserService {
     List<Tree> queryMenuByRid(Integer id, Integer pid);
 
     void updateMenu(Integer[] ids, Integer roleid);
+
+    List<Tree> chashu(Integer userid);
 }

@@ -64,4 +64,6 @@ public interface UserDao {
     void deleteRoleMenu(@Param("roleid")Integer roleid);
 
     void addRoleMenu(TreeAndRole rm);
+
+    List<Tree> chashu(@Param("id") Integer userid);
 }

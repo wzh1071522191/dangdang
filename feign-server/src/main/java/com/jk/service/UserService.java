@@ -6,12 +6,11 @@ import com.jk.model.LoginUser;
 import com.jk.model.Role;
 import com.jk.model.Tree;
 import com.jk.util.Param;
-import com.jk.util.ParameUtil;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import java.util.List;
 import java.util.Map;
@@ -55,4 +54,6 @@ public interface UserService {
     List<Tree> queryMenuByRid(@RequestParam Integer id, @RequestParam Integer pid);
     @RequestMapping("updateMenu")
     void updateMenu(@RequestParam Integer[] ids, @RequestParam Integer roleid);
+    @RequestMapping("chatree")
+    List<Tree> chashu(@RequestParam Integer userid);
 }
