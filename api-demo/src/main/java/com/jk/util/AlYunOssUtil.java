@@ -24,14 +24,14 @@ public class AlYunOssUtil {
     public static final Logger logger = LoggerFactory.getLogger(AlYunOssUtil.class);
 
 
-    private String endpoint = "oss-cn-beijing.aliyuncs.com";
+    private String endpoint = "";
     // accessKey
-    private String accessKeyId = "LTAIB5IFr7msJrOL";
-    private String accessKeySecret = "WeLzRSUN8kSfYFpMixyM3iX2uVIJRd";
+    private String accessKeyId = "";
+    private String accessKeySecret = "";
     // 空间
-    private String bucketName = "zsg0604";
+    private String bucketName = "";
     // 文件存储目录
-    private String filedir = "zsg0604/";
+    private String filedir = "";
 
 
 
